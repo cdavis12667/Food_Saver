@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Food Saver</string>
+    <string name="title_activity_add_item">AddItemActivity</string>
 </resources>
