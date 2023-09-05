@@ -7,13 +7,43 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="178dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
+    <Button
+        android:id="@+id/mainToAddButton"
+        android:layout_width="180dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="124dp"
+        android:text="Add Item"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/mainToPantryButton"
+        android:layout_width="180dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="40dp"
+        android:text="Pantry"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainToAddButton" />
+
+    <Button
+        android:id="@+id/mainToShoppingButton"
+        android:layout_width="180dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="40dp"
+        android:text="Shopping List"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainToPantryButton" />
+
+    <Button
+        android:id="@+id/mainToSettingsButton"
+        android:layout_width="180dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="40dp"
+        android:text="Settings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainToShoppingButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
