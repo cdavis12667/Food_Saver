@@ -1,26 +1,33 @@
 package com.example.foodsaver
 
-import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.Month
-import java.time.ZoneId
-import java.util.Calendar
 import java.util.Date
-import java.util.Locale
 
 
-class Food(itemName: String, expirationDate: String, isExpired: Boolean) {
+class Food() {
+
+    //Member Fields, Getters and setters done internally
     var itemName = ""
-    var expirationDate = ""
-    var isExpired: Boolean = false
+    private var expirationDate = ""
 
+    //Field to be used with updates
+    //var daysTillExpiration = 0
+    private var isExpired = false
 
+    //Function to check expiration dates
+    //May be updated to include specified windows of time
     fun CheckExpiration(foodItem: Food): Boolean {
+        val Sformat = SimpleDateFormat("MM-dd-yyy")
+        val fExpirationDate = Sformat.parse(expirationDate)
 
 
+        if (fExpirationDate.before(Date())) {
+            foodItem.isExpired = true
+            //Add in Color change
+        } else {
+            //Days Till Expiration date to be used for color addition Green/Yellow
 
-
+        }
 
         return foodItem.isExpired
     }
