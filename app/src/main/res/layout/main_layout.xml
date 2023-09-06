@@ -13,7 +13,7 @@
         android:layout_height="84dp"
         android:layout_marginStart="112dp"
         android:layout_marginTop="124dp"
-        android:text="Add Item"
+        android:text="@string/add_item"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,7 +23,7 @@
         android:layout_height="84dp"
         android:layout_marginStart="112dp"
         android:layout_marginTop="40dp"
-        android:text="Pantry"
+        android:text="@string/pantry"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainToAddButton" />
 
@@ -33,7 +33,7 @@
         android:layout_height="84dp"
         android:layout_marginStart="112dp"
         android:layout_marginTop="40dp"
-        android:text="Shopping List"
+        android:text="@string/shopping_list"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainToPantryButton" />
 
@@ -43,7 +43,7 @@
         android:layout_height="80dp"
         android:layout_marginStart="112dp"
         android:layout_marginTop="40dp"
-        android:text="Settings"
+        android:text="@string/settings"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainToShoppingButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

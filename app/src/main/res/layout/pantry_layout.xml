@@ -12,7 +12,7 @@
         android:layout_height="48dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
-        android:text="M"
+        android:text="@string/m"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
