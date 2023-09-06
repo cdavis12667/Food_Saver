@@ -2,7 +2,6 @@ package com.example.foodsaver
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.ComponentActivity
 
 
@@ -15,13 +14,10 @@ class SettingsActivity : ComponentActivity() {
         //assigning vars
         settingToMainButton = findViewById(R.id.settingToMainButton)
         //making event to switch activity
-        settingToMainButton.setOnClickListener(object: View.OnClickListener{
-            override fun onClick(p0: View?) {
+        settingToMainButton.setOnClickListener{
                 val intent = Intent(this@SettingsActivity, MainActivity::class.java)
                 startActivity(intent)
             }
-
-        })
     }
 }
 

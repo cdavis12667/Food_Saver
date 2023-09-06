@@ -6,4 +6,8 @@
     <string name="shopping_list">Shopping List</string>
     <string name="add_item">Add Item</string>
     <string name="pantry">Pantry</string>
+    <string name="add_item_title">Add Item</string>
+    <string name="add_helper">Add Food Name</string>
+    <string name="add_date_helper">Add date mm-dd-yyy</string>
+    <string name="add_confirm">Confirm</string>
 </resources>

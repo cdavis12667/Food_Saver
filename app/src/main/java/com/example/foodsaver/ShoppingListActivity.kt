@@ -2,7 +2,6 @@ package com.example.foodsaver
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.ComponentActivity
 
 class ShoppingListActivity : ComponentActivity() {
@@ -13,12 +12,10 @@ class ShoppingListActivity : ComponentActivity() {
         setContentView(R.layout.shopping_list_layout)
         //assigning vars
         shoppingToMainButton = findViewById(R.id.shoppingToMainButton)
-        shoppingToMainButton.setOnClickListener(object: View.OnClickListener {
-            override fun onClick(p0: View?) {
+        shoppingToMainButton.setOnClickListener{
                 val intent = Intent(this@ShoppingListActivity, MainActivity::class.java)
                 startActivity(intent)
-            }
-        })
+        }
     }
 }
 

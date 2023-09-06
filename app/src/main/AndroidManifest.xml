@@ -15,22 +15,22 @@
         <activity
             android:name=".AddItemActivity"
             android:exported="false"
-            android:label="@string/title_activity_add_item"
+            android:label="@string/add_item"
             android:theme="@style/Theme.FoodSaver" />
         <activity
             android:name=".PantryActivity"
             android:exported="false"
-            android:label="Pantry"
+            android:label="@string/pantry"
             android:theme="@style/Theme.FoodSaver" />
         <activity
             android:name=".SettingsActivity"
             android:exported="false"
-            android:label="Settings"
+            android:label="@string/settings"
             android:theme="@style/Theme.FoodSaver" />
         <activity
             android:name=".ShoppingListActivity"
             android:exported="false"
-            android:label="Shopping List"
+            android:label="@string/shopping_list"
             android:theme="@style/Theme.FoodSaver" />
         <activity
             android:name=".MainActivity"

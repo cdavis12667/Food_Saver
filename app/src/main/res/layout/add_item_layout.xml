@@ -15,4 +15,55 @@
         android:text="@string/m"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/addItemTitle"
+        android:layout_width="216dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="98dp"
+        android:clickable="false"
+        android:fontFamily="@font/lobster_regular"
+        android:text="@string/add_item_title"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/addFoodNameEntry"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="76dp"
+        android:autofillHints="name"
+        android:fontFamily="@font/merriweather_regular"
+        android:hint="@string/add_helper"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addItemTitle" />
+
+    <EditText
+        android:id="@+id/addDateInput"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="20dp"
+        android:autofillHints="date"
+        android:ems="10"
+        android:fontFamily="@font/merriweather_regular"
+        android:hint="@string/add_date_helper"
+        android:inputType="date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addFoodNameEntry" />
+
+    <Button
+        android:id="@+id/addConfirmB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/add_confirm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addDateInput" />
 </androidx.constraintlayout.widget.ConstraintLayout>

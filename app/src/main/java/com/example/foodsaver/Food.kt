@@ -8,7 +8,10 @@ class Food() {
 
     //Member Fields, Getters and setters done internally
     var itemName = ""
-    private var expirationDate = ""
+    /*Christian Davis: changed this to public as I need to access it for user input
+    if it needs to be private then change it back and I'll think of something
+    else*/
+    var expirationDate = ""
 
     //Field to be used with updates
     //var daysTillExpiration = 0
