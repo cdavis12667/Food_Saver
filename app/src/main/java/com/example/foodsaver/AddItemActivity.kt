@@ -2,11 +2,9 @@ package com.example.foodsaver
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
-import com.example.foodsaver.PantryActivity.Companion.GlobalFoodMap
 import com.example.foodsaver.PantryActivity.Companion.GlobalFoodNames
 
 class AddItemActivity : ComponentActivity() {
@@ -16,6 +14,7 @@ class AddItemActivity : ComponentActivity() {
     private lateinit var addFoodNameEntry: android.widget.EditText
     private lateinit var addDateInput: android.widget.EditText
     private lateinit var addDisplaySelectionText: android.widget.TextView
+    private lateinit var foodInput: Food
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,20 +36,20 @@ class AddItemActivity : ComponentActivity() {
 
         //Making this on click to take user input and make a food item
         addConfirmB.setOnClickListener {
-
+            foodInput = Food()
             //if name and date are present then make add food name to vector and date to map
             if ((addFoodNameEntry.text.isNotEmpty()) && (addDateInput.text.isNotEmpty())) {
-                //Put in the name get out the expiration date
-                GlobalFoodMap.put(addFoodNameEntry.text.toString(), addDateInput.text.toString())
-                //Add name to vector to later be used with map
-                GlobalFoodNames.add(addFoodNameEntry.text.toString())
+                foodInput.itemName = addFoodNameEntry.text.toString()
+                foodInput.expirationDate = addDateInput.text.toString()
+                GlobalFoodNames.add(foodInput)
 
             }
             //If text is not empty but date is then just enter text and no date
             else if ((addFoodNameEntry.text.isNotEmpty()) &&(addDateInput.text.isEmpty()))
             {
                 //Add name to vector to later be used with map in case they decide to add a date
-                GlobalFoodNames.add(addFoodNameEntry.text.toString())
+                foodInput.itemName = addFoodNameEntry.text.toString()
+                GlobalFoodNames.add(foodInput)
 
             }
             //if text is empty show error message
@@ -67,10 +66,10 @@ class AddItemActivity : ComponentActivity() {
 
             addDisplaySelectionText.text = ""
             //Going to display all items in the pantry
-            for(name in GlobalFoodNames)
+            for(food in GlobalFoodNames)
             {
 
-                addDisplaySelectionText.append(name)
+                addDisplaySelectionText.append(food.itemName)
                 addDisplaySelectionText.append("\n")
                 //feed the key to the map if the map returns a value then print that on the same line
             }
