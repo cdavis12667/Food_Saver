@@ -3,7 +3,7 @@ package com.example.foodsaver
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-
+import java.util.Vector
 
 
 class PantryActivity : ComponentActivity() {
@@ -12,11 +12,11 @@ class PantryActivity : ComponentActivity() {
 
     //Making a companion object which is a bit like static objects
     companion object {
-        /*This should make it so we put in a string and get out the matching food object
-        I'm just setting it as mutable so that we can add more food objects with out running
-        into problems
-         */
-         val GlobalFoodMap = mutableMapOf<String, Food>()
+        /*Alright here is my working idea we have a list of food names we put those food names into
+        the map and get out our expiration dates. A mutable map and vector means we can change/add/
+        delete when ever we need to  */
+         val GlobalFoodMap = mutableMapOf<String, String>()
+         val GlobalFoodNames = Vector<String>()
 
     }
     override fun onCreate(savedInstanceState: Bundle?) {
