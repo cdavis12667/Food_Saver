@@ -61,9 +61,28 @@
         android:id="@+id/addConfirmB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
+        android:layout_marginStart="156dp"
         android:layout_marginTop="24dp"
+        android:fontFamily="@font/merriweather_regular"
         android:text="@string/add_confirm"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addDateInput" />
+
+    <ScrollView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addConfirmB">
+
+        <TextView
+            android:id="@+id/addDisplaySelectionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_food_list"
+            android:textIsSelectable="true" />
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
