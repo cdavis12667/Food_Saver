@@ -3,7 +3,7 @@ package com.example.foodsaver
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import java.util.Vector
+
 
 
 class PantryActivity : ComponentActivity() {
@@ -12,7 +12,7 @@ class PantryActivity : ComponentActivity() {
 
     //Making a companion object which is a bit like static objects
     companion object {
-         val GlobalFoodNames = Vector<Food>()
+         var GlobalFoodNames = mutableListOf<Food>()
 
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,4 +27,5 @@ class PantryActivity : ComponentActivity() {
             startActivity(intent)
         }
     }
+
 }

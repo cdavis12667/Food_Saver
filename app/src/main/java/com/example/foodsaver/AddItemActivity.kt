@@ -2,10 +2,10 @@ package com.example.foodsaver
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import com.example.foodsaver.PantryActivity.Companion.GlobalFoodNames
+
 
 class AddItemActivity : ComponentActivity() {
     //making a var for my buttons
@@ -47,7 +47,7 @@ class AddItemActivity : ComponentActivity() {
             //If text is not empty but date is then just enter text and no date
             else if ((addFoodNameEntry.text.isNotEmpty()) &&(addDateInput.text.isEmpty()))
             {
-                //Add name to vector to later be used with map in case they decide to add a date
+                //Add name to list to later be used with map in case they decide to add a date
                 foodInput.itemName = addFoodNameEntry.text.toString()
                 GlobalFoodNames.add(foodInput)
 
@@ -58,20 +58,16 @@ class AddItemActivity : ComponentActivity() {
                 val toast = Toast.makeText(this, "Input Food name", Toast.LENGTH_SHORT)
                 toast.show()
             }
-            //Going to test that everything is correct using logcat uncomment test code if needed
-            //This should print the name of the string to logcat
-            //Log.i("Test", GlobalFoodNames.lastElement())
-            //Next let's test and see if I can pull a date from the map (It works!)
-            //GlobalFoodMap.get(addFoodNameEntry.text.toString())?.let { it1 -> Log.i("Test", it1) }
+
 
             addDisplaySelectionText.text = ""
+            //Sort
+            GlobalFoodNames.sortBy { it.itemName }
             //Going to display all items in the pantry
             for(food in GlobalFoodNames)
             {
-
                 addDisplaySelectionText.append(food.itemName)
                 addDisplaySelectionText.append("\n")
-                //feed the key to the map if the map returns a value then print that on the same line
             }
 
         }
