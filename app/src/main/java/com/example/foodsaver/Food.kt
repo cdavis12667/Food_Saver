@@ -7,32 +7,32 @@ import java.util.Date
 class Food() {
 
     //Member Fields, Getters and setters done internally
-    var itemName = ""
+    var foodItemName = ""
     /*Christian Davis: changed this to public as I need to access it for user input
     if it needs to be private then change it back and I'll think of something
     else*/
-    var expirationDate = ""
+    var itemExpirationDate = ""
 
     //Field to be used with updates
     //var daysTillExpiration = 0
-    private var isExpired = false
+    private var itemIsExpired = false
 
     //Function to check expiration dates
     //May be updated to include specified windows of time
-    fun CheckExpiration(foodItem: Food): Boolean {
-        val Sformat = SimpleDateFormat("MM-dd-yyy")
-        val fExpirationDate = Sformat.parse(expirationDate)
+    fun checkExpiration(foodItem: Food): Boolean {
+        val sFormat = SimpleDateFormat("MM-dd-yyy")
+        val formatExpirationDate = sFormat.parse(itemExpirationDate)
 
 
-        if (fExpirationDate.before(Date())) {
-            foodItem.isExpired = true
+        if (formatExpirationDate.before(Date())) {
+            foodItem.itemIsExpired = true
             //Add in Color change
-        } else {
+        } else { //
             //Days Till Expiration date to be used for color addition Green/Yellow
 
         }
 
-        return foodItem.isExpired
+        return foodItem.itemIsExpired
     }
 
 

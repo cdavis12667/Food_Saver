@@ -39,8 +39,8 @@ class AddItemActivity : ComponentActivity() {
             foodInput = Food()
             //if name and date are present then make add food name to vector and date to map
             if ((addFoodNameEntry.text.isNotEmpty()) && (addDateInput.text.isNotEmpty())) {
-                foodInput.itemName = addFoodNameEntry.text.toString()
-                foodInput.expirationDate = addDateInput.text.toString()
+                foodInput.foodItemName = addFoodNameEntry.text.toString()
+                foodInput.itemExpirationDate = addDateInput.text.toString()
                 GlobalFoodNames.add(foodInput)
 
             }
@@ -48,7 +48,7 @@ class AddItemActivity : ComponentActivity() {
             else if ((addFoodNameEntry.text.isNotEmpty()) &&(addDateInput.text.isEmpty()))
             {
                 //Add name to list to later be used with map in case they decide to add a date
-                foodInput.itemName = addFoodNameEntry.text.toString()
+                foodInput.foodItemName = addFoodNameEntry.text.toString()
                 GlobalFoodNames.add(foodInput)
 
             }
@@ -62,11 +62,11 @@ class AddItemActivity : ComponentActivity() {
 
             addDisplaySelectionText.text = ""
             //Sort
-            GlobalFoodNames.sortBy { it.itemName }
+            GlobalFoodNames.sortBy { it.foodItemName }
             //Going to display all items in the pantry
             for(food in GlobalFoodNames)
             {
-                addDisplaySelectionText.append(food.itemName)
+                addDisplaySelectionText.append(food.foodItemName)
                 addDisplaySelectionText.append("\n")
             }
 
