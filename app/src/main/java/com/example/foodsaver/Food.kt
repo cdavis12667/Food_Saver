@@ -28,7 +28,7 @@ class Food() {
             //Add in Color change
         } else { //
             //Days Till Expiration date to be used for color addition Green/Yellow
-            daysTillExpiration = calculateTimeBetweenDates(expirationDate )
+            foodItem.daysTillExpiration = calculateTimeBetweenDates(expirationDate )
 
         }
 
