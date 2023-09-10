@@ -14,25 +14,45 @@ class Food() {
     var itemExpirationDate = ""
 
     //Field to be used with updates
-    //var daysTillExpiration = 0
+    var daysTillExpiration:Long = 0
     private var itemIsExpired = false
 
     //Function to check expiration dates
     //May be updated to include specified windows of time
     fun checkExpiration(foodItem: Food): Boolean {
-        val sFormat = SimpleDateFormat("MM-dd-yyy")
-        val formatExpirationDate = sFormat.parse(itemExpirationDate)
+       val expirationDate= convertExpirationDate(foodItem)
 
 
-        if (formatExpirationDate.before(Date())) {
+        if (expirationDate.before(Date())) {
             foodItem.itemIsExpired = true
             //Add in Color change
         } else { //
             //Days Till Expiration date to be used for color addition Green/Yellow
+            daysTillExpiration = calculateTimeBetweenDates(expirationDate )
 
         }
 
         return foodItem.itemIsExpired
+    }
+
+    //Function Created to calculate the time between dates, may be moved up into
+    //checkExpiration function in later changes. Left access public for use outside of class
+    fun calculateTimeBetweenDates(expirationDate: Date): Long {
+
+        val timeInMilliseconds = expirationDate.time - Date().time
+
+        return timeInMilliseconds / 86400000
+
+
+    }
+
+    //function added to convert strings into Dates to avoid repetitive code
+    private fun convertExpirationDate(foodItem: Food): Date {
+        val sFormat = SimpleDateFormat("MM-dd-yyy")
+
+        val formatedExpirationDate=sFormat.parse(foodItem.itemExpirationDate)
+
+        return formatedExpirationDate
     }
 
 
