@@ -42,7 +42,9 @@ class AddItemActivity : ComponentActivity() {
                 foodInput.foodItemName = addFoodNameEntry.text.toString()
                 foodInput.itemExpirationDate = addDateInput.text.toString()
                 GlobalFoodNames.add(foodInput)
-
+                /*In order to replaces the slashes syntax would be
+                * Stringname.replace('/','-') It will ignore the
+                * name if it is already correct*/
             }
             //If text is not empty but date is then just enter text and no date
             else if ((addFoodNameEntry.text.isNotEmpty()) &&(addDateInput.text.isEmpty()))

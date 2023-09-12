@@ -15,7 +15,7 @@ class Food() {
     var itemExpirationDate = ""
 
     //Field to be used with updates
-    var daysTillExpiration: Long = 0
+    var daysTillExpiration = 0
     private var itemIsExpired = false
 
     //Function to check expiration dates
@@ -38,11 +38,13 @@ class Food() {
 
     //Function Created to calculate the time between dates, may be moved up into
     //checkExpiration function in later changes. Left access public for use outside of class
-    fun calculateTimeBetweenDates(expirationDate: Date): Long {
+    fun calculateTimeBetweenDates(expirationDate: Date): Int {
 
         val timeInMilliseconds = expirationDate.time - Date().time
 
-        return timeInMilliseconds / 86400000
+        var timeInDays = (timeInMilliseconds / 86400000).toInt()
+
+        return timeInDays
 
 
     }
