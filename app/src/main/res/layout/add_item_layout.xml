@@ -68,29 +68,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addDateInput" />
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="44dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addConfirmB">
-
-        <TextView
-            android:id="@+id/addDisplaySelectionText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/add_food_list"
-            android:textIsSelectable="true" />
-    </ScrollView>
-
     <ListView
+        android:id="@+id/addList"
         android:layout_width="409dp"
         android:layout_height="153dp"
         android:layout_marginStart="1dp"
+        android:layout_marginTop="164dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+        app:layout_constraintTop_toBottomOf="@+id/addConfirmB" />
+
+    <Button
+        android:id="@+id/addEditButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="76dp"
+        android:fontFamily="@font/merriweather_regular"
+        android:text="@string/select_change"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addConfirmB" />
+
+    <TextView
+        android:id="@+id/selectAndChangeText"
+        android:layout_width="198dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/merriweather_regular"
+        android:text="@string/select"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addConfirmB" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
