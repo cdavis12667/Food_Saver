@@ -21,6 +21,7 @@ class AddItemActivity : ComponentActivity() {
     private lateinit var addList: android.widget.ListView
     private lateinit var adapter: ArrayAdapter<String>
     private lateinit var addEditButton: android.widget.Button
+    private lateinit var addRemoveButton: android.widget.Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +34,7 @@ class AddItemActivity : ComponentActivity() {
         addDateInput = findViewById(R.id.addDateInput)
         addList = findViewById(R.id.addList)
         addEditButton = findViewById(R.id.addEditButton)
+        addRemoveButton = findViewById(R.id.addRemoveButton)
         //I just need something to hold the selected index from addList
         var indexHolder = 0
         //Setting my adapter to the simple layout
@@ -97,7 +99,7 @@ class AddItemActivity : ComponentActivity() {
             }
 
         }
-        //this is a listener that fires of when an item in the list is clicked
+        //this is a listener that fires off when an item in the list is clicked
         addList.setOnItemClickListener { adapterView: AdapterView<*>, view2: View, i: Int, l: Long ->
             //When an entry is clicked print that entry to the text boxes
             addFoodNameEntry.text.clear()
@@ -108,7 +110,6 @@ class AddItemActivity : ComponentActivity() {
             indexHolder = i
         }
         /*Now I need to make a button that takes the text box text and uses it to replace the entry
-
          */
         addEditButton.setOnClickListener {
             //I need to take whats in the text box and override the global food list
@@ -116,8 +117,6 @@ class AddItemActivity : ComponentActivity() {
                 //Change the entry using the index from select list item event
                 GlobalFoodNames[indexHolder].foodItemName = addFoodNameEntry.text.toString()
                 GlobalFoodNames[indexHolder].itemExpirationDate = addDateInput.text.toString()
-                //I need to change adapters entry
-
 
             } else if ((addFoodNameEntry.text.isNotEmpty()) && (addDateInput.text.isEmpty())) {
                 //Change the entry using the index from select list item event
@@ -127,6 +126,22 @@ class AddItemActivity : ComponentActivity() {
             }
             //Resorting the names
             GlobalFoodNames.sortBy { it.foodItemName }
+            //Clear and reset adapter
+            adapter.clear()
+            //Display new name list
+            for (food in GlobalFoodNames) {
+                //Pull from Global Food Names and display
+                adapter.add(food.foodItemName + " " + food.itemExpirationDate)
+            }
+        }
+        //Event fires off when the button is clicked
+        addRemoveButton.setOnClickListener {
+            //We take the index from index holder than just remove it from the global food list
+            GlobalFoodNames.removeAt(indexHolder)
+            //We should clear the text box
+            addFoodNameEntry.text.clear()
+            addDateInput.text.clear()
+            //Next we need to clear the adapter and rewrite the list
             //Clear and reset adapter
             adapter.clear()
             //Display new name list
