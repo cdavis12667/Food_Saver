@@ -117,6 +117,8 @@ class AddItemActivity : ComponentActivity() {
                 adapter.add(food.foodItemName + " " + food.itemExpirationDate)
             }
             listClickedFlag = false
+            addFoodNameEntry.text.clear()
+            addDateInput.text.clear()
 
             /*
             //if name and date are present then make add food name to vector and date to map
