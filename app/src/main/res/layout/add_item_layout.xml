@@ -37,21 +37,21 @@
         android:id="@+id/addFoodNameEntry"
         android:layout_width="180dp"
         android:layout_height="60dp"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="116dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="12dp"
         android:autofillHints="name"
         android:fontFamily="@font/merriweather_regular"
         android:hint="@string/add_helper"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addItemTitle" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectAndChangeText" />
 
     <EditText
         android:id="@+id/addDateInput"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="20dp"
         android:autofillHints="date"
         android:ems="10"
         android:fontFamily="@font/merriweather_regular"
@@ -64,8 +64,8 @@
         android:id="@+id/addConfirmB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="@font/merriweather_regular"
         android:text="@string/add_confirm"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,45 +75,34 @@
         android:id="@+id/addList"
         android:layout_width="409dp"
         android:layout_height="153dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="164dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addConfirmB" />
-
-    <Button
-        android:id="@+id/addEditButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="72dp"
-        android:fontFamily="@font/merriweather_regular"
-        android:text="@string/select_change"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addConfirmB" />
+        app:layout_constraintTop_toBottomOf="@+id/addItemTitle" />
 
     <TextView
         android:id="@+id/selectAndChangeText"
         android:layout_width="270dp"
         android:layout_height="23dp"
         android:layout_marginStart="68dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/merriweather_regular"
         android:text="@string/select"
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addConfirmB" />
+        app:layout_constraintTop_toBottomOf="@+id/addList" />
 
     <Button
         android:id="@+id/addRemoveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="72dp"
         android:fontFamily="@font/merriweather_regular"
         android:text="@string/add_remove"
-        app:layout_constraintBottom_toTopOf="@+id/addList"
-        app:layout_constraintStart_toEndOf="@+id/addEditButton" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addDateInput" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
