@@ -6,12 +6,13 @@
     <string name="shopping_list">Shopping List</string>
     <string name="add_item">Add Item</string>
     <string name="pantry">Pantry</string>
-    <string name="add_item_title">Add Item</string>
+    <string name="add_item_title">Edit Pantry</string>
     <string name="add_helper">Add Food Name</string>
     <string name="add_date_helper">Add date mm-dd-yyy</string>
-    <string name="add_confirm">Confirm</string>
+    <string name="add_confirm">Add or Edit</string>
     <string name="add_food_list">"Food List"</string>
-    <string name="select_change">Change</string>
-    <string name="select">Select Entry and Change</string>
+    <string name="select_change">Edit</string>
+    <string name="select">Select Entry and Edit or Remove</string>
+    <string name="add_remove">Remove</string>
 
 </resources>

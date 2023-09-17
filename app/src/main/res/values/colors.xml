@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- Colors for food saver theme -->
+    <color name="darkBrown">#382710</color>
+    <color name="lightBrown">#856333</color>
+    <color name="lightTan">#D1BDA1</color>
+    <color name="darkBlue">#102938</color>
+    <color name="lightBlue">#547285</color>
+
+
 </resources>
