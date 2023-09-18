@@ -11,7 +11,6 @@ import androidx.activity.ComponentActivity
 import com.example.foodsaver.PantryActivity.Companion.GlobalFoodNames
 
 
-
 class AddItemActivity : ComponentActivity() {
     //making a var for my buttons
     private lateinit var addToMainButton: android.widget.Button
@@ -22,7 +21,6 @@ class AddItemActivity : ComponentActivity() {
     private lateinit var addList: android.widget.ListView
     private lateinit var adapter: ArrayAdapter<String>
     private lateinit var addRemoveButton: android.widget.Button
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,23 +37,21 @@ class AddItemActivity : ComponentActivity() {
         var indexHolder = 0
         var listClickedFlag = false
         //Setting my adapter to the simple layout
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,)
+        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1)
         //setting my lists views adapter to be adapter
         addList.adapter = adapter
         //We need this here other wise the activity switching wipes the list
-        if (GlobalFoodNames.isNotEmpty())
-        {
-            for(food in GlobalFoodNames)
-            {
+        if (GlobalFoodNames.isNotEmpty()) {
+            for (food in GlobalFoodNames) {
                 //Pull from Global Food Names and display
                 adapter.add(food.foodItemName + " " + food.itemExpirationDate)
             }
         }
 
         //setting to switch to main on click
-        addToMainButton.setOnClickListener{
-                val intent = Intent(this@AddItemActivity, MainActivity::class.java)
-                startActivity(intent)
+        addToMainButton.setOnClickListener {
+            val intent = Intent(this@AddItemActivity, MainActivity::class.java)
+            startActivity(intent)
         }
 
 
@@ -65,17 +61,19 @@ class AddItemActivity : ComponentActivity() {
             foodInput = Food()
 
             //check to make sure that the text boxes are not empty
-            if ((addFoodNameEntry.text.isNotEmpty()) && (addDateInput.text.isNotEmpty())){
+            if ((addFoodNameEntry.text.isNotEmpty()) && (addDateInput.text.isNotEmpty())) {
                 //Make a food object
                 //check for valid date
-                if(foodInput.isValidDate(addDateInput.text.toString())) {
+                var dateInputText=addDateInput.text.toString().replace("/","-")
+                if (foodInput.isValidDate(addDateInput.text.toString())) {
                     foodInput.foodItemName = addFoodNameEntry.text.toString()
-                    foodInput.itemExpirationDate = addDateInput.text.toString()
+                    foodInput.itemExpirationDate = dateInputText
                     //if this is true it means they clicked and want to edit
                     if (listClickedFlag) {
                         GlobalFoodNames[indexHolder].foodItemName = addFoodNameEntry.text.toString()
-                        GlobalFoodNames[indexHolder].itemExpirationDate =
-                            addDateInput.text.toString()
+                        GlobalFoodNames[indexHolder].itemExpirationDate = dateInputText
+
+
                     }
                     // if the flag is not true it means they want to add an item
                     else if (!listClickedFlag) {
@@ -83,28 +81,29 @@ class AddItemActivity : ComponentActivity() {
                     }
                 }
                 //if date is not valid then show message
-                else{
-                    val toast = Toast.makeText(this, "Input Valid Date mm-dd-yyyy", Toast.LENGTH_SHORT)
+                else {
+                    val toast =
+                        Toast.makeText(this, "Input Valid Date mm-dd-yyyy", Toast.LENGTH_SHORT)
                     toast.show()
                 }
 
             }
             //this should be the same as above but with no date
-            else if ((addFoodNameEntry.text.isNotEmpty()) &&(addDateInput.text.isEmpty())){
+            else if ((addFoodNameEntry.text.isNotEmpty()) && (addDateInput.text.isEmpty())) {
                 //make a food object
                 foodInput.foodItemName = addFoodNameEntry.text.toString()
                 //if this is true that means they clicked the list and want to edit
-                if(listClickedFlag){
+                if (listClickedFlag) {
                     GlobalFoodNames[indexHolder].foodItemName = addFoodNameEntry.text.toString()
                     GlobalFoodNames[indexHolder].itemExpirationDate = ""
                 }
                 //if not true than just add
-                else if (!listClickedFlag){
+                else if (!listClickedFlag) {
                     GlobalFoodNames.add(foodInput)
                 }
             }
             //have a check for it nothing is there and show error message
-            else{
+            else {
                 val toast = Toast.makeText(this, "Input Food name", Toast.LENGTH_SHORT)
                 toast.show()
             }
@@ -113,8 +112,7 @@ class AddItemActivity : ComponentActivity() {
             //Clear List
             adapter.clear()
             //Going to display all items in the pantry
-            for(food in GlobalFoodNames)
-            {
+            for (food in GlobalFoodNames) {
                 //Pull from Global Food Names and display
                 adapter.add(food.foodItemName + " " + food.itemExpirationDate)
             }

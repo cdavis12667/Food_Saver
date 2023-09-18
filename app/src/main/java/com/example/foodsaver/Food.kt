@@ -52,7 +52,7 @@ class Food() {
 
     //function added to convert strings into Dates to avoid repetitive code
     private fun convertExpirationDate(foodItem: Food): Date {
-        foodItem.itemExpirationDate.replace('/','-') //Added catch to convert / to -
+
         val sFormat = SimpleDateFormat("MM-dd-yyyy")
 
         val formattedExpirationDate = sFormat.parse(foodItem.itemExpirationDate)
@@ -63,11 +63,14 @@ class Food() {
     //Function added to check if a string is a valid date
     fun isValidDate(Date: String):Boolean{
         val sFormat=SimpleDateFormat("MM-dd-yyyy")
+
         var isValid=false
+
         //Disallows the user to enter date in any other format than the above
         sFormat.isLenient=false
         try{
-            val date=sFormat.parse(Date)
+            val convertedDate= Date.replace("/","-")
+            val date=sFormat.parse(convertedDate)
             isValid=true
         }
         catch(e:ParseException){
