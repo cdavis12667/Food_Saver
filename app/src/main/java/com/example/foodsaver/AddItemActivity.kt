@@ -65,7 +65,7 @@ class AddItemActivity : ComponentActivity() {
                 //Make a food object
                 //check for valid date
                 var dateInputText=addDateInput.text.toString().replace("/","-")
-                if (foodInput.isValidDate(dateInputText)) {
+                if (foodInput.isValidDate(addDateInput.text.toString())) {
                     foodInput.foodItemName = addFoodNameEntry.text.toString()
                     foodInput.itemExpirationDate = dateInputText
                     //if this is true it means they clicked and want to edit
