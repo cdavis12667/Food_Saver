@@ -156,8 +156,10 @@
         android:id="@+id/settingsText5"
         android:layout_width="202dp"
         android:layout_height="18dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="478dp"
         android:text="Set Item Types"
-        tools:layout_editor_absoluteX="108dp"
-        tools:layout_editor_absoluteY="478dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
