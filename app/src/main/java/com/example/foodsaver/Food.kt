@@ -69,8 +69,8 @@ class Food() {
         //Disallows the user to enter date in any other format than the above
         sFormat.isLenient=false
         try{
-            val convertedDate= Date.replace("/","-")
-            val date=sFormat.parse(convertedDate)
+
+            val date=sFormat.parse(Date)
             isValid=true
         }
         catch(e:ParseException){
