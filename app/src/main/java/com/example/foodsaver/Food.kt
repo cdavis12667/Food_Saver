@@ -70,7 +70,8 @@ class Food() {
         sFormat.isLenient=false
         try{
 
-            val date=sFormat.parse(Date)
+            var convertedDate=Date.replace("/","-")
+            val date=sFormat.parse(convertedDate)
             isValid=true
         }
         catch(e:ParseException){
