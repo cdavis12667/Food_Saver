@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    tools:ignore="UselessParent">
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/imageID"
         android:layout_width="84dp"
         android:layout_height="84dp"
-        android:padding="16dp"
-        tools:ignore="ContentDescription" />
+        android:padding="16dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,24 +19,21 @@
 
         <TextView
             android:id="@+id/foodString"
+            android:fontFamily="@font/merriweather_regular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:gravity="bottom|left"
             android:textColor="@android:color/black"
             android:textSize="18sp"
-            android:textStyle="bold"
-            tools:ignore="RtlHardcoded" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/dateString"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:gravity="top|left"
             android:textColor="@android:color/black"
-            android:textSize="14sp"
-            tools:ignore="RtlHardcoded" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 

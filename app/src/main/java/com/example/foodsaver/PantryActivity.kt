@@ -31,28 +31,26 @@ class PantryActivity : ComponentActivity() {
         pantryList.adapter = PantryCustomAdapter(this, arrImageText)
 
 
+        if (GlobalFoodNames.isNotEmpty()) {
+            for (food in GlobalFoodNames) {
+                if (food.itemExpirationDate == "") {
+                    arrImageText.add(ImageTextView(R.drawable.black_circle, food.foodItemName, ""))
+                } else {
+                    arrImageText.add(MakeImgTxt(food))
+                }
+            }
 
 
+            //setting switch activity event
+            pantryToMainButton.setOnClickListener {
 
-        if (GlobalFoodNames.isNotEmpty())
-        {
-            for(food in GlobalFoodNames)
-            {
-               arrImageText.add(MakeImgTxt(food))
-
+                val intent = Intent(this@PantryActivity, MainActivity::class.java)
+                startActivity(intent)
             }
         }
 
 
-
-        //setting switch activity event
-        pantryToMainButton.setOnClickListener {
-
-            val intent = Intent(this@PantryActivity, MainActivity::class.java)
-            startActivity(intent)
-        }
     }
-
     //this should take in a food object and return a ImageTextView
     private fun MakeImgTxt(food: Food): ImageTextView {
         //We will plug this in later
@@ -75,5 +73,4 @@ class PantryActivity : ComponentActivity() {
 
 
     }
-
 }
