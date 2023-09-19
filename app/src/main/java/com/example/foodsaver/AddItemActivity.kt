@@ -102,7 +102,7 @@ class AddItemActivity : ComponentActivity() {
                     GlobalFoodNames.add(foodInput)
                 }
             }
-            //have a check for it nothing is there and show error message
+            //have a check for if nothing is there and show error message
             else {
                 val toast = Toast.makeText(this, "Input Food name", Toast.LENGTH_SHORT)
                 toast.show()
@@ -149,6 +149,7 @@ class AddItemActivity : ComponentActivity() {
                 //Pull from Global Food Names and display
                 adapter.add(food.foodItemName + " " + food.itemExpirationDate)
             }
+            //reset flag to false
             listClickedFlag = false
         }
 
