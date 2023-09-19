@@ -15,14 +15,16 @@ class PantryCustomAdapter(var activity: Activity, var imageTextList: ArrayList<I
 
     //this private class just defines a view with three different views
     private class ViewHolder(row: View?) {
+        //I have a layout I'm making vars and binding them
         var foodString: TextView
         var dateString: TextView
         var imageID: ImageView
         //on init initialize the variables
         init {
+            //I'm binding these vars to my layouts just like I would in an activity screen
             this.foodString = row?.findViewById(R.id.foodString) as TextView
-            this.dateString = row?.findViewById(R.id.dateString) as TextView
-            this.imageID = row?.findViewById(R.id.imageID) as ImageView
+            this.dateString = row.findViewById(R.id.dateString) as TextView
+            this.imageID = row.findViewById(R.id.imageID) as ImageView
         }
     }
     override fun getCount(): Int {
@@ -41,18 +43,17 @@ class PantryCustomAdapter(var activity: Activity, var imageTextList: ArrayList<I
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
         // Making some vars for later
         val view: View?
-        val viewHolder: ViewHolder
+       val viewHolder: ViewHolder
         //if our view is null then make a view
         if(p1 == null){
             //create a layout inflater from context
             val layout = LayoutInflater.from(activity)
             //this sets the layout to our custom_list_view
-            //also p2 or ViewGroup? is just the parent of p1 I think
             view = layout.inflate(R.layout.custom_list_view, p2, false)
             //the view holder class takes in a view and is assigned the views we need see above
-            viewHolder = ViewHolder(view)
+           viewHolder = ViewHolder(view)
             //tag stores data in a view so were just storing viewHolder in our main view
-            view.tag = viewHolder
+           view.tag = viewHolder
         }
         else{
             //if we already have a view then just set the vars
@@ -60,15 +61,29 @@ class PantryCustomAdapter(var activity: Activity, var imageTextList: ArrayList<I
             //set view holder to views tag and typecast to ViewHolder
             viewHolder = view.tag as ViewHolder
         }
-        /*this is just bad naming on my part I'm pulling a single item from the adapter and
-        setting it as an ImageTextView Object I'm then assigning viewHolders vars to equal
-        the imageTextViews member classes then returning the view */
-        val imageTextView: ImageTextView = getItem(p0) as ImageTextView
-        viewHolder.foodString.text = imageTextView.foodString
-        viewHolder.dateString.text = imageTextView.dateString
-        viewHolder.imageID.setImageResource(imageTextView.imageID)
-
+        //View holder now containts data for view as it's set to tag so just bind the data
+        viewHolder.foodString.text = imageTextList[p0].foodString
+        viewHolder.dateString.text = imageTextList[p0].dateString
+        viewHolder.imageID.setImageResource(imageTextList[p0].imageID)
         return view as View
+
+
+        /*
+        var row: View? = p1
+        val inflater: LayoutInflater = activity.layoutInflater
+        if(p1 == null){
+            row = inflater.inflate(R.layout.custom_list_view, p2, false)
+            var foodString: TextView = row.findViewById(R.id.foodString)
+            var dateString: TextView = row.findViewById(R.id.dateString)
+            var imageID: ImageView = row.findViewById(R.id.imageID)
+            foodString.text = imageTextList[p0].foodString
+            dateString.text = imageTextList[p0].dateString
+            imageID.setImageResource(imageTextList[p0].imageID)
+
+        }
+        return row!!
+
+         */
     }
 
 }
