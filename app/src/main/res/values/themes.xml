@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.FoodSaver" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.FoodSaver" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- Messing with colors
+        <item name="android:background">@color/lightTan</item>
+        <item name="android:colorButtonNormal">@color/lightBlue</item>
+        <item name="android:textColorHint">@color/darkBrown</item>
+        -->
+
+
+    </style>
+
+
 </resources>

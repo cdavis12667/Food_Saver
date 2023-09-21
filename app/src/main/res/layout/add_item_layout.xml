@@ -1,7 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/add_item_l"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/lightTan"
+    >
+
+    <Button
+        android:id="@+id/addToMainButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="#2FBCC0"
+        android:text="@string/m"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/addItemTitle"
+        style="@style/Theme.FoodSaver"
+        android:layout_width="220dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="96dp"
+        android:clickable="false"
+        android:fontFamily="@font/lobster_regular"
+        android:shadowColor="@color/black"
+        android:shadowDx="15"
+        android:shadowDy="15"
+        android:shadowRadius="1"
+        android:text="@string/add_item_title"
+        android:textAlignment="center"
+        android:textColor="@color/teal_700"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/addFoodNameEntry"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="12dp"
+        android:autofillHints="name"
+        android:fontFamily="@font/merriweather_regular"
+        android:hint="@string/add_helper"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectAndChangeText" />
+
+    <EditText
+        android:id="@+id/addDateInput"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="20dp"
+        android:autofillHints="date"
+        android:ems="10"
+        android:fontFamily="@font/merriweather_regular"
+        android:hint="@string/add_date_helper"
+        android:inputType="date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addFoodNameEntry" />
+
+    <Button
+        android:id="@+id/addConfirmB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="#547285"
+        android:fontFamily="@font/merriweather_regular"
+        android:text="@string/add_confirm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addDateInput" />
+
+    <ListView
+        android:id="@+id/addList"
+        android:layout_width="409dp"
+        android:layout_height="153dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/merriweather_regular"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addItemTitle" />
+
+    <TextView
+        android:id="@+id/selectAndChangeText"
+        android:layout_width="270dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/merriweather_regular"
+        android:text="@string/select"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addList" />
+
+    <Button
+        android:id="@+id/addRemoveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="72dp"
+        android:backgroundTint="#547285"
+        android:fontFamily="@font/merriweather_regular"
+        android:text="@string/add_remove"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addDateInput" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

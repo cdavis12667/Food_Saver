@@ -1,4 +1,22 @@
 <resources>
     <string name="app_name">Food Saver</string>
     <string name="title_activity_add_item">AddItemActivity</string>
+    <string name="m">M</string>
+    <string name="settings">Settings</string>
+    <string name="shopping_list">Shopping List</string>
+    <string name="add_item">Add Item</string>
+    <string name="pantry">Pantry</string>
+    <!-- Edit/Add Item Screen Strings-->
+    <string name="add_item_title">Edit Pantry</string>
+    <string name="add_helper">Add Food Name</string>
+    <string name="add_date_helper">Add date mm-dd-yyyy</string>
+    <string name="add_confirm">Add or Edit</string>
+    <string name="add_food_list">"Food List"</string>
+    <string name="select_change">Edit</string>
+    <string name="select">Select Entry and Edit or Remove</string>
+    <string name="add_remove">Remove</string>
+    <!-- Pantry Screen Strings-->
+    <string name="pantry_title">Pantry</string>
+<!-- Main Menu Strings -->
+    <string name="menu_title"> Food Savers</string>
 </resources>

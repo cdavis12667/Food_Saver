@@ -1,7 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/settings_l"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/lightTan">
+
+    <Button
+        android:id="@+id/settingToMainButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#2FBCC0"
+        android:text="@string/m"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/settingsTitle"
+        android:layout_width="217dp"
+        android:layout_height="69dp"
+        android:layout_marginEnd="98dp"
+        android:clickable="false"
+        android:fontFamily="@font/lobster_regular"
+        android:text="@string/settings"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/settingsSwitch1"
+        android:layout_width="280dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="316dp"
+        android:text="Expired"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/settingsText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="408dp"
+        android:text="Notify when item is expiring within 3 days."
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/settingsText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="460dp"
+        android:text="Notify based on specific item types."
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/settingsText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="356dp"
+        android:text="Notify when item is expired."
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/settingsSwitch3"
+        android:layout_width="280dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="428dp"
+        android:text="Specific Item Type"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/settingsSwitch2"
+        android:layout_width="280dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="376dp"
+        android:text="Expiring Soon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/settingsText1"
+        android:layout_width="281dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="102dp"
+        android:text="Pantry Update Frequency"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:layout_width="231dp"
+        android:layout_height="164dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="139dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/settingsRadioB1"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:text="Daily"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="64dp" />
+
+        <RadioButton
+            android:id="@+id/settingsRadioB4"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:text="Monthly"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="64dp" />
+
+        <RadioButton
+            android:id="@+id/settingsRadioB2"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:text="Weekly"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="64dp" />
+
+        <RadioButton
+            android:id="@+id/settingsRadioB3"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:text="Bi-Weekly"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="64dp" />
+
+        <RadioButton
+            android:id="@+id/settingsRadioB5"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:text="Off"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="64dp" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/settingsText5"
+        android:layout_width="202dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="478dp"
+        android:text="Set Item Types"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
