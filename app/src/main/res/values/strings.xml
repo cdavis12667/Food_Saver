@@ -17,5 +17,6 @@
     <string name="add_remove">Remove</string>
     <!-- Pantry Screen Strings-->
     <string name="pantry_title">Pantry</string>
-
+<!-- Main Menu Strings -->
+    <string name="menu_title"> Food Savers</string>
 </resources>

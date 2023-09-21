@@ -41,14 +41,14 @@ class PantryActivity : ComponentActivity() {
             }
 
 
-            //setting switch activity event
-            pantryToMainButton.setOnClickListener {
 
-                val intent = Intent(this@PantryActivity, MainActivity::class.java)
-                startActivity(intent)
-            }
         }
+        //setting switch activity event
+        pantryToMainButton.setOnClickListener {
 
+            val intent = Intent(this@PantryActivity, MainActivity::class.java)
+            startActivity(intent)
+        }
 
     }
     //this should take in a food object and return a ImageTextView
