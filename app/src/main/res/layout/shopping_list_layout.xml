@@ -7,21 +7,6 @@
     android:layout_height="match_parent"
     android:background="@color/lightBlue">
 
-    <TextView
-        android:id="@+id/shoplistTitle"
-        android:layout_width="272dp"
-        android:layout_height="73dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="68dp"
-        android:clickable="false"
-        android:fontFamily="@font/lobster_regular"
-        android:text="@string/shopping_list"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="48sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/shoppingToMainButton"
         android:layout_width="48dp"
@@ -32,55 +17,4 @@
         android:text="@string/m"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/shopSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="14dp"
-        android:src="@android:drawable/ic_menu_search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ListView
-        android:id="@+id/shopListView"
-        android:layout_width="412dp"
-        android:layout_height="535dp"
-        android:layout_marginTop="194dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/shopText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="115dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Type in an item..."
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/addButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="224dp"
-        android:layout_marginTop="112dp"
-        android:src="@android:drawable/ic_menu_add"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/shopClear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="13dp"
-        android:text="Clear List"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
