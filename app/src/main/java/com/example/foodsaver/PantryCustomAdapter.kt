@@ -11,7 +11,7 @@ import android.widget.TextView
 /*This class inherits from base adapter so it has methods that must be overwritten and a
 consturctor to be used
  */
-class PantryCustomAdapter(var activity: Activity, var imageTextList: ArrayList<ImageTextView>): BaseAdapter() {
+class PantryCustomAdapter(private var activity: Activity, private var imageTextList: ArrayList<ImageTextView>): BaseAdapter() {
 
     //this private class just defines a view with three different views
     private class ViewHolder(row: View?) {
@@ -44,6 +44,7 @@ class PantryCustomAdapter(var activity: Activity, var imageTextList: ArrayList<I
         // Making some vars for later
         val view: View?
        val viewHolder: ViewHolder
+
         //if our view is null then make a view
         if(p1 == null){
             //create a layout inflater from context
@@ -68,22 +69,6 @@ class PantryCustomAdapter(var activity: Activity, var imageTextList: ArrayList<I
         return view as View
 
 
-        /*
-        var row: View? = p1
-        val inflater: LayoutInflater = activity.layoutInflater
-        if(p1 == null){
-            row = inflater.inflate(R.layout.custom_list_view, p2, false)
-            var foodString: TextView = row.findViewById(R.id.foodString)
-            var dateString: TextView = row.findViewById(R.id.dateString)
-            var imageID: ImageView = row.findViewById(R.id.imageID)
-            foodString.text = imageTextList[p0].foodString
-            dateString.text = imageTextList[p0].dateString
-            imageID.setImageResource(imageTextList[p0].imageID)
-
-        }
-        return row!!
-
-         */
     }
 
 }
