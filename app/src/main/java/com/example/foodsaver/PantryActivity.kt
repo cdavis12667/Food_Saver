@@ -11,14 +11,9 @@ class PantryActivity : ComponentActivity() {
     private lateinit var pantryToMainButton: android.widget.Button
     private lateinit var pantryList: android.widget.ListView
 
-
-
-
-
     //Making a companion object which is a bit like static objects
     companion object {
          var GlobalFoodNames = mutableListOf<Food>()
-
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,9 +34,6 @@ class PantryActivity : ComponentActivity() {
                     arrImageText.add(MakeImgTxt(food))
                 }
             }
-
-
-
         }
         //setting switch activity event
         pantryToMainButton.setOnClickListener {
@@ -56,9 +48,9 @@ class PantryActivity : ComponentActivity() {
         //We will plug this in later
         val imageID: Int
         //calling this so the class sets days till expiration
-        val bool = food.checkExpiration(food)
+        val exp = food.checkExpiration(food)
         //If food is expired set to red
-        if (food.daysTillExpiration <= 0) {
+        if (exp) {
             imageID = R.drawable.red_circle
         }
         //If more than 13 days make it green
