@@ -1,11 +1,12 @@
 package com.example.foodsaver
 
+import java.io.Serializable
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
 
 
-class Food() {
+class Food(): Serializable{
 
     //Member Fields, Getters and setters done internally
     var foodItemName = ""

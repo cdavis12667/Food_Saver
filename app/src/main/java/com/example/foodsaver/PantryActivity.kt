@@ -3,7 +3,9 @@ package com.example.foodsaver
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-
+import java.io.EOFException
+import java.io.File
+import java.io.ObjectInputStream
 
 
 class PantryActivity : ComponentActivity() {
@@ -14,6 +16,7 @@ class PantryActivity : ComponentActivity() {
     //Making a companion object which is a bit like static objects
     companion object {
          var GlobalFoodNames = mutableListOf<Food>()
+
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +27,12 @@ class PantryActivity : ComponentActivity() {
         //making an array list
         var arrImageText: ArrayList<ImageTextView> = ArrayList()
         pantryList.adapter = PantryCustomAdapter(this, arrImageText)
+        val file = File(filesDir, "Fooddata")
+
+        if(file.exists())
+        {
+            GlobalFoodNames = getFoodFile()!!
+        }
 
 
         if (GlobalFoodNames.isNotEmpty()) {
@@ -65,4 +74,23 @@ class PantryActivity : ComponentActivity() {
 
 
     }
+    private fun getFoodFile(): MutableList<Food>? {
+        try {
+
+            val fis = openFileInput("Fooddata")
+            val ois = ObjectInputStream(fis)
+            val foodlist = ois.readObject()
+            ois.close()
+            if (foodlist != null) {
+                return foodlist as MutableList<Food>
+            }
+        } catch (e: EOFException) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
+
+
 }
+
