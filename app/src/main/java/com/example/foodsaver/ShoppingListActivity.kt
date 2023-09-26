@@ -13,6 +13,9 @@ import android.widget.SearchView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import com.example.foodsaver.PantryActivity.Companion.GlobalFoodNames
+import java.io.EOFException
+import java.io.File
+import java.io.ObjectInputStream
 
 
 class ShoppingListActivity : ComponentActivity() {
@@ -50,6 +53,13 @@ class ShoppingListActivity : ComponentActivity() {
         searchResultsAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1)
         searchListView.adapter = searchResultsAdapter
         searchListView.visibility = View.GONE //Invisible until the search starts
+
+        val file = File(filesDir, "Fooddata")
+
+        if(file.exists())
+        {
+            GlobalFoodNames = getFoodFile()!!
+        }
 
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -177,5 +187,21 @@ class ShoppingListActivity : ComponentActivity() {
     private fun clearShoppingList() {
         shoppingItems.clear() // Clear the list of items
         shoppingListAdapter.notifyDataSetChanged() // Notify the adapter to update the view
+    }
+    //method to pull food file without requiring the pantry to be opened first
+    private fun getFoodFile(): MutableList<Food>? {
+        try {
+
+            val fis = openFileInput("Fooddata")
+            val ois = ObjectInputStream(fis)
+            val foodlist = ois.readObject()
+            ois.close()
+            if (foodlist != null) {
+                return foodlist as MutableList<Food>
+            }
+        } catch (e: EOFException) {
+            e.printStackTrace()
+        }
+        return null
     }
 }
