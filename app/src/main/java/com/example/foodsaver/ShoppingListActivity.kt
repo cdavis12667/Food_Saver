@@ -3,30 +3,33 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ListView
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import com.example.foodsaver.PantryActivity.Companion.GlobalFoodNames
 
 
 class ShoppingListActivity : ComponentActivity() {
     //making vars
     private lateinit var shoppingToMainButton: android.widget.Button
     private lateinit var shopText: EditText
+    private lateinit var shoppingListAdapter: ArrayAdapter<String>
     private lateinit var addButton: ImageButton
     private lateinit var shopListView: ListView
     private lateinit var adapter: ArrayAdapter<String> // Use ArrayAdapter for simplicity
     private val shoppingItems = mutableListOf<String>()
-    private lateinit var shopSearch: ImageButton
     private lateinit var searchDialog: AlertDialog
     private lateinit var searchResultsListView: ListView
     private lateinit var shopClear: Button
-    private lateinit var items: MutableList<String>
+    private lateinit var searchView: SearchView
+    private lateinit var searchListView: ListView
+    private lateinit var searchResultsAdapter: ArrayAdapter<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.shopping_list_layout)
@@ -39,14 +42,37 @@ class ShoppingListActivity : ComponentActivity() {
         shopText = findViewById(R.id.shopText)
         addButton = findViewById(R.id.addButton)
         shopListView = findViewById(R.id.shopListView)
-        shopSearch = findViewById(R.id.shopSearch)
+        shoppingListAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1)
+        shopListView.adapter = shoppingListAdapter
         shopClear = findViewById<Button>(R.id.shopClear)
+        searchView = findViewById(R.id.searchView)
+        searchListView = findViewById(R.id.searchListView)
+        searchResultsAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1)
+        searchListView.adapter = searchResultsAdapter
+        searchListView.visibility = View.GONE //Invisible until the search starts
 
-        shopSearch.setOnClickListener {
-            showSearchDialog()
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                searchFood(newText)
+                return true
+
+                if (searchView.hasFocus()) {
+                    searchResultsListView.visibility = View.VISIBLE
+                }
+            }
+        })
+
+        searchView.setOnQueryTextFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                // Search bar lost focus, hide the search results
+                searchListView.visibility = View.GONE
+            }
         }
-
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, shoppingItems)
 
 
         shopText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
@@ -62,11 +88,8 @@ class ShoppingListActivity : ComponentActivity() {
             showClearConfirmationDialog()
         }
 
-        shopListView = findViewById(R.id.shopListView)
-        shopListView.adapter = adapter
-
         // Set an item click listener to toggle strikethrough
-        shopListView.setOnItemClickListener { parent, view, position, id ->
+        shopListView.setOnItemClickListener { _, view, _, _ ->
             // Get the TextView inside the clicked item
             val textView = view as TextView
 
@@ -78,7 +101,7 @@ class ShoppingListActivity : ComponentActivity() {
                 // Remove strikethrough style
                 textView.paintFlags = textView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
             }
-            shopListView.setOnItemLongClickListener { parent, view, position, id ->
+            shopListView.setOnItemLongClickListener { _, view, position, _ ->
                 showDeleteConfirmationDialog(position)
                 true // Return true to indicate that the long-press event is consumed
             }
@@ -95,37 +118,36 @@ class ShoppingListActivity : ComponentActivity() {
     private fun clearEditText() {
         shopText.text.clear()
     }
-    private fun showSearchDialog(){ //Still requires something to function as intended.
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.search_dialog, null)
-        val searchText = dialogView.findViewById<EditText>(R.id.searchEditText)
-        searchResultsListView = dialogView.findViewById<ListView>(R.id.searchResultsListView)
 
-        searchDialog = AlertDialog.Builder(this)
-            .setView(dialogView)
-            .setPositiveButton("Search") { _, _ ->
-                val query = searchText.text.toString().trim()
-                searchFood(query)
-            }
-            .setNegativeButton("Cancel") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .create()
-
-        searchDialog.show()
-
-    }
     private fun searchFood(query: String) {
-        val hardcodedData = listOf("Apple", "Banana", "Orange") // Replace with your actual food names
-        val searchResults = hardcodedData.filter { food ->
-            food.contains(query, ignoreCase = true)
-        }
-        /*val searchResults = GlobalFoodNames.filter { food ->
+        val searchResults = GlobalFoodNames.filter { food ->
             food.foodItemName.contains(query, ignoreCase = true)
-        }*/
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, searchResults)
-        searchResultsListView.adapter = adapter
+        }
 
-        adapter.notifyDataSetChanged()
+        val searchResNames = searchResults.map {it.foodItemName}
+        searchResultsAdapter.clear() // Clear the adapter's current data
+        searchResultsAdapter.addAll(searchResNames) // Add the filtered results to the adapter
+        searchResultsAdapter.notifyDataSetChanged()
+
+        if (searchResults.isNotEmpty()){
+            searchListView.visibility = View.VISIBLE
+        }
+        else {
+            searchListView.visibility = View.GONE
+        }
+        searchListView.setOnItemClickListener { _, _, position, _ ->
+            // Get the selected item from search results
+            val selectedItem = searchResNames[position]
+
+            // Add the selected item to your shopping list (items)
+            shoppingItems.add(selectedItem)
+            shoppingListAdapter.notifyDataSetChanged()
+
+            // Clear the search query and hide the search results
+            searchView.setQuery("", false) // Clear query
+            searchView.clearFocus() // Remove focus from search bar
+            searchResultsListView.visibility = View.GONE
+        }
     }
     private fun showDeleteConfirmationDialog(position: Int) {
         AlertDialog.Builder(this)
@@ -139,7 +161,7 @@ class ShoppingListActivity : ComponentActivity() {
     }
     private fun deleteItem(position: Int) {
         shoppingItems.removeAt(position)
-        adapter.notifyDataSetChanged()
+        shoppingListAdapter.notifyDataSetChanged()
     }
 
     private fun showClearConfirmationDialog() {
@@ -154,6 +176,6 @@ class ShoppingListActivity : ComponentActivity() {
     }
     private fun clearShoppingList() {
         shoppingItems.clear() // Clear the list of items
-        adapter.notifyDataSetChanged() // Notify the adapter to update the view
+        shoppingListAdapter.notifyDataSetChanged() // Notify the adapter to update the view
     }
 }
