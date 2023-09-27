@@ -16,7 +16,6 @@ class PantryActivity : ComponentActivity() {
     //Making a companion object which is a bit like static objects
     companion object {
          var GlobalFoodNames = mutableListOf<Food>()
-
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +37,7 @@ class PantryActivity : ComponentActivity() {
         if (GlobalFoodNames.isNotEmpty()) {
             for (food in GlobalFoodNames) {
                 if (food.itemExpirationDate == "") {
-                    arrImageText.add(ImageTextView(R.drawable.black_circle, food.foodItemName, ""))
+                    arrImageText.add(ImageTextView(R.drawable.calender_date, food.foodItemName, ""))
                 } else {
                     arrImageText.add(MakeImgTxt(food))
                 }

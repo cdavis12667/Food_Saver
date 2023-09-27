@@ -122,8 +122,6 @@ class AddItemActivity : ComponentActivity() {
             }
             //Sort
             GlobalFoodNames.sortBy { it.foodItemName }
-            //save changes to list
-            saveFood(GlobalFoodNames)
             //Clear List
             adapter.clear()
             //Going to display all items in the pantry
@@ -153,8 +151,6 @@ class AddItemActivity : ComponentActivity() {
         addRemoveButton.setOnClickListener {
             //We take the index from index holder than just remove it from the global food list
             GlobalFoodNames.removeAt(indexHolder)
-            //save changes
-            saveFood(GlobalFoodNames)
             //We should clear the text box
             addFoodNameEntry.text.clear()
             addDateInput.text.clear()
@@ -201,5 +197,15 @@ class AddItemActivity : ComponentActivity() {
             e.printStackTrace()
         }
         return null
+    }
+//Saving before destroying
+    override fun onDestroy() {
+        super.onDestroy()
+        saveFood(GlobalFoodNames)
+    }
+//Saving before stopping
+    override fun onStop() {
+        super.onStop()
+        saveFood(GlobalFoodNames)
     }
 }
