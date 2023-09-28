@@ -15,6 +15,11 @@
     <string name="select_change">Edit</string>
     <string name="select">Select Entry and Edit or Remove</string>
     <string name="add_remove">Remove</string>
+    <!-- add item legend strings-->
+    <string name="add_item_green">14 days or more from expiring</string>
+    <string name="add_item_yellow">13 days or less from expiring</string>
+    <string name="add_item_red">Item expired</string>
+    <string name="add_item_no_date">No date</string>
     <!-- Pantry Screen Strings-->
     <string name="pantry_title">Pantry</string>
 <!-- Main Menu Strings -->

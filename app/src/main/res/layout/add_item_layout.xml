@@ -113,5 +113,94 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addDateInput" />
 
+    <ImageView
+        android:id="@+id/additemGreenLegend"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="264dp"
+        android:src="@drawable/green_circle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addList" />
+
+    <ImageView
+        android:id="@+id/additemYellowLegend"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/yellow_circle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/additemGreenLegend" />
+
+    <ImageView
+        android:id="@+id/additemRedLegend"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/red_circle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/additemYellowLegend" />
+
+    <ImageView
+        android:id="@+id/additemNoDateLegend"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/calender_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/additemRedLegend" />
+
+    <TextView
+        android:id="@+id/additemGreenText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="13dp"
+        android:fontFamily="@font/merriweather_regular"
+        android:text="@string/add_item_green"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/additemGreenLegend"
+        app:layout_constraintTop_toBottomOf="@+id/addConfirmB" />
+
+    <TextView
+        android:id="@+id/additemYellowText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="39dp"
+        android:text="@string/add_item_yellow"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/additemYellowLegend"
+        app:layout_constraintTop_toBottomOf="@+id/additemGreenText" />
+
+    <TextView
+        android:id="@+id/additemTextRedLegend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="37dp"
+        android:text="@string/add_item_red"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/additemRedLegend"
+        app:layout_constraintTop_toBottomOf="@+id/additemYellowText" />
+
+    <TextView
+        android:id="@+id/additemNoDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="35dp"
+        android:text="@string/add_item_no_date"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/additemNoDateLegend"
+        app:layout_constraintTop_toBottomOf="@+id/additemTextRedLegend" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
