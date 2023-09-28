@@ -8,6 +8,7 @@ import androidx.activity.ComponentActivity
 class SettingsActivity : ComponentActivity() {
     //making vars
     private lateinit var settingToMainButton: android.widget.Button
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_layout)

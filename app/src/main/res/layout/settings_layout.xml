@@ -38,7 +38,11 @@
         android:layout_height="34dp"
         android:layout_marginStart="72dp"
         android:layout_marginTop="316dp"
+        android:layout_marginEnd="59dp"
+        android:layout_marginBottom="381dp"
         android:text="Expired"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,9 +52,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
         android:layout_marginTop="408dp"
+        android:layout_marginEnd="77dp"
         android:text="Notify when item is expiring within 3 days."
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="+@id/settingsSwitch2"/>
 
     <TextView
         android:id="@+id/settingsText4"
@@ -58,9 +65,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
         android:layout_marginTop="460dp"
-        android:text="Notify based on specific item types."
+        android:text="Notify only based on specific items in your pantry."
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="+@id/settingsSwitch3"/>
 
     <TextView
         android:id="@+id/settingsText2"
@@ -68,9 +76,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
         android:layout_marginTop="356dp"
+        android:layout_marginEnd="165dp"
         android:text="Notify when item is expired."
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <Switch
         android:id="@+id/settingsSwitch3"
@@ -80,7 +91,8 @@
         android:layout_marginTop="428dp"
         android:text="Specific Item Type"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="+@id/settingsText5"/>
 
     <Switch
         android:id="@+id/settingsSwitch2"
@@ -90,18 +102,19 @@
         android:layout_marginTop="376dp"
         android:text="Expiring Soon"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="+@id/settingsText4"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/settingsText1"
         android:layout_width="281dp"
         android:layout_height="37dp"
-        android:layout_marginTop="102dp"
+        android:layout_marginTop="76dp"
         android:text="Pantry Update Frequency"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.553"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -160,8 +173,19 @@
         android:layout_height="18dp"
         android:layout_marginStart="108dp"
         android:layout_marginTop="478dp"
+        android:layout_marginEnd="101dp"
         android:text="Set Item Types"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/settingsText4" />
+
+    <TextView
+        android:id="@+id/settingsTooltip1"
+        android:layout_width="401dp"
+        android:layout_height="38dp"
+        android:text="Set the update frequency. Weekly will be Fridays, and Monthly will be the 1st of the month."
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="101dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
