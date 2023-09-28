@@ -8,13 +8,6 @@
     android:background="@color/lightBlue"
     app:layout_constraintTop_toBottomOf="parent">
 
-    <androidx.constraintlayout.helper.widget.Layer
-        android:id="@+id/layer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="searchListView,shopText,shopClear,addButton,shopListView"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/shoplistTitle"
         android:layout_width="272dp"
@@ -32,12 +25,14 @@
 
     <ListView
         android:id="@+id/searchListView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
         android:background="@android:color/white"
+        android:elevation="10dp"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <Button
         android:id="@+id/shoppingToMainButton"
@@ -64,9 +59,11 @@
         android:id="@+id/textView3"
         android:layout_width="381dp"
         android:layout_height="21dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="12dp"
         android:text="Use the search function above to check the pantry."
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -74,11 +71,15 @@
         android:id="@+id/shopText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="115dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="189dp"
+        android:layout_marginBottom="550dp"
         android:ems="10"
         android:inputType="text"
         android:text="Type in an item..."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -86,20 +87,26 @@
         android:id="@+id/shopClear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="13dp"
+        android:layout_marginStart="301dp"
+        android:layout_marginTop="132dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="551dp"
         android:text="Clear List"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="224dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginStart="232dp"
+        android:layout_marginTop="132dp"
         android:src="@android:drawable/ic_menu_add"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/shopText"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView

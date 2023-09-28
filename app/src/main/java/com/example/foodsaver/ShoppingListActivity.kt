@@ -54,6 +54,10 @@ class ShoppingListActivity : ComponentActivity() {
         searchListView.adapter = searchResultsAdapter
         searchListView.visibility = View.GONE //Invisible until the search starts
 
+        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, shoppingItems)
+        shopListView = findViewById(R.id.shopListView)
+        shopListView.adapter = adapter
+
         val file = File(filesDir, "Fooddata")
 
         if(file.exists())
@@ -71,7 +75,7 @@ class ShoppingListActivity : ComponentActivity() {
                 searchFood(newText)
                 return true
 
-                if (searchView.hasFocus()) {
+                if (searchView.hasFocus()) { //This makes the search results listview only visible when the search view has focus
                     searchResultsListView.visibility = View.VISIBLE
                 }
             }
@@ -79,7 +83,7 @@ class ShoppingListActivity : ComponentActivity() {
 
         searchView.setOnQueryTextFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                // Search bar lost focus, hide the search results
+                // If the search bar loses focus, the search results get hidden
                 searchListView.visibility = View.GONE
             }
         }
@@ -113,7 +117,7 @@ class ShoppingListActivity : ComponentActivity() {
             }
             shopListView.setOnItemLongClickListener { _, view, position, _ ->
                 showDeleteConfirmationDialog(position)
-                true // Return true to indicate that the long-press event is consumed
+                true
             }
         }
     }
@@ -188,7 +192,7 @@ class ShoppingListActivity : ComponentActivity() {
         shoppingItems.clear() // Clear the list of items
         shoppingListAdapter.notifyDataSetChanged() // Notify the adapter to update the view
     }
-    //method to pull food file without requiring the pantry to be opened first
+    //Method to pull food file without requiring the pantry to be opened first
     private fun getFoodFile(): MutableList<Food>? {
         try {
 
