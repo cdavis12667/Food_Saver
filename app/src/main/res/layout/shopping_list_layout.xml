@@ -71,15 +71,11 @@
         android:id="@+id/shopText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="13dp"
         android:layout_marginTop="136dp"
-        android:layout_marginEnd="189dp"
-        android:layout_marginBottom="550dp"
         android:ems="10"
         android:inputType="text"
         android:text="Type in an item..."
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

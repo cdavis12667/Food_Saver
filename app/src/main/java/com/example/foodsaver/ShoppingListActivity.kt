@@ -89,9 +89,15 @@ class ShoppingListActivity : ComponentActivity() {
         }
 
 
+        //Deletes ONLY the tooltip when gaining focus
         shopText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+            val starttext = shopText.text.toString().trim()
             if (hasFocus) {
-                clearEditText()
+                if(starttext == "Type in an item...")
+                {
+                    clearEditText()
+                }
+
             }
         }
 
@@ -175,7 +181,7 @@ class ShoppingListActivity : ComponentActivity() {
     }
     private fun deleteItem(position: Int) {
         shoppingItems.removeAt(position)
-        shoppingListAdapter.notifyDataSetChanged()
+        adapter.notifyDataSetChanged()
     }
 
     private fun showClearConfirmationDialog() {
@@ -190,7 +196,7 @@ class ShoppingListActivity : ComponentActivity() {
     }
     private fun clearShoppingList() {
         shoppingItems.clear() // Clear the list of items
-        shoppingListAdapter.notifyDataSetChanged() // Notify the adapter to update the view
+        adapter.notifyDataSetChanged() // Notify the adapter to update the view
     }
     //Method to pull food file without requiring the pantry to be opened first
     private fun getFoodFile(): MutableList<Food>? {
