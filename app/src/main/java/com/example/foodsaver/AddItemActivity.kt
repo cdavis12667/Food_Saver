@@ -45,28 +45,20 @@ class AddItemActivity : ComponentActivity() {
         //setting my lists views adapter to be adapter
         addList.adapter = adapter
         //Checks to see if the file is empty if not then sets saved data to global food names
-        //Their is probably a better way to do this but I can't find anything
         val file = File(filesDir, "Fooddata")
         if(file.exists())
         {
             GlobalFoodNames = getFoodFile()!!
-        }
-        if (GlobalFoodNames.isNotEmpty()) {
             for (food in GlobalFoodNames) {
                 //Pull from Global Food Names and display
                 adapter.add(food.foodItemName + " " + food.itemExpirationDate)
             }
         }
-
-
-
-
         //setting to switch to main on click
         addToMainButton.setOnClickListener {
             val intent = Intent(this@AddItemActivity, MainActivity::class.java)
             startActivity(intent)
         }
-
 
         //Making this on click to take user input and make a food item
         addConfirmB.setOnClickListener {
@@ -197,11 +189,6 @@ class AddItemActivity : ComponentActivity() {
             e.printStackTrace()
         }
         return null
-    }
-//Saving before destroying
-    override fun onDestroy() {
-        super.onDestroy()
-        saveFood(GlobalFoodNames)
     }
 //Saving before stopping
     override fun onStop() {

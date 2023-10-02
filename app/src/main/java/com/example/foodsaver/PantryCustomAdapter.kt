@@ -14,7 +14,7 @@ consturctor to be used
 class PantryCustomAdapter(private var activity: Activity, private var imageTextList: ArrayList<ImageTextView>): BaseAdapter() {
 
     //this private class just defines a view with three different views
-    private class ViewHolder(row: View?) {
+    private class Binder(row: View?) {
         //I have a layout I'm making vars and binding them
         var foodString: TextView
         var dateString: TextView
@@ -43,7 +43,7 @@ class PantryCustomAdapter(private var activity: Activity, private var imageTextL
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
         // Making some vars for later
         val view: View?
-       val viewHolder: ViewHolder
+       val binder: Binder
 
         //if our view is null then make a view
         if(p1 == null){
@@ -51,21 +51,21 @@ class PantryCustomAdapter(private var activity: Activity, private var imageTextL
             val layout = LayoutInflater.from(activity)
             //this sets the layout to our custom_list_view
             view = layout.inflate(R.layout.custom_list_view, p2, false)
-            //the view holder class takes in a view and is assigned the views we need see above
-           viewHolder = ViewHolder(view)
-            //tag stores data in a view so were just storing viewHolder in our main view
-           view.tag = viewHolder
+            //the Binder class takes in a view and is assigned the views we need see above
+           binder = Binder(view)
+            //tag stores data in a view so were just storing Binder in our main view
+           view.tag = binder
         }
         else{
             //if we already have a view then just set the vars
             view = p1
-            //set view holder to views tag and typecast to ViewHolder
-            viewHolder = view.tag as ViewHolder
+            //set view holder to views tag and typecast to Binder
+            binder = view.tag as Binder
         }
         //View holder now containts data for view as it's set to tag so just bind the data
-        viewHolder.foodString.text = imageTextList[p0].foodString
-        viewHolder.dateString.text = imageTextList[p0].dateString
-        viewHolder.imageID.setImageResource(imageTextList[p0].imageID)
+        binder.foodString.text = imageTextList[p0].foodString
+        binder.dateString.text = imageTextList[p0].dateString
+        binder.imageID.setImageResource(imageTextList[p0].imageID)
         return view as View
 
 
