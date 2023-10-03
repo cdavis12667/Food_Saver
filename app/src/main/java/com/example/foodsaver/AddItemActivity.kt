@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import com.example.foodsaver.PantryActivity.Companion.GlobalFoodNames
+import java.text.ParseException
 
 
 class AddItemActivity : ComponentActivity() {
@@ -64,14 +65,17 @@ class AddItemActivity : ComponentActivity() {
             if ((addFoodNameEntry.text.isNotEmpty()) && (addDateInput.text.isNotEmpty())) {
                 //Make a food object
                 //check for valid date
-                var dateInputText=addDateInput.text.toString().replace("/","-")
+                //var dateInputText = ""
+
+                   // dateInputText = foodInput.convertShortHandYear(addDateInput.text.toString())
+
                 if (foodInput.isValidDate(addDateInput.text.toString())) {
                     foodInput.foodItemName = addFoodNameEntry.text.toString()
-                    foodInput.itemExpirationDate = dateInputText
+                    foodInput.itemExpirationDate = foodInput.convertShortHandYear(addDateInput.text.toString())
                     //if this is true it means they clicked and want to edit
                     if (listClickedFlag) {
                         GlobalFoodNames[indexHolder].foodItemName = addFoodNameEntry.text.toString()
-                        GlobalFoodNames[indexHolder].itemExpirationDate = dateInputText
+                        GlobalFoodNames[indexHolder].itemExpirationDate = foodInput.convertShortHandYear(addDateInput.text.toString())
 
 
                     }
