@@ -12,10 +12,13 @@ import android.widget.ListView
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.core.view.get
 import com.example.foodsaver.PantryActivity.Companion.GlobalFoodNames
 import java.io.EOFException
 import java.io.File
+import java.io.IOException
 import java.io.ObjectInputStream
+import java.io.ObjectOutputStream
 
 
 class ShoppingListActivity : ComponentActivity() {
@@ -26,13 +29,14 @@ class ShoppingListActivity : ComponentActivity() {
     private lateinit var addButton: ImageButton
     private lateinit var shopListView: ListView
     private lateinit var adapter: ArrayAdapter<String> // Use ArrayAdapter for simplicity
-    private val shoppingItems = mutableListOf<String>()
+    private var shoppingItems = mutableListOf<String>()
     private lateinit var searchDialog: AlertDialog
     private lateinit var searchResultsListView: ListView
     private lateinit var shopClear: Button
     private lateinit var searchView: SearchView
     private lateinit var searchListView: ListView
     private lateinit var searchResultsAdapter: ArrayAdapter<String>
+    private lateinit var holdStrike: MutableList<Int>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.shopping_list_layout)
@@ -57,14 +61,25 @@ class ShoppingListActivity : ComponentActivity() {
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, shoppingItems)
         shopListView = findViewById(R.id.shopListView)
         shopListView.adapter = adapter
-
+        //Making a list of ints to hold index postions so I can re strikethough the proper items
+        holdStrike = mutableListOf()
         val file = File(filesDir, "Fooddata")
 
         if(file.exists())
         {
             GlobalFoodNames = getFoodFile()!!
-        }
 
+        }
+        //making a file for food data
+        val shoppingFile = File(filesDir, "Shoppingdata")
+        //checking if fooddata already exists
+        if(shoppingFile.exists()){
+            //if it does clear shopping items
+            shoppingItems.clear()
+            //get data from file and add to shopping items
+            shoppingItems.addAll(getShoppingItems()!!)
+
+        }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -117,14 +132,17 @@ class ShoppingListActivity : ComponentActivity() {
             if (textView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG == 0) {
                 // Apply strikethrough style
                 textView.paintFlags = textView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+
             } else {
                 // Remove strikethrough style
                 textView.paintFlags = textView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+
             }
             shopListView.setOnItemLongClickListener { _, view, position, _ ->
                 showDeleteConfirmationDialog(position)
                 true
             }
+
         }
     }
     private fun addItem() {
@@ -213,5 +231,40 @@ class ShoppingListActivity : ComponentActivity() {
             e.printStackTrace()
         }
         return null
+    }
+    //Functions for saving and writing
+    //This functions saves a list and returns a bool if it worked or did not work
+    private fun saveShoppingItems(listSave: MutableList<String>): Boolean{
+        try {
+            val fos = openFileOutput("Shoppingdata", MODE_PRIVATE)
+            val oos = ObjectOutputStream(fos)
+            oos.writeObject(listSave)
+            oos.close()
+        }
+        catch(e: IOException){
+            e.printStackTrace()
+            return false
+        }
+        return true
+    }
+    //this function reads an object and returns null if no object is their
+    private fun getShoppingItems(): MutableList<String>? {
+        try {
+
+            val fis = openFileInput("Shoppingdata")
+            val ois = ObjectInputStream(fis)
+            val listSave = ois.readObject()
+            ois.close()
+            if (listSave != null) {
+                return listSave as MutableList<String>
+            }
+        } catch (e: EOFException) {
+            e.printStackTrace()
+        }
+        return null
+    }
+    override fun onStop() {
+        super.onStop()
+        saveShoppingItems(shoppingItems)
     }
 }

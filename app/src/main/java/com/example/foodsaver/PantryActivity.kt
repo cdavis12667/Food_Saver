@@ -27,14 +27,9 @@ class PantryActivity : ComponentActivity() {
         var arrImageText: ArrayList<ImageTextView> = ArrayList()
         pantryList.adapter = PantryCustomAdapter(this, arrImageText)
         val file = File(filesDir, "Fooddata")
-
         if(file.exists())
         {
             GlobalFoodNames = getFoodFile()!!
-        }
-
-
-        if (GlobalFoodNames.isNotEmpty()) {
             for (food in GlobalFoodNames) {
                 if (food.itemExpirationDate == "") {
                     arrImageText.add(ImageTextView(R.drawable.calender_date, food.foodItemName, ""))
@@ -49,7 +44,6 @@ class PantryActivity : ComponentActivity() {
             val intent = Intent(this@PantryActivity, MainActivity::class.java)
             startActivity(intent)
         }
-
     }
     //this should take in a food object and return a ImageTextView
     private fun MakeImgTxt(food: Food): ImageTextView {
