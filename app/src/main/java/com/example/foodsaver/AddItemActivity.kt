@@ -72,11 +72,11 @@ class AddItemActivity : ComponentActivity() {
                 var dateInputText=addDateInput.text.toString().replace("/","-")
                 if (foodInput.isValidDate(addDateInput.text.toString())) {
                     foodInput.foodItemName = addFoodNameEntry.text.toString()
-                    foodInput.itemExpirationDate = dateInputText
+                    foodInput.itemExpirationDate = foodInput.convertShortHandYear(dateInputText)
                     //if this is true it means they clicked and want to edit
                     if (listClickedFlag) {
                         GlobalFoodNames[indexHolder].foodItemName = addFoodNameEntry.text.toString()
-                        GlobalFoodNames[indexHolder].itemExpirationDate = dateInputText
+                        GlobalFoodNames[indexHolder].itemExpirationDate = foodInput.convertShortHandYear(dateInputText)
 
 
                     }
