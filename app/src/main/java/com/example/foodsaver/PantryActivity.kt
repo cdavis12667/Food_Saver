@@ -3,7 +3,9 @@ package com.example.foodsaver
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-
+import java.io.EOFException
+import java.io.File
+import java.io.ObjectInputStream
 
 
 class PantryActivity : ComponentActivity() {
@@ -24,12 +26,13 @@ class PantryActivity : ComponentActivity() {
         //making an array list
         var arrImageText: ArrayList<ImageTextView> = ArrayList()
         pantryList.adapter = PantryCustomAdapter(this, arrImageText)
-
-
-        if (GlobalFoodNames.isNotEmpty()) {
+        val file = File(filesDir, "Fooddata")
+        if(file.exists())
+        {
+            GlobalFoodNames = getFoodFile()!!
             for (food in GlobalFoodNames) {
                 if (food.itemExpirationDate == "") {
-                    arrImageText.add(ImageTextView(R.drawable.black_circle, food.foodItemName, ""))
+                    arrImageText.add(ImageTextView(R.drawable.calender_date, food.foodItemName, ""))
                 } else {
                     arrImageText.add(MakeImgTxt(food))
                 }
@@ -41,7 +44,6 @@ class PantryActivity : ComponentActivity() {
             val intent = Intent(this@PantryActivity, MainActivity::class.java)
             startActivity(intent)
         }
-
     }
     //this should take in a food object and return a ImageTextView
     private fun MakeImgTxt(food: Food): ImageTextView {
@@ -65,4 +67,23 @@ class PantryActivity : ComponentActivity() {
 
 
     }
+    private fun getFoodFile(): MutableList<Food>? {
+        try {
+
+            val fis = openFileInput("Fooddata")
+            val ois = ObjectInputStream(fis)
+            val foodlist = ois.readObject()
+            ois.close()
+            if (foodlist != null) {
+                return foodlist as MutableList<Food>
+            }
+        } catch (e: EOFException) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
+
+
 }
+

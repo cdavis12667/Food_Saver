@@ -2,14 +2,17 @@ package com.example.foodsaver
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings.Global
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import com.example.foodsaver.PantryActivity.Companion.GlobalFoodNames
-import java.text.ParseException
+import java.io.EOFException
+import java.io.File
+import java.io.IOException
+import java.io.ObjectInputStream
+import java.io.ObjectOutputStream
 
 
 class AddItemActivity : ComponentActivity() {
@@ -41,20 +44,21 @@ class AddItemActivity : ComponentActivity() {
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1)
         //setting my lists views adapter to be adapter
         addList.adapter = adapter
-        //We need this here other wise the activity switching wipes the list
-        if (GlobalFoodNames.isNotEmpty()) {
+        //Checks to see if the file is empty if not then sets saved data to global food names
+        val file = File(filesDir, "Fooddata")
+        if(file.exists())
+        {
+            GlobalFoodNames = getFoodFile()!!
             for (food in GlobalFoodNames) {
                 //Pull from Global Food Names and display
                 adapter.add(food.foodItemName + " " + food.itemExpirationDate)
             }
         }
-
         //setting to switch to main on click
         addToMainButton.setOnClickListener {
             val intent = Intent(this@AddItemActivity, MainActivity::class.java)
             startActivity(intent)
         }
-
 
         //Making this on click to take user input and make a food item
         addConfirmB.setOnClickListener {
@@ -65,17 +69,14 @@ class AddItemActivity : ComponentActivity() {
             if ((addFoodNameEntry.text.isNotEmpty()) && (addDateInput.text.isNotEmpty())) {
                 //Make a food object
                 //check for valid date
-                //var dateInputText = ""
-
-                   // dateInputText = foodInput.convertShortHandYear(addDateInput.text.toString())
-
+                var dateInputText=addDateInput.text.toString().replace("/","-")
                 if (foodInput.isValidDate(addDateInput.text.toString())) {
                     foodInput.foodItemName = addFoodNameEntry.text.toString()
-                    foodInput.itemExpirationDate = foodInput.convertShortHandYear(addDateInput.text.toString())
+                    foodInput.itemExpirationDate = dateInputText
                     //if this is true it means they clicked and want to edit
                     if (listClickedFlag) {
                         GlobalFoodNames[indexHolder].foodItemName = addFoodNameEntry.text.toString()
-                        GlobalFoodNames[indexHolder].itemExpirationDate = foodInput.convertShortHandYear(addDateInput.text.toString())
+                        GlobalFoodNames[indexHolder].itemExpirationDate = dateInputText
 
 
                     }
@@ -157,5 +158,41 @@ class AddItemActivity : ComponentActivity() {
             listClickedFlag = false
         }
 
+    }
+    //Functions for saving and writing
+    //This functions saves a list and returns a bool if it worked or did not work
+    private fun saveFood(mutableFoodList: MutableList<Food>): Boolean{
+        try {
+            val fos = openFileOutput("Fooddata", MODE_PRIVATE)
+            val oos = ObjectOutputStream(fos)
+            oos.writeObject(mutableFoodList)
+            oos.close()
+        }
+        catch(e: IOException){
+            e.printStackTrace()
+            return false
+        }
+        return true
+    }
+    //this function reads an object and returns null if no object is their
+    private fun getFoodFile(): MutableList<Food>? {
+        try {
+
+            val fis = openFileInput("Fooddata")
+            val ois = ObjectInputStream(fis)
+            val foodlist = ois.readObject()
+            ois.close()
+            if (foodlist != null) {
+                return foodlist as MutableList<Food>
+            }
+        } catch (e: EOFException) {
+            e.printStackTrace()
+        }
+        return null
+    }
+//Saving before stopping
+    override fun onStop() {
+        super.onStop()
+        saveFood(GlobalFoodNames)
     }
 }
