@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 
-class Food(): Serializable{
+class Food() : Serializable {
 
     //Member Fields, Getters and setters done internally
     var foodItemName = ""
@@ -80,10 +80,11 @@ class Food(): Serializable{
             var shortHandDate = shortHandFormat.parse(dashDate)
             var convertedDate = sFormat.format(shortHandDate)
             sDate = sFormat.parse(convertedDate)
-            isValid=true
+            if (sDate.after(Date())) {
+                isValid = true
+            }
 
-        }
-        catch (e: ParseException) {
+        } catch (e: ParseException) {
 
 
         }
@@ -95,13 +96,13 @@ class Food(): Serializable{
 
     fun convertShortHandYear(date: String): String {
 
-            val sFormat = SimpleDateFormat("MM-dd-yy")
-            val Format = SimpleDateFormat("MM-dd-yyyy")
-            //Adding in the slash to dash conversion
-            var dashDate = date.replace('/', '-')
-            //Convert shorthand date string to a date and formatting it with full year
-            var shortHandDate = sFormat.parse(dashDate)
-            var convertedDate = Format.format(shortHandDate)
+        val sFormat = SimpleDateFormat("MM-dd-yy")
+        val Format = SimpleDateFormat("MM-dd-yyyy")
+        //Adding in the slash to dash conversion
+        var dashDate = date.replace('/', '-')
+        //Convert shorthand date string to a date and formatting it with full year
+        var shortHandDate = sFormat.parse(dashDate)
+        var convertedDate = Format.format(shortHandDate)
 
 
         return convertedDate
