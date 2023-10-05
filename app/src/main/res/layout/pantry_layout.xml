@@ -5,7 +5,7 @@
     android:id="@+id/pantry_l"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightTan">
+    android:background="@color/BabyBlue">
 
     <TextView
         android:id="@+id/pantryTitle"
@@ -28,7 +28,7 @@
         android:layout_height="48dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
-        android:backgroundTint="#2FBCC0"
+        android:backgroundTint="#68C6F0"
         android:text="@string/m"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
