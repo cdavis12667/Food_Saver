@@ -20,5 +20,6 @@ class SettingsActivity : ComponentActivity() {
                 startActivity(intent)
             }
     }
+
 }
 
