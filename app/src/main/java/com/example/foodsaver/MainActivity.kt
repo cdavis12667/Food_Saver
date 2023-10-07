@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.AlertDialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -25,7 +26,6 @@ class MainActivity : ComponentActivity() {
     private lateinit var mainToPantryButton: android.widget.Button
     private lateinit var mainToShoppingButton: android.widget.Button
     private lateinit var mainToSettingsButton: android.widget.Button
-    private var attnList = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +44,6 @@ class MainActivity : ComponentActivity() {
 
 
         //Setting up notification manager
-
-        val notificationId = 1 // Just in case it's needed
 
         //Going to make some on click listeners which just go off when the user clicks a button
 
@@ -73,27 +71,14 @@ class MainActivity : ComponentActivity() {
             }
 
         //Retrieve file and update GlobalFoodNames *May not be required in other activities anymore!*
-        if(file.exists())
+        /*if(file.exists())
         {
             GlobalFoodNames = getFoodFile()!!
-        }
+        }*/
 
-        if(GlobalFoodNames.isNotEmpty())
-        {
-            for (food in GlobalFoodNames) {
-                if (food.itemExpirationDate == "" || food.daysTillExpiration <= 7){
-                    attnList.add(food.foodItemName)
-                }
-            }
-        }
+        //Notification on-tap action; intent and pending intent
 
-        //Notification builder
-        val builder = NotificationCompat.Builder(this, "pantry_notify")
-            .setSmallIcon(android.R.drawable.ic_dialog_info)
-            .setContentTitle("Pantry Update")
-            .setContentText("Food that requires your attention:")
-            .setStyle(NotificationCompat.BigTextStyle().bigText("Testing")) //Later: attnList.joinToString { "\n" } */
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
 
 
         //Check for build version before establishing notification channel
@@ -109,9 +94,8 @@ class MainActivity : ComponentActivity() {
             val notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(channel)
 
-
         }
-
+        //Notification permission check, then test notification
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.POST_NOTIFICATIONS
@@ -127,14 +111,75 @@ class MainActivity : ComponentActivity() {
             })
             notificationPermissionAlertDialog.show()
         } else {
-            val notificationManager = NotificationManagerCompat.from(this)
-            notificationManager.notify(notificationId, builder.build())
+            showNotification()
+
         }
 
 
+    }
+
+    fun showNotification(){
+        //Get file, update GlobalFoodNames (just in case MainActivity onCreate isn't called)
+        val file = File(filesDir, "Fooddata")
+        val expList = mutableListOf<String>()
+        val expSoonList = mutableListOf<String>()
+        val expWeekList = mutableListOf<String>()
+        val expDateMissing = mutableListOf<String>()
 
 
+        /*if(file.exists())
+        {
+            GlobalFoodNames = getFoodFile()!!
+        }*/
 
+        if(GlobalFoodNames.isNotEmpty())
+        {
+            for (food in GlobalFoodNames) {
+                if (food.itemExpirationDate == "") {
+                    expDateMissing.add(food.foodItemName)
+                }
+                else if (food.checkExpiration(food))
+                {
+                    expList.add(food.foodItemName)
+                }
+                else if (food.daysTillExpiration in 4..7)
+                {
+                    expWeekList.add(food.foodItemName)
+                }
+                else if (food.daysTillExpiration in 1 .. 3)
+                {
+                    expSoonList.add(food.foodItemName)
+                }
+            }
+        }
+
+        //Notification builder
+        val notificationIntent = Intent(this@MainActivity, PantryActivity::class.java)
+        val pendingIntent = PendingIntent.getActivity(
+            this@MainActivity,
+            1,
+            notificationIntent,
+            PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val builder = NotificationCompat.Builder(this, "pantry_notify")
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setContentTitle("Pantry Update")
+            .setContentText("Food that requires your attention:")
+            .setStyle(NotificationCompat.BigTextStyle().bigText("Testing")) //Later: attnList.joinToString { "\n" } */
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        val notificationManager = NotificationManagerCompat.from(this)
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // Permission request done in MainActivity
+            return
+        }
+        notificationManager.notify(1,builder.build())
     }
     private fun getFoodFile(): MutableList<Food>? {
         try {
