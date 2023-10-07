@@ -14,6 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.example.foodsaver.PantryActivity.Companion.GlobalFoodNames
 import java.io.EOFException
 import java.io.File
 import java.io.ObjectInputStream
@@ -70,12 +71,28 @@ class MainActivity : ComponentActivity() {
                 val intent = Intent(this@MainActivity, SettingsActivity::class.java)
                 startActivity(intent)
             }
+
+        //Retrieve file and update GlobalFoodNames *May not be required in other activities anymore!*
+        if(file.exists())
+        {
+            GlobalFoodNames = getFoodFile()!!
+        }
+
+        if(GlobalFoodNames.isNotEmpty())
+        {
+            for (food in GlobalFoodNames) {
+                if (food.itemExpirationDate == "" || food.daysTillExpiration <= 7){
+                    attnList.add(food.foodItemName)
+                }
+            }
+        }
+
         //Notification builder
         val builder = NotificationCompat.Builder(this, "pantry_notify")
             .setSmallIcon(android.R.drawable.ic_dialog_info)
             .setContentTitle("Pantry Update")
             .setContentText("Food that requires your attention:")
-            /* .setStyle(NotificationCompat.BigTextStyle().bigText("Testing")) //Later: attnList.joinToString { "\n" } */
+            .setStyle(NotificationCompat.BigTextStyle().bigText("Testing")) //Later: attnList.joinToString { "\n" } */
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
 
@@ -95,22 +112,6 @@ class MainActivity : ComponentActivity() {
 
         }
 
-
-
-        //Retrieving the file causes an error. Testing notification functionality first.
-        /*if(file.exists())
-        {
-            GlobalFoodNames = getFoodFile()!!
-        }
-
-        if(GlobalFoodNames.isNotEmpty())
-        {
-            for (food in GlobalFoodNames) {
-                if (food.itemExpirationDate == "" || food.daysTillExpiration <= 7){
-                    attnList.add(food.foodItemName)
-                }
-            }
-        }*/
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.POST_NOTIFICATIONS
