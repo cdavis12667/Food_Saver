@@ -3,6 +3,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -124,25 +125,27 @@ class ShoppingListActivity : ComponentActivity() {
         }
 
         // Set an item click listener to toggle strikethrough
-        shopListView.setOnItemClickListener { _, view, _, _ ->
+        shopListView.setOnItemClickListener { _, view, number, _ ->
             // Get the TextView inside the clicked item
             val textView = view as TextView
 
-            // Toggle strikethrough style
-            if (textView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG == 0) {
+            // Check for checkmark
+            if (!shoppingItems[number].endsWith("\u2713")) {
+                //If check mark is not thier than add it
                 // Apply strikethrough style
-                textView.paintFlags = textView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                shoppingItems[number] = shoppingItems[number] +" "+"\u2713"
 
             } else {
-                // Remove strikethrough style
-                textView.paintFlags = textView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                Log.d("String Debug", shoppingItems[number].dropLast( shoppingItems[number].length))
+                // Remove checkmark
+                shoppingItems[number] = shoppingItems[number].removeRange(shoppingItems[number].length - 1, shoppingItems[number].length)
 
             }
             shopListView.setOnItemLongClickListener { _, view, position, _ ->
                 showDeleteConfirmationDialog(position)
                 true
             }
-
+            adapter.notifyDataSetChanged()
         }
     }
     private fun addItem() {
