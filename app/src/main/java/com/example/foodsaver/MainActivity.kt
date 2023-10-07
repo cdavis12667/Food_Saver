@@ -1,10 +1,12 @@
 package com.example.foodsaver
 
 import android.Manifest
+import android.app.AlarmManager
 import android.app.AlertDialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -19,6 +21,7 @@ import com.example.foodsaver.PantryActivity.Companion.GlobalFoodNames
 import java.io.EOFException
 import java.io.File
 import java.io.ObjectInputStream
+import java.util.Calendar
 
 class MainActivity : ComponentActivity() {
     //Here I'm just making some vars that will be used for setting buttons
@@ -26,6 +29,8 @@ class MainActivity : ComponentActivity() {
     private lateinit var mainToPantryButton: android.widget.Button
     private lateinit var mainToShoppingButton: android.widget.Button
     private lateinit var mainToSettingsButton: android.widget.Button
+    private lateinit var alarmManager: AlarmManager
+    private lateinit var alarmIntent: PendingIntent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,15 +76,10 @@ class MainActivity : ComponentActivity() {
             }
 
         //Retrieve file and update GlobalFoodNames *May not be required in other activities anymore!*
-        /*if(file.exists())
+        if(file.exists())
         {
             GlobalFoodNames = getFoodFile()!!
-        }*/
-
-        //Notification on-tap action; intent and pending intent
-
-
-
+        }
 
         //Check for build version before establishing notification channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -115,9 +115,68 @@ class MainActivity : ComponentActivity() {
 
         }
 
+        //Read preferences and decide scheduling
+        val sharedPrefs = getSharedPreferences("FoodSaverPref", Context.MODE_PRIVATE)
+        val notificationFrequency = sharedPrefs.getInt("Notification Frequency", 1)
+        //Set up notification timing through AlarmManager (and maybe Broadcast)
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, MainActivity::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        //Handling the timing
+        val intervalMillis = 7 * 24 * 60 * 60 * 1000
+        val intervalMonthMillis = 30 * 24 * 60 * 60 * 1000 //30 days in milliseconds
+
+// Set the time you want the notification to appear
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, 8)
+        calendar.set(Calendar.MINUTE, 0)
+
+// Schedule the notification
+        when(notificationFrequency)
+        {
+            //Daily
+            1 -> {
+                alarmManager.setRepeating(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.timeInMillis,
+                    AlarmManager.INTERVAL_DAY,
+                    pendingIntent)
+            }
+            //Weekly
+            2 -> {
+                alarmManager.setRepeating(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.timeInMillis,
+                    intervalMillis.toLong(),
+                    pendingIntent)
+            }
+            //Bi-Weekly
+            3 -> {
+                val intervalMillis = intervalMillis * 2
+                alarmManager.setRepeating(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.timeInMillis,
+                    intervalMillis.toLong(),
+                    pendingIntent)
+            }
+            //Monthly
+            4 -> {
+                alarmManager.setRepeating(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.timeInMillis,
+                    intervalMonthMillis.toLong(),
+                    pendingIntent)
+            }
+        }
 
     }
 
+    /*inner class NotificationReciever : BroadcastReceiver()
+    {
+        override fun onReceive(p0: Context?, p1: Intent?) {
+            TODO("Not yet implemented")
+        }
+    }*/
     fun showNotification(){
         //Get file, update GlobalFoodNames (just in case MainActivity onCreate isn't called)
         val file = File(filesDir, "Fooddata")
@@ -125,7 +184,8 @@ class MainActivity : ComponentActivity() {
         val expSoonList = mutableListOf<String>()
         val expWeekList = mutableListOf<String>()
         val expDateMissing = mutableListOf<String>()
-
+        val sharedPrefs = getSharedPreferences("FoodSaverPref", Context.MODE_PRIVATE)
+        val notificationFrequency = sharedPrefs.getInt("Notification Frequency", 1)
 
         /*if(file.exists())
         {
@@ -153,7 +213,8 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        //Notification builder
+
+        //Notification on-tap action; intent and pending intent
         val notificationIntent = Intent(this@MainActivity, PantryActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(
             this@MainActivity,
@@ -161,7 +222,7 @@ class MainActivity : ComponentActivity() {
             notificationIntent,
             PendingIntent.FLAG_IMMUTABLE
         )
-
+        //Notification builder
         val builder = NotificationCompat.Builder(this, "pantry_notify")
             .setSmallIcon(android.R.drawable.ic_dialog_info)
             .setContentTitle("Pantry Update")
@@ -179,7 +240,11 @@ class MainActivity : ComponentActivity() {
             // Permission request done in MainActivity
             return
         }
-        notificationManager.notify(1,builder.build())
+        if(notificationFrequency != 0)
+        {
+            notificationManager.notify(1,builder.build())
+        }
+
     }
     private fun getFoodFile(): MutableList<Food>? {
         try {
