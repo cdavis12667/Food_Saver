@@ -3,6 +3,7 @@ package com.example.foodsaver
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.activity.ComponentActivity
@@ -17,6 +18,7 @@ class SettingsActivity : ComponentActivity() {
     private lateinit var settingsRadioB3: RadioButton
     private lateinit var settingsRadioB4: RadioButton
     private lateinit var settingsRadioB5: RadioButton
+    private lateinit var notifyTestButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,7 @@ class SettingsActivity : ComponentActivity() {
         settingsRadioB3 = findViewById(R.id.settingsRadioB3)
         settingsRadioB4 = findViewById(R.id.settingsRadioB4)
         settingsRadioB5 = findViewById(R.id.settingsRadioB5)
+        notifyTestButton = findViewById(R.id.notifyTestButton)
         //making event to switch activity
         settingToMainButton.setOnClickListener{
                 val intent = Intent(this@SettingsActivity, MainActivity::class.java)
@@ -56,6 +59,26 @@ class SettingsActivity : ComponentActivity() {
                     editor.putInt("NotificationFrequency", 0)
                 }
             }
+            editor.apply()
+        }
+
+        notifyTestButton.setOnClickListener {
+            val intent = Intent("pantry_update")
+            val notFreq = sharedPrefs.getInt("NotificationFrequency", 5)
+            if(notFreq == 0)
+            {
+                editor.putInt("NotificationFrequency", 1)
+                sendBroadcast(intent)
+                editor.putInt("NotificationFrequency", 0)
+            }
+            else{
+                sendBroadcast(intent)
+            }
+
+
+            //Send the broadcast to Main
+
+
         }
     }
 

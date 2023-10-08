@@ -6,9 +6,11 @@ import android.app.AlertDialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -48,7 +50,10 @@ class MainActivity : ComponentActivity() {
         val file = File(filesDir, "Fooddata")
 
 
-        //Setting up notification manager
+        //Setting up notification reciver intent
+        val filter = IntentFilter("pantry_update") // Match the action
+        val receiver = NotificationReceiver()
+        registerReceiver(receiver, filter)
 
         //Going to make some on click listeners which just go off when the user clicks a button
 
@@ -111,7 +116,6 @@ class MainActivity : ComponentActivity() {
             })
             notificationPermissionAlertDialog.show()
         } else {
-            showNotification()
 
         }
 
@@ -120,7 +124,7 @@ class MainActivity : ComponentActivity() {
         val notificationFrequency = sharedPrefs.getInt("Notification Frequency", 1)
         //Set up notification timing through AlarmManager (and maybe Broadcast)
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, NotificationReceiver()::class.java)
         val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
         //Handling the timing
         val intervalMillis = 7 * 24 * 60 * 60 * 1000
@@ -171,12 +175,77 @@ class MainActivity : ComponentActivity() {
 
     }
 
-    /*inner class NotificationReciever : BroadcastReceiver()
+    inner class NotificationReceiver : BroadcastReceiver()
     {
-        override fun onReceive(p0: Context?, p1: Intent?) {
-            TODO("Not yet implemented")
+        override fun onReceive(context: Context?, intent: Intent?) {
+            //Get file, update GlobalFoodNames (just in case MainActivity onCreate isn't called)
+            val file = File(filesDir, "Fooddata")
+            val expList = mutableListOf<String>()
+            val expSoonList = mutableListOf<String>()
+            val expWeekList = mutableListOf<String>()
+            val expDateMissing = mutableListOf<String>()
+            val sharedPrefs = getSharedPreferences("FoodSaverPref", Context.MODE_PRIVATE)
+            val notificationFrequency = sharedPrefs.getInt("Notification Frequency", 1)
+
+            if(file.exists())
+            {
+                GlobalFoodNames = getFoodFile()!!
+            }
+
+            if(GlobalFoodNames.isNotEmpty())
+            {
+                for (food in GlobalFoodNames) {
+                    if (food.itemExpirationDate == "") {
+                        expDateMissing.add(food.foodItemName)
+                    }
+                    else if (food.checkExpiration(food))
+                    {
+                        expList.add(food.foodItemName)
+                    }
+                    else if (food.daysTillExpiration in 4..7)
+                    {
+                        expWeekList.add(food.foodItemName)
+                    }
+                    else if (food.daysTillExpiration in 1 .. 3)
+                    {
+                        expSoonList.add(food.foodItemName)
+                    }
+                }
+            }
+
+
+            //Notification on-tap action; intent and pending intent
+            val notificationIntent = Intent(this@MainActivity, PantryActivity::class.java)
+            val pendingIntent = PendingIntent.getActivity(
+                this@MainActivity,
+                1,
+                notificationIntent,
+                PendingIntent.FLAG_IMMUTABLE
+            )
+            //Notification builder
+            val builder = NotificationCompat.Builder(this@MainActivity, "pantry_notify")
+                .setSmallIcon(android.R.drawable.ic_dialog_info)
+                .setContentTitle("Pantry Update")
+                .setContentText("Food that requires your attention:")
+                .setStyle(NotificationCompat.BigTextStyle().bigText("Testing")) //Later: attnList.joinToString { "\n" } */
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            val notificationManager = NotificationManagerCompat.from(this@MainActivity)
+            if (ActivityCompat.checkSelfPermission(
+                    this@MainActivity,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // Permission request done in MainActivity
+                return
+            }
+            if(notificationFrequency != 0)
+            {
+                notificationManager.notify(1,builder.build())
+            }
         }
-    }*/
+    }
     fun showNotification(){
         //Get file, update GlobalFoodNames (just in case MainActivity onCreate isn't called)
         val file = File(filesDir, "Fooddata")
