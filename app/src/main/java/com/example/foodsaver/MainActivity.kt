@@ -221,10 +221,11 @@ class MainActivity : ComponentActivity() {
             }
             //Make the notification text
 
-            val notificationText = "You have $expWeekCount item expiring within a week.\n" +
-                                    "You have $expSoonCount items expiring within three days.\n" +
-                                    "You have $expCount expired items in your pantry!\n" +
-                                    "$noDateCount items do not have an expiration date."
+            val notificationText = "$expWeekCount items are expiring within a week.\n" +
+                                    "$expSoonCount items are expiring within three days.\n" +
+                                    "$expCount items in your pantry have expired!\n" +
+                                    "$noDateCount items do not have an expiration date.\n" +
+                                    "Tap here to check your pantry."
 
 
 
