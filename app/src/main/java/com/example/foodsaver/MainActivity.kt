@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
         val file = File(filesDir, "Fooddata")
 
 
-        //Setting up notification reciver intent
+        //Setting up notification receiver intent
         val filter = IntentFilter("pantry_update") // Match the action
         val receiver = NotificationReceiver()
         registerReceiver(receiver, filter)
@@ -121,7 +121,14 @@ class MainActivity : ComponentActivity() {
 
         //Read preferences and decide scheduling
         val sharedPrefs = getSharedPreferences("FoodSaverPref", Context.MODE_PRIVATE)
-        val notificationFrequency = sharedPrefs.getInt("Notification Frequency", 1)
+        val notificationFrequency = sharedPrefs.getInt("Notification Frequency", 5)
+        //setting default for preference, helps with testing and other functions
+        //5 is the default;
+        if(notificationFrequency == 5){
+            // TODO: Separate alert dialog for alerting the user about the default setting.
+            //After dialog, they can say okay or go to the Settings screen to set the frequency settings
+        }
+
         //Set up notification timing through AlarmManager (and maybe Broadcast)
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(this, NotificationReceiver()::class.java)
@@ -180,10 +187,10 @@ class MainActivity : ComponentActivity() {
         override fun onReceive(context: Context?, intent: Intent?) {
             //Get file, update GlobalFoodNames (just in case MainActivity onCreate isn't called)
             val file = File(filesDir, "Fooddata")
-            val expList = mutableListOf<String>()
-            val expSoonList = mutableListOf<String>()
-            val expWeekList = mutableListOf<String>()
-            val expDateMissing = mutableListOf<String>()
+            var expCount = 0
+            var expSoonCount = 0
+            var expWeekCount = 0
+            var noDateCount = 0
             val sharedPrefs = getSharedPreferences("FoodSaverPref", Context.MODE_PRIVATE)
             val notificationFrequency = sharedPrefs.getInt("Notification Frequency", 1)
 
@@ -196,22 +203,29 @@ class MainActivity : ComponentActivity() {
             {
                 for (food in GlobalFoodNames) {
                     if (food.itemExpirationDate == "") {
-                        expDateMissing.add(food.foodItemName)
+                        noDateCount++
                     }
                     else if (food.checkExpiration(food))
                     {
-                        expList.add(food.foodItemName)
+                        expCount++
                     }
                     else if (food.daysTillExpiration in 4..7)
                     {
-                        expWeekList.add(food.foodItemName)
+                        expWeekCount++
                     }
                     else if (food.daysTillExpiration in 1 .. 3)
                     {
-                        expSoonList.add(food.foodItemName)
+                        expSoonCount++
                     }
                 }
             }
+            //Make the notification text
+
+            val notificationText = "You have $expWeekCount item expiring within a week.\n" +
+                                    "You have $expSoonCount items expiring within three days.\n" +
+                                    "You have $expCount expired items in your pantry!\n" +
+                                    "$noDateCount items do not have an expiration date."
+
 
 
             //Notification on-tap action; intent and pending intent
@@ -223,15 +237,15 @@ class MainActivity : ComponentActivity() {
                 PendingIntent.FLAG_IMMUTABLE
             )
             //Notification builder
+            val notificationManager = NotificationManagerCompat.from(this@MainActivity)
             val builder = NotificationCompat.Builder(this@MainActivity, "pantry_notify")
                 .setSmallIcon(android.R.drawable.ic_dialog_info)
                 .setContentTitle("Pantry Update")
-                .setContentText("Food that requires your attention:")
-                .setStyle(NotificationCompat.BigTextStyle().bigText("Testing")) //Later: attnList.joinToString { "\n" } */
+                .setContentText("Check the status of your pantry")
+                .setStyle(NotificationCompat.BigTextStyle().bigText(notificationText)) //Later: output all lists */
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            val notificationManager = NotificationManagerCompat.from(this@MainActivity)
             if (ActivityCompat.checkSelfPermission(
                     this@MainActivity,
                     Manifest.permission.POST_NOTIFICATIONS
@@ -246,6 +260,7 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+    //Should be defunct after receiver is fully setup; still here for testing.
     fun showNotification(){
         //Get file, update GlobalFoodNames (just in case MainActivity onCreate isn't called)
         val file = File(filesDir, "Fooddata")

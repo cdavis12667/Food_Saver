@@ -23,9 +23,11 @@ class SettingsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_layout)
-        //sharedpreferences setup
+        //shared preferences setup
         val sharedPrefs = getSharedPreferences("FoodSaverPref", Context.MODE_PRIVATE)
         val editor = sharedPrefs.edit()
+
+        val notFreq = sharedPrefs.getInt("NotificationFrequency", 1)
         //assigning vars
         settingToMainButton = findViewById(R.id.settingToMainButton)
         radioGroup = findViewById(R.id.radioGroup)
@@ -61,10 +63,9 @@ class SettingsActivity : ComponentActivity() {
             }
             editor.apply()
         }
-
+        //Test notifications
         notifyTestButton.setOnClickListener {
             val intent = Intent("pantry_update")
-            val notFreq = sharedPrefs.getInt("NotificationFrequency", 5)
             if(notFreq == 0)
             {
                 editor.putInt("NotificationFrequency", 1)
@@ -72,11 +73,12 @@ class SettingsActivity : ComponentActivity() {
                 editor.putInt("NotificationFrequency", 0)
             }
             else{
+                //Send the broadcast to Main
                 sendBroadcast(intent)
             }
 
 
-            //Send the broadcast to Main
+
 
 
         }
