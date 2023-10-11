@@ -3,6 +3,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -36,7 +37,7 @@ class ShoppingListActivity : ComponentActivity() {
     private lateinit var searchView: SearchView
     private lateinit var searchListView: ListView
     private lateinit var searchResultsAdapter: ArrayAdapter<String>
-    private lateinit var holdStrike: MutableList<Int>
+    private lateinit var exportShopList: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.shopping_list_layout)
@@ -57,12 +58,12 @@ class ShoppingListActivity : ComponentActivity() {
         searchResultsAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1)
         searchListView.adapter = searchResultsAdapter
         searchListView.visibility = View.GONE //Invisible until the search starts
+        exportShopList = findViewById(R.id.exportShopList)
 
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, shoppingItems)
         shopListView = findViewById(R.id.shopListView)
         shopListView.adapter = adapter
-        //Making a list of ints to hold index postions so I can re strikethough the proper items
-        holdStrike = mutableListOf()
+
         val file = File(filesDir, "Fooddata")
 
         if(file.exists())
@@ -112,9 +113,12 @@ class ShoppingListActivity : ComponentActivity() {
                 {
                     clearEditText()
                 }
-
             }
         }
+        exportShopList.setOnClickListener{
+           showExportConfirmationDialog()
+        }
+
 
         addButton.setOnClickListener {
             addItem()
@@ -124,25 +128,27 @@ class ShoppingListActivity : ComponentActivity() {
         }
 
         // Set an item click listener to toggle strikethrough
-        shopListView.setOnItemClickListener { _, view, _, _ ->
+        shopListView.setOnItemClickListener { _, view, number, _ ->
             // Get the TextView inside the clicked item
             val textView = view as TextView
 
-            // Toggle strikethrough style
-            if (textView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG == 0) {
+            // Check for checkmark
+            if (!shoppingItems[number].endsWith("\u2713")) {
+                //If check mark is not thier than add it
                 // Apply strikethrough style
-                textView.paintFlags = textView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                shoppingItems[number] = shoppingItems[number] +" "+"\u2713"
 
             } else {
-                // Remove strikethrough style
-                textView.paintFlags = textView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                Log.d("String Debug", shoppingItems[number].dropLast( shoppingItems[number].length))
+                // Remove checkmark
+                shoppingItems[number] = shoppingItems[number].removeRange(shoppingItems[number].length - 1, shoppingItems[number].length)
 
             }
             shopListView.setOnItemLongClickListener { _, view, position, _ ->
                 showDeleteConfirmationDialog(position)
                 true
             }
-
+            adapter.notifyDataSetChanged()
         }
     }
     private fun addItem() {
@@ -187,12 +193,52 @@ class ShoppingListActivity : ComponentActivity() {
             searchResultsListView.visibility = View.GONE
         }
     }
+    /*this takes all items with a check mark in the shopping list and
+    exports them to the global food list*/
+    private fun addShoppingToPantry(){
+        //temp list
+        var templist = mutableListOf<String>()
+        templist.addAll(shoppingItems)
+        //loop through list
+
+        for(name in shoppingItems){
+            //check for check mark
+            if(name.contains("\u2713")){
+                //make food object with that name
+                val food: Food = Food()
+                //set food name without checkmark
+                food.foodItemName = name.removeRange(name.length - 1, name.length)
+                //add that name to the global food list
+                GlobalFoodNames.add(food)
+                //remove item from shopping list
+                templist.remove(name)
+            }
+        }
+        shoppingItems.clear()
+        shoppingItems.addAll(templist)
+        //update adapter
+        adapter.notifyDataSetChanged()
+        //resort global
+        GlobalFoodNames.sortBy { it.foodItemName }
+    }
+
     private fun showDeleteConfirmationDialog(position: Int) {
         AlertDialog.Builder(this)
             .setTitle("Confirm Deletion")
             .setMessage("Are you sure you want to delete this item?")
             .setPositiveButton("Delete") { dialog, which ->
                 deleteItem(position)
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+    //Setting confirm dialog for export
+    private fun showExportConfirmationDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Confirm Export")
+            .setMessage("Move checked items to pantry and remove from list?")
+            .setPositiveButton("Export") { dialog, which ->
+                addShoppingToPantry()
             }
             .setNegativeButton("Cancel", null)
             .show()
@@ -232,6 +278,19 @@ class ShoppingListActivity : ComponentActivity() {
         }
         return null
     }
+    private fun saveFood(mutableFoodList: MutableList<Food>): Boolean{
+        try {
+            val fos = openFileOutput("Fooddata", MODE_PRIVATE)
+            val oos = ObjectOutputStream(fos)
+            oos.writeObject(mutableFoodList)
+            oos.close()
+        }
+        catch(e: IOException){
+            e.printStackTrace()
+            return false
+        }
+        return true
+    }
     //Functions for saving and writing
     //This functions saves a list and returns a bool if it worked or did not work
     private fun saveShoppingItems(listSave: MutableList<String>): Boolean{
@@ -266,5 +325,6 @@ class ShoppingListActivity : ComponentActivity() {
     override fun onStop() {
         super.onStop()
         saveShoppingItems(shoppingItems)
+        saveFood(GlobalFoodNames)
     }
 }
