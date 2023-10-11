@@ -22,6 +22,7 @@
         android:id="@+id/settingsTitle"
         android:layout_width="217dp"
         android:layout_height="69dp"
+        android:layout_marginStart="96dp"
         android:layout_marginEnd="98dp"
         android:clickable="false"
         android:fontFamily="@font/lobster_regular"
@@ -30,6 +31,7 @@
         android:textColor="#000000"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Switch
@@ -113,6 +115,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="231dp"
         android:layout_height="164dp"
         android:layout_marginStart="65dp"
@@ -180,6 +183,17 @@
         android:layout_marginTop="100dp"
         android:text="Set the update frequency. Weekly will be Fridays, and Monthly will be the 1st of the month."
         android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/notifyTestButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="569dp"
+        android:text="Notification Test"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

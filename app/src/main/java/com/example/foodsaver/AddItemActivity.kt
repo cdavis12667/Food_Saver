@@ -195,4 +195,8 @@ class AddItemActivity : ComponentActivity() {
         super.onStop()
         saveFood(GlobalFoodNames)
     }
+    override fun onPause(){
+        super.onPause()
+        saveFood(GlobalFoodNames)
+    }
 }
