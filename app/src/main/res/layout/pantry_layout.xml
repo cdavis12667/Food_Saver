@@ -9,10 +9,10 @@
 
     <TextView
         android:id="@+id/pantryTitle"
-        android:layout_width="272dp"
-        android:layout_height="73dp"
+        android:layout_width="250dp"
+        android:layout_height="65dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="68dp"
+        android:layout_marginEnd="108dp"
         android:clickable="false"
         android:fontFamily="@font/lobster_regular"
         android:text="@string/pantry"
@@ -40,5 +40,17 @@
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pantryTitle" />
+
+    <Button
+        android:id="@+id/pantrySortButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:backgroundTint="#68C6F0"
+        android:text="sort alphabetically"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

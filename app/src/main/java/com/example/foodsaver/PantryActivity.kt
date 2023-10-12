@@ -1,7 +1,12 @@
 package com.example.foodsaver
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.SharedPreferences.Editor
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
 import androidx.activity.ComponentActivity
 import java.io.EOFException
 import java.io.File
@@ -10,9 +15,12 @@ import java.io.ObjectInputStream
 
 class PantryActivity : ComponentActivity() {
     //setting vars
-    private lateinit var pantryToMainButton: android.widget.Button
+    private lateinit var pantryToMainButton: Button
     private lateinit var pantryList: android.widget.ListView
-
+    private lateinit var pantrySortButton: Button
+    private lateinit var adapter: PantryCustomAdapter
+    private lateinit var pantrySharedPreferences: SharedPreferences
+    private lateinit var pantryEditor: Editor
     //Making a companion object which is a bit like static objects
     companion object {
          var GlobalFoodNames = mutableListOf<Food>()
@@ -23,28 +31,90 @@ class PantryActivity : ComponentActivity() {
         //Assigning vars
         pantryToMainButton = findViewById(R.id.pantryToMainButton)
         pantryList = findViewById(R.id.Pantrylist)
+        pantrySortButton = findViewById(R.id.pantrySortButton)
+        pantrySharedPreferences = getSharedPreferences("pantrySharedPreferences", Context.MODE_PRIVATE)
+        pantryEditor = pantrySharedPreferences.edit()
         //making an array list
         var arrImageText: ArrayList<ImageTextView> = ArrayList()
-        pantryList.adapter = PantryCustomAdapter(this, arrImageText)
+        //setting the adapter to my custom adapter
+        adapter = PantryCustomAdapter(this, arrImageText)
+        //setting the pantry list adapter to adapter
+        pantryList.adapter = adapter
+        //I don't want to modify the global list when I sort so instead I use this
+        var sortList = mutableListOf<Food>()
         val file = File(filesDir, "Fooddata")
         if(file.exists())
         {
-            GlobalFoodNames = getFoodFile()!!
-            for (food in GlobalFoodNames) {
-                if (food.itemExpirationDate == "") {
-                    arrImageText.add(ImageTextView(R.drawable.calender_date, food.foodItemName, ""))
-                } else {
-                    arrImageText.add(MakeImgTxt(food))
-                }
+            //Import global food list and set it to sortList
+            sortList = getFoodFile()!!
+            //If sort flag is true then sort by name
+            if(pantrySharedPreferences.getBoolean("SortFlag", false)){
+                sortList.sortBy { it.foodItemName}
+                pantrySortButton.text = "Sort By Date"
             }
+            //if sort flag is false sort by date
+            else{
+                sortFoodByDate(sortList)
+                pantrySortButton.text = "Sort Alphabetically"
+            }
+            //Set the list attached to the adapter by converting the food list to a imagetext array
+            arrImageText.addAll(makeImageTextArr(sortList))
+            //update data set
+            adapter.notifyDataSetChanged()
         }
         //setting switch activity event
         pantryToMainButton.setOnClickListener {
-
             val intent = Intent(this@PantryActivity, MainActivity::class.java)
             startActivity(intent)
         }
+        //Button for switching sort
+        pantrySortButton.setOnClickListener{
+            if(pantrySharedPreferences.getBoolean("SortFlag", false)){
+                //resort the list and change text
+                pantryEditor.putBoolean("SortFlag", false)
+                sortFoodByDate(sortList)
+                pantrySortButton.text = "Sort Alphabetically"
+            }
+            else{
+                //resort the list and change text
+                pantryEditor.putBoolean("SortFlag", true)
+                sortList.sortBy { it.foodItemName}
+                pantrySortButton.text = "Sort By Date"
+            }
+            //Update pref
+            pantryEditor.apply()
+            //clear list fill list and notify adapter
+            arrImageText.clear()
+           arrImageText.addAll(makeImageTextArr(sortList))
+            adapter.notifyDataSetChanged()
+        }
     }
+
+    //change a list of food items to a list of imagetext items
+    private fun makeImageTextArr(foodList: MutableList<Food>): ArrayList<ImageTextView>{
+        var returnArr = arrayListOf<ImageTextView>()
+        for (food in foodList) {
+            if (food.itemExpirationDate == "") {
+                returnArr.add(ImageTextView(R.drawable.calender_date, food.foodItemName, ""))
+            } else {
+                returnArr.add(MakeImgTxt(food))
+            }
+        }
+        return returnArr
+    }
+    //sort food by days till expiration
+    private fun sortFoodByDate(foodList: MutableList<Food>){
+        for (food in foodList) {
+            if (food.itemExpirationDate != "") {
+                val bo = food.checkExpiration(food)
+            }
+            else{
+                food.daysTillExpiration = 1000
+            }
+        }
+        foodList.sortBy { it.daysTillExpiration}
+    }
+
     //this should take in a food object and return a ImageTextView
     private fun MakeImgTxt(food: Food): ImageTextView {
         //We will plug this in later
@@ -64,8 +134,6 @@ class PantryActivity : ComponentActivity() {
             imageID = R.drawable.yellow_circle
         }
         return ImageTextView(imageID, food.foodItemName, food.itemExpirationDate)
-
-
     }
     private fun getFoodFile(): MutableList<Food>? {
         try {
