@@ -26,8 +26,9 @@ class SettingsActivity : ComponentActivity() {
         //shared preferences setup
         val sharedPrefs = getSharedPreferences("FoodSaverPref", Context.MODE_PRIVATE)
         val editor = sharedPrefs.edit()
-
+        val radioButtonSelection = sharedPrefs.getInt("FreqButton", -1)
         val notFreq = sharedPrefs.getInt("NotificationFrequency", 1)
+
         //assigning vars
         settingToMainButton = findViewById(R.id.settingToMainButton)
         radioGroup = findViewById(R.id.radioGroup)
@@ -42,6 +43,11 @@ class SettingsActivity : ComponentActivity() {
                 val intent = Intent(this@SettingsActivity, MainActivity::class.java)
                 startActivity(intent)
             }
+        //load user selection
+        if (radioButtonSelection != -1) {
+            radioGroup.check(radioButtonSelection)
+        }
+
         //listener for radio button, setting notification preferences
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when(checkedId) {
@@ -61,6 +67,7 @@ class SettingsActivity : ComponentActivity() {
                     editor.putInt("NotificationFrequency", 0)
                 }
             }
+            editor.putInt("FreqButton", checkedId)
             editor.apply()
         }
         //Test notifications

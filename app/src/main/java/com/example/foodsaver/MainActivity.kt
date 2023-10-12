@@ -209,11 +209,11 @@ class MainActivity : ComponentActivity() {
                     {
                         expCount++
                     }
-                    else if (food.daysTillExpiration in 4..7)
+                    else if (food.daysTillExpiration in 3..8)
                     {
                         expWeekCount++
                     }
-                    else if (food.daysTillExpiration in 1 .. 3)
+                    else if (food.daysTillExpiration < 3)
                     {
                         expSoonCount++
                     }
@@ -221,10 +221,10 @@ class MainActivity : ComponentActivity() {
             }
             //Make the notification text
 
-            val notificationText = "$expWeekCount items are expiring within a week.\n" +
-                                    "$expSoonCount items are expiring within three days.\n" +
-                                    "$expCount items in your pantry have expired!\n" +
-                                    "$noDateCount items do not have an expiration date.\n" +
+            val notificationText = "Expiring within a week: $expWeekCount\n" +
+                                    "Expiring within 3 days: $expSoonCount\n" +
+                                    "Expired: $expCount\n" +
+                                    "Have no expiration date: $noDateCount\n" +
                                     "Tap here to check your pantry."
 
 
