@@ -195,9 +195,9 @@
         android:id="@+id/setting_home"
         android:layout_width="63dp"
         android:layout_height="51dp"
-        android:background="#00BCD4"
+        android:background="@color/lightBlue"
         android:scaleType="fitCenter"
-        android:src="@drawable/large_home_purple"
+        android:src="@drawable/home_button"
         tools:layout_editor_absoluteX="6dp"
         tools:layout_editor_absoluteY="7dp" />
 
