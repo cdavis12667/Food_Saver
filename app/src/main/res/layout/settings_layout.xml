@@ -7,17 +7,6 @@
     android:layout_height="match_parent"
     android:background="@color/BabyBlue">
 
-    <Button
-        android:id="@+id/settingToMainButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#2FBCC0"
-        android:text="@string/m"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/settingsTitle"
         android:layout_width="217dp"
@@ -184,5 +173,15 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/setting_home"
+        android:layout_width="63dp"
+        android:layout_height="51dp"
+        android:background="#00BCD4"
+        android:scaleType="fitCenter"
+        android:src="@drawable/large_home_purple"
+        tools:layout_editor_absoluteX="6dp"
+        tools:layout_editor_absoluteY="7dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,15 +7,15 @@ import androidx.activity.ComponentActivity
 
 class SettingsActivity : ComponentActivity() {
     //making vars
-    private lateinit var settingToMainButton: android.widget.Button
+    private lateinit var setting_home:android.widget.ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_layout)
         //assigning vars
-        settingToMainButton = findViewById(R.id.settingToMainButton)
+        setting_home = findViewById(R.id.setting_home)
         //making event to switch activity
-        settingToMainButton.setOnClickListener{
+        setting_home.setOnClickListener{
                 val intent = Intent(this@SettingsActivity, MainActivity::class.java)
                 startActivity(intent)
             }

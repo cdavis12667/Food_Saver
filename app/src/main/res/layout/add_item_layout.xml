@@ -8,17 +8,6 @@
     android:background="@color/BabyBlue"
     >
 
-    <Button
-        android:id="@+id/addToMainButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:backgroundTint="#2FBCC0"
-        android:text="@string/m"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/addItemTitle"
         style="@style/Theme.FoodSaver"
@@ -204,6 +193,18 @@
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/additemNoDateLegend"
         app:layout_constraintTop_toBottomOf="@+id/additemTextRedLegend" />
+
+    <ImageButton
+        android:id="@+id/edit_home"
+        android:layout_width="60dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/BabyBlue"
+        android:scaleType="fitCenter"
+        android:src="@drawable/large_home_purple"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

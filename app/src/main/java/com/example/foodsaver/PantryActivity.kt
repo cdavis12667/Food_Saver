@@ -7,6 +7,7 @@ import android.content.SharedPreferences.Editor
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.activity.ComponentActivity
 import java.io.EOFException
 import java.io.File
@@ -21,6 +22,7 @@ class PantryActivity : ComponentActivity() {
     private lateinit var adapter: PantryCustomAdapter
     private lateinit var pantrySharedPreferences: SharedPreferences
     private lateinit var pantryEditor: Editor
+    private lateinit var pantry_home:android.widget.ImageButton
     //Making a companion object which is a bit like static objects
     companion object {
          var GlobalFoodNames = mutableListOf<Food>()
@@ -29,7 +31,7 @@ class PantryActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pantry_layout)
         //Assigning vars
-        pantryToMainButton = findViewById(R.id.pantryToMainButton)
+        pantry_home = findViewById(R.id.pantry_home)
         pantryList = findViewById(R.id.Pantrylist)
         pantrySortButton = findViewById(R.id.pantrySortButton)
         pantrySharedPreferences = getSharedPreferences("pantrySharedPreferences", Context.MODE_PRIVATE)
@@ -63,7 +65,7 @@ class PantryActivity : ComponentActivity() {
             adapter.notifyDataSetChanged()
         }
         //setting switch activity event
-        pantryToMainButton.setOnClickListener {
+        pantry_home.setOnClickListener {
             val intent = Intent(this@PantryActivity, MainActivity::class.java)
             startActivity(intent)
         }

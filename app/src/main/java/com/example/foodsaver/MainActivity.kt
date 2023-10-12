@@ -3,6 +3,8 @@ package com.example.foodsaver
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+
+
 class MainActivity : ComponentActivity() {
     //Here I'm just making some vars that will be used for setting buttons
     private lateinit var mainToAddButton: android.widget.Button
