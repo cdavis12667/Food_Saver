@@ -5,7 +5,7 @@
     android:id="@+id/shopping_list_l"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BabyBlue"
+    android:background="@color/lightBlue"
     app:layout_constraintTop_toBottomOf="parent">
 
     <TextView
@@ -16,9 +16,13 @@
         android:layout_marginEnd="68dp"
         android:clickable="false"
         android:fontFamily="@font/lobster_regular"
+        android:shadowColor="@color/black"
+        android:shadowDx="5"
+        android:shadowDy="10"
+        android:shadowRadius="1"
         android:text="@string/shopping_list"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textColor="@color/lightTan"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -85,6 +89,7 @@
         android:layout_height="47dp"
         android:layout_marginStart="288dp"
         android:layout_marginTop="136dp"
+        android:backgroundTint="@color/lightTan"
         android:text="Clear List"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -95,6 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="232dp"
         android:layout_marginTop="133dp"
+        android:backgroundTint="@color/lightTan"
         android:src="@android:drawable/ic_menu_add"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

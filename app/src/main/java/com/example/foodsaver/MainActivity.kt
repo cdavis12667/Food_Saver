@@ -3,6 +3,8 @@ package com.example.foodsaver
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+
 class MainActivity : ComponentActivity() {
     //Here I'm just making some vars that will be used for setting buttons
     private lateinit var mainToAddButton: android.widget.Button
@@ -10,6 +12,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var mainToShoppingButton: android.widget.Button
     private lateinit var mainToSettingsButton: android.widget.Button
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout)
 
