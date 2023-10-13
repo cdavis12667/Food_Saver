@@ -25,13 +25,14 @@ class AddItemActivity : ComponentActivity() {
     private lateinit var addList: android.widget.ListView
     private lateinit var adapter: ArrayAdapter<String>
     private lateinit var addRemoveButton: android.widget.Button
+    private lateinit var edit_home: android.widget.ImageButton
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_item_layout)
         //assigning var
-        addToMainButton = findViewById(R.id.addToMainButton)
+        edit_home = findViewById(R.id.edit_home)
         addConfirmB = findViewById(R.id.addConfirmB)
         addFoodNameEntry = findViewById(R.id.addFoodNameEntry)
         addDateInput = findViewById(R.id.addDateInput)
@@ -55,7 +56,7 @@ class AddItemActivity : ComponentActivity() {
             }
         }
         //setting to switch to main on click
-        addToMainButton.setOnClickListener {
+        edit_home.setOnClickListener {
             val intent = Intent(this@AddItemActivity, MainActivity::class.java)
             startActivity(intent)
         }

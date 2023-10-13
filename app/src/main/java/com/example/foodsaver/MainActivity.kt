@@ -24,6 +24,7 @@ import java.io.EOFException
 import java.io.File
 import java.io.ObjectInputStream
 import java.util.Calendar
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 class MainActivity : ComponentActivity() {
     //Here I'm just making some vars that will be used for setting buttons
@@ -35,6 +36,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var alarmIntent: PendingIntent
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout)
 

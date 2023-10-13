@@ -5,19 +5,8 @@
     android:id="@+id/add_item_l"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightTan"
+    android:background="@color/lightBlue"
     >
-
-    <Button
-        android:id="@+id/addToMainButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:backgroundTint="#2FBCC0"
-        android:text="@string/m"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/addItemTitle"
@@ -34,7 +23,7 @@
         android:shadowRadius="1"
         android:text="@string/add_item_title"
         android:textAlignment="center"
-        android:textColor="@color/teal_700"
+        android:textColor="@color/lightTan"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,6 +38,8 @@
         android:fontFamily="@font/merriweather_regular"
         android:hint="@string/add_helper"
         android:inputType="text"
+        android:textColor="@color/purple_700"
+        android:textColorHint="@color/purple_700"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectAndChangeText" />
 
@@ -63,6 +54,8 @@
         android:fontFamily="@font/merriweather_regular"
         android:hint="@string/add_date_helper"
         android:inputType="date"
+        android:textColor="@color/purple_700"
+        android:textColorHint="@color/purple_700"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addFoodNameEntry" />
 
@@ -72,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
         android:layout_marginTop="36dp"
-        android:backgroundTint="#547285"
+        android:backgroundTint="@color/lightTan"
         android:fontFamily="@font/merriweather_regular"
         android:text="@string/add_confirm"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,6 +90,7 @@
         android:fontFamily="@font/merriweather_regular"
         android:text="@string/select"
         android:textAlignment="center"
+        android:textColor="@color/purple_700"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addList" />
@@ -107,7 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="72dp"
-        android:backgroundTint="#547285"
+        android:backgroundTint="@color/lightTan"
         android:fontFamily="@font/merriweather_regular"
         android:text="@string/add_remove"
         app:layout_constraintEnd_toEndOf="parent"
@@ -204,6 +198,18 @@
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/additemNoDateLegend"
         app:layout_constraintTop_toBottomOf="@+id/additemTextRedLegend" />
+
+    <ImageButton
+        android:id="@+id/edit_home"
+        android:layout_width="60dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/lightBlue"
+        android:scaleType="fitCenter"
+        android:src="@drawable/home_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

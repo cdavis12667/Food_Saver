@@ -11,6 +11,7 @@ import androidx.activity.ComponentActivity
 
 class SettingsActivity : ComponentActivity() {
     //making vars
+
     private lateinit var settingToMainButton: android.widget.Button
     private lateinit var radioGroup: RadioGroup
     private lateinit var settingsRadioB1: RadioButton
@@ -19,6 +20,8 @@ class SettingsActivity : ComponentActivity() {
     private lateinit var settingsRadioB4: RadioButton
     private lateinit var settingsRadioB5: RadioButton
     private lateinit var notifyTestButton: Button
+ private lateinit var setting_home:android.widget.ImageButton
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +41,9 @@ class SettingsActivity : ComponentActivity() {
         settingsRadioB4 = findViewById(R.id.settingsRadioB4)
         settingsRadioB5 = findViewById(R.id.settingsRadioB5)
         notifyTestButton = findViewById(R.id.notifyTestButton)
+        setting_home = findViewById(R.id.setting_home)
         //making event to switch activity
-        settingToMainButton.setOnClickListener{
+        setting_home.setOnClickListener{
                 val intent = Intent(this@SettingsActivity, MainActivity::class.java)
                 startActivity(intent)
             }

@@ -5,18 +5,7 @@
     android:id="@+id/settings_l"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightTan">
-
-    <Button
-        android:id="@+id/settingToMainButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#2FBCC0"
-        android:text="@string/m"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:background="@color/lightBlue">
 
     <TextView
         android:id="@+id/settingsTitle"
@@ -26,9 +15,13 @@
         android:layout_marginEnd="98dp"
         android:clickable="false"
         android:fontFamily="@font/lobster_regular"
+        android:shadowColor="@color/black"
+        android:shadowDx="5"
+        android:shadowDy="10"
+        android:shadowRadius="1"
         android:text="@string/settings"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textColor="@color/lightTan"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +34,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="309dp"
         android:text="Expired"
+        android:textColor="@color/purple_700"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,6 +45,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="429dp"
         android:text="Notify when item is expiring within 3 days."
+        android:textColor="@color/purple_700"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,6 +57,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="496dp"
         android:text="Only notify for specific items in your pantry."
+        android:textColor="@color/purple_700"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,6 +69,7 @@
         android:layout_marginTop="360dp"
         android:layout_marginEnd="165dp"
         android:text="Notify when item is expired."
+        android:textColor="@color/purple_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,6 +82,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="448dp"
         android:text="Specific Item Type"
+        android:textColor="@color/purple_700"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -96,6 +94,7 @@
         android:layout_marginTop="380dp"
         android:layout_marginEnd="59dp"
         android:text="Expiring Soon"
+        android:textColor="@color/purple_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,6 +107,7 @@
         android:layout_marginTop="76dp"
         android:text="Pantry Update Frequency"
         android:textAlignment="center"
+        android:textColor="@color/purple_700"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.553"
@@ -128,6 +128,7 @@
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:text="Daily"
+            android:textColor="@color/purple_700"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="64dp" />
 
@@ -136,6 +137,7 @@
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:text="Monthly"
+            android:textColor="@color/purple_700"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="64dp" />
 
@@ -144,6 +146,7 @@
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:text="Weekly"
+            android:textColor="@color/purple_700"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="64dp" />
 
@@ -152,6 +155,7 @@
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:text="Bi-Weekly"
+            android:textColor="@color/purple_700"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="64dp" />
 
@@ -160,6 +164,7 @@
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:text="Off"
+            android:textColor="@color/purple_700"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="64dp" />
     </RadioGroup>
@@ -183,6 +188,7 @@
         android:layout_marginTop="100dp"
         android:text="Set the update frequency. Weekly will be Fridays, and Monthly will be the 1st of the month."
         android:textAlignment="center"
+        android:textColor="@color/purple_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -199,4 +205,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<ImageButton
+        android:id="@+id/setting_home"
+        android:layout_width="63dp"
+        android:layout_height="51dp"
+        android:background="@color/lightBlue"
+        android:scaleType="fitCenter"
+        android:src="@drawable/home_button"
+        tools:layout_editor_absoluteX="6dp"
+        tools:layout_editor_absoluteY="7dp" />
+  
 </androidx.constraintlayout.widget.ConstraintLayout>

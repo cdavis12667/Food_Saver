@@ -16,9 +16,13 @@
         android:layout_marginEnd="68dp"
         android:clickable="false"
         android:fontFamily="@font/lobster_regular"
+        android:shadowColor="@color/black"
+        android:shadowDx="5"
+        android:shadowDy="10"
+        android:shadowRadius="1"
         android:text="@string/shopping_list"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textColor="@color/lightTan"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,17 +37,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView" />
-
-    <Button
-        android:id="@+id/shoppingToMainButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#2FBCC0"
-        android:text="@string/m"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <SearchView
         android:id="@+id/searchView"
@@ -85,6 +78,7 @@
         android:layout_height="47dp"
         android:layout_marginStart="288dp"
         android:layout_marginTop="136dp"
+        android:backgroundTint="@color/lightTan"
         android:text="Clear List"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -95,6 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="232dp"
         android:layout_marginTop="133dp"
+        android:backgroundTint="@color/lightTan"
         android:src="@android:drawable/ic_menu_add"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -106,5 +101,30 @@
         android:layout_marginTop="194dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/exportShopList"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:backgroundTint="#2FBCC0"
+        android:src="@drawable/export_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/shoppinglist_home"
+        android:layout_width="67dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/lightBlue"
+        android:scaleType="fitCenter"
+        android:src="@drawable/home_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
