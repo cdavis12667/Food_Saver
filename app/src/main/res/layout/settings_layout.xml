@@ -11,6 +11,7 @@
         android:id="@+id/settingsTitle"
         android:layout_width="217dp"
         android:layout_height="69dp"
+        android:layout_marginStart="96dp"
         android:layout_marginEnd="98dp"
         android:clickable="false"
         android:fontFamily="@font/lobster_regular"
@@ -23,6 +24,7 @@
         android:textColor="@color/lightTan"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Switch
@@ -113,6 +115,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="231dp"
         android:layout_height="164dp"
         android:layout_marginStart="65dp"
@@ -191,7 +194,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <Button
+        android:id="@+id/notifyTestButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="569dp"
+        android:text="Notification Test"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<ImageButton
         android:id="@+id/setting_home"
         android:layout_width="63dp"
         android:layout_height="51dp"
@@ -200,5 +214,5 @@
         android:src="@drawable/home_button"
         tools:layout_editor_absoluteX="6dp"
         tools:layout_editor_absoluteY="7dp" />
-
+  
 </androidx.constraintlayout.widget.ConstraintLayout>
