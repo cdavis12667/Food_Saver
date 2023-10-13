@@ -12,7 +12,6 @@ import androidx.activity.ComponentActivity
 class SettingsActivity : ComponentActivity() {
     //making vars
 
-    private lateinit var settingToMainButton: android.widget.Button
     private lateinit var radioGroup: RadioGroup
     private lateinit var settingsRadioB1: RadioButton
     private lateinit var settingsRadioB2: RadioButton
@@ -33,7 +32,6 @@ class SettingsActivity : ComponentActivity() {
         val notFreq = sharedPrefs.getInt("NotificationFrequency", 1)
 
         //assigning vars
-        settingToMainButton = findViewById(R.id.settingToMainButton)
         radioGroup = findViewById(R.id.radioGroup)
         settingsRadioB1 = findViewById(R.id.settingsRadioB1)
         settingsRadioB2 = findViewById(R.id.settingsRadioB2)
