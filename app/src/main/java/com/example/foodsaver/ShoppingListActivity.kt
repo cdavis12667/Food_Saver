@@ -327,4 +327,9 @@ class ShoppingListActivity : ComponentActivity() {
         saveShoppingItems(shoppingItems)
         saveFood(GlobalFoodNames)
     }
+    override fun onPause() {
+        super.onPause()
+        saveShoppingItems(shoppingItems)
+        saveFood(GlobalFoodNames)
+    }
 }
