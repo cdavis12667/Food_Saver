@@ -38,8 +38,8 @@
         android:fontFamily="@font/merriweather_regular"
         android:hint="@string/add_helper"
         android:inputType="text"
-        android:textColor="@color/purple_700"
-        android:textColorHint="@color/purple_700"
+        android:textColor="#CBB8F6"
+        android:textColorHint="#CBB8F6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectAndChangeText" />
 
@@ -54,8 +54,8 @@
         android:fontFamily="@font/merriweather_regular"
         android:hint="@string/add_date_helper"
         android:inputType="date"
-        android:textColor="@color/purple_700"
-        android:textColorHint="@color/purple_700"
+        android:textColor="#CBB8F6"
+        android:textColorHint="#CBB8F6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addFoodNameEntry" />
 
@@ -90,7 +90,7 @@
         android:fontFamily="@font/merriweather_regular"
         android:text="@string/select"
         android:textAlignment="center"
-        android:textColor="@color/purple_700"
+        android:textColor="#CBB8F6"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addList" />

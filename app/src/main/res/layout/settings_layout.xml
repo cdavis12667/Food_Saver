@@ -32,7 +32,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="309dp"
         android:text="Expired"
-        android:textColor="@color/purple_700"
+        android:textColor="#CBB8F6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,7 +43,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="429dp"
         android:text="Notify when item is expiring within 3 days."
-        android:textColor="@color/purple_700"
+        android:textColor="#CBB8F6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,7 +55,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="496dp"
         android:text="Only notify for specific items in your pantry."
-        android:textColor="@color/purple_700"
+        android:textColor="#CBB8F6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,7 +67,7 @@
         android:layout_marginTop="360dp"
         android:layout_marginEnd="165dp"
         android:text="Notify when item is expired."
-        android:textColor="@color/purple_700"
+        android:textColor="#CBB8F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +80,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="448dp"
         android:text="Specific Item Type"
-        android:textColor="@color/purple_700"
+        android:textColor="#CBB8F6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -92,7 +92,7 @@
         android:layout_marginTop="380dp"
         android:layout_marginEnd="59dp"
         android:text="Expiring Soon"
-        android:textColor="@color/purple_700"
+        android:textColor="#CBB8F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +105,7 @@
         android:layout_marginTop="76dp"
         android:text="Pantry Update Frequency"
         android:textAlignment="center"
-        android:textColor="@color/purple_700"
+        android:textColor="#CBB8F6"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.553"
@@ -125,7 +125,7 @@
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:text="Daily"
-            android:textColor="@color/purple_700"
+            android:textColor="#CBB8F6"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="64dp" />
 
@@ -134,7 +134,7 @@
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:text="Monthly"
-            android:textColor="@color/purple_700"
+            android:textColor="#CBB8F6"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="64dp" />
 
@@ -143,7 +143,7 @@
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:text="Weekly"
-            android:textColor="@color/purple_700"
+            android:textColor="#CBB8F6"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="64dp" />
 
@@ -152,7 +152,7 @@
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:text="Bi-Weekly"
-            android:textColor="@color/purple_700"
+            android:textColor="#CBB8F6"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="64dp" />
 
@@ -161,7 +161,7 @@
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:text="Off"
-            android:textColor="@color/purple_700"
+            android:textColor="#CBB8F6"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="64dp" />
     </RadioGroup>
@@ -185,7 +185,7 @@
         android:layout_marginTop="100dp"
         android:text="Set the update frequency. Weekly will be Fridays, and Monthly will be the 1st of the month."
         android:textAlignment="center"
-        android:textColor="@color/purple_700"
+        android:textColor="#CBB8F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
