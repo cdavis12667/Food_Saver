@@ -19,12 +19,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.foodsaver.PantryActivity.Companion.GlobalFoodNames
 import java.io.EOFException
 import java.io.File
 import java.io.ObjectInputStream
 import java.util.Calendar
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 class MainActivity : ComponentActivity() {
     //Here I'm just making some vars that will be used for setting buttons
@@ -90,7 +90,7 @@ class MainActivity : ComponentActivity() {
 
         //Check for build version before establishing notification channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
+            //First channel, pantry update notification
             val channelId = "pantry_notify"
             val channelName = "Pantry Notification"
             val channelDescription = "A list of items that may require the user's attention."
@@ -98,6 +98,12 @@ class MainActivity : ComponentActivity() {
             val channel = NotificationChannel(channelId, channelName, importance).apply {
                 description = channelDescription
             }
+            //second channel
+            val channelID2 = "exp_daily_notice"
+            val channelName2 = "Food Expiring Today"
+            val channelDescription2 = "The following items will expire today."
+            val channel2 = NotificationChannel(channelID2, channelName2, importance).apply {
+                description = channelDescription2 }
             val notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(channel)
 
@@ -195,6 +201,10 @@ class MainActivity : ComponentActivity() {
             var noDateCount = 0
             val sharedPrefs = getSharedPreferences("FoodSaverPref", Context.MODE_PRIVATE)
             val notificationFrequency = sharedPrefs.getInt("Notification Frequency", 1)
+            val expDailyCheck = sharedPrefs.getBoolean("DailyExpCheck", false)
+            val skipDateMissing = sharedPrefs.getBoolean("SkipMissingDateCheck", false)
+            //Establishing notification text val, will be changed on checks
+            var notificationText = "Test"
 
             if(file.exists())
             {
@@ -223,11 +233,21 @@ class MainActivity : ComponentActivity() {
             }
             //Make the notification text
 
-            val notificationText = "Expiring within a week: $expWeekCount\n" +
-                                    "Expiring within 3 days: $expSoonCount\n" +
-                                    "Expired: $expCount\n" +
-                                    "Have no expiration date: $noDateCount\n" +
-                                    "Tap here to check your pantry."
+            if(!skipDateMissing)
+            {
+                 notificationText = "Expiring within a week: $expWeekCount\n" +
+                        "Expiring within 3 days: $expSoonCount\n" +
+                        "Expired: $expCount\n" +
+                        "Have no expiration date: $noDateCount\n" +
+                        "Tap here to check your pantry."
+            }
+            else{
+                notificationText = "Expiring within a week: $expWeekCount\n" +
+                        "Expiring within 3 days: $expSoonCount\n" +
+                        "Expired: $expCount\n" +
+                        "Tap here to check your pantry."
+            }
+
 
 
 

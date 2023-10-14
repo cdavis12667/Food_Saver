@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.Switch
 import androidx.activity.ComponentActivity
 
 
@@ -18,8 +19,10 @@ class SettingsActivity : ComponentActivity() {
     private lateinit var settingsRadioB3: RadioButton
     private lateinit var settingsRadioB4: RadioButton
     private lateinit var settingsRadioB5: RadioButton
+    private lateinit var settingsSwitch1: Switch
+    private lateinit var settingsSwitch2: Switch
     private lateinit var notifyTestButton: Button
- private lateinit var setting_home:android.widget.ImageButton
+    private lateinit var setting_home:android.widget.ImageButton
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +33,8 @@ class SettingsActivity : ComponentActivity() {
         val editor = sharedPrefs.edit()
         val radioButtonSelection = sharedPrefs.getInt("FreqButton", -1)
         val notFreq = sharedPrefs.getInt("NotificationFrequency", 1)
+        val expDailyCheck = sharedPrefs.getBoolean("DailyExpCheck", false)
+        val missingDateNotify = sharedPrefs.getBoolean("SkipMissingDateCheck", false)
 
         //assigning vars
         radioGroup = findViewById(R.id.radioGroup)
@@ -38,6 +43,8 @@ class SettingsActivity : ComponentActivity() {
         settingsRadioB3 = findViewById(R.id.settingsRadioB3)
         settingsRadioB4 = findViewById(R.id.settingsRadioB4)
         settingsRadioB5 = findViewById(R.id.settingsRadioB5)
+        settingsSwitch1 = findViewById(R.id.settingsSwitch1)
+        settingsSwitch2 = findViewById(R.id.settingsSwitch2)
         notifyTestButton = findViewById(R.id.notifyTestButton)
         setting_home = findViewById(R.id.setting_home)
         //making event to switch activity
@@ -49,6 +56,9 @@ class SettingsActivity : ComponentActivity() {
         if (radioButtonSelection != -1) {
             radioGroup.check(radioButtonSelection)
         }
+        settingsSwitch1.isChecked = expDailyCheck
+        settingsSwitch2.isChecked = missingDateNotify
+
 
         //listener for radio button, setting notification preferences
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -86,10 +96,15 @@ class SettingsActivity : ComponentActivity() {
                 sendBroadcast(intent)
             }
 
+        }
 
-
-
-
+        settingsSwitch1.setOnCheckedChangeListener{_,isChecked ->
+            editor.putBoolean("DailyExpCheck", isChecked)
+            editor.apply()
+        }
+        settingsSwitch2.setOnCheckedChangeListener{_, isChecked ->
+            editor.putBoolean("SkipMissingDateCheck", isChecked)
+            editor.apply()
         }
     }
 

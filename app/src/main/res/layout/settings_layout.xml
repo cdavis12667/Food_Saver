@@ -44,22 +44,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
         android:layout_marginTop="429dp"
-        android:text="Notify when item is expiring within 3 days."
+        android:text="Disable notification for missing expiration dates."
         android:textColor="#CBB8F6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <TextView
-        android:id="@+id/settingsText4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="496dp"
-        android:text="Only notify for specific items in your pantry."
-        android:textColor="#CBB8F6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/settingsText2"
@@ -68,21 +57,10 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="360dp"
         android:layout_marginEnd="165dp"
-        android:text="Notify when item is expired."
+        android:text="Notify when item is expired each day."
         android:textColor="#CBB8F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Switch
-        android:id="@+id/settingsSwitch3"
-        android:layout_width="280dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="448dp"
-        android:text="Specific Item Type"
-        android:textColor="#CBB8F6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -93,7 +71,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="380dp"
         android:layout_marginEnd="59dp"
-        android:text="Expiring Soon"
+        android:text="Disable Date Missing Notification"
         android:textColor="#CBB8F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -174,12 +152,11 @@
         android:layout_width="202dp"
         android:layout_height="18dp"
         android:layout_marginStart="108dp"
-        android:layout_marginTop="478dp"
         android:layout_marginEnd="101dp"
         android:text="Set Item Types"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settingsText4" />
+        tools:layout_editor_absoluteY="994dp" />
 
     <TextView
         android:id="@+id/settingsTooltip1"
@@ -198,14 +175,14 @@
         android:id="@+id/notifyTestButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="569dp"
+        android:layout_marginTop="480dp"
         android:text="Notification Test"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<ImageButton
+    <ImageButton
         android:id="@+id/setting_home"
         android:layout_width="63dp"
         android:layout_height="51dp"
