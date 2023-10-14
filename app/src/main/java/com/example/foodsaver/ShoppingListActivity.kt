@@ -24,7 +24,6 @@ import java.io.ObjectOutputStream
 
 class ShoppingListActivity : ComponentActivity() {
     //making vars
-    private lateinit var shoppingToMainButton: android.widget.Button
     private lateinit var shopText: EditText
     private lateinit var shoppingListAdapter: ArrayAdapter<String>
     private lateinit var addButton: ImageButton
@@ -38,12 +37,13 @@ class ShoppingListActivity : ComponentActivity() {
     private lateinit var searchListView: ListView
     private lateinit var searchResultsAdapter: ArrayAdapter<String>
     private lateinit var exportShopList: ImageButton
+    private lateinit var shoppinglist_home: android.widget.ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.shopping_list_layout)
         //assigning vars
-        shoppingToMainButton = findViewById(R.id.shoppingToMainButton)
-        shoppingToMainButton.setOnClickListener{
+        shoppinglist_home = findViewById(R.id.shoppinglist_home)
+        shoppinglist_home.setOnClickListener{
             val intent = Intent(this@ShoppingListActivity, MainActivity::class.java)
             startActivity(intent)
         }
@@ -324,6 +324,11 @@ class ShoppingListActivity : ComponentActivity() {
     }
     override fun onStop() {
         super.onStop()
+        saveShoppingItems(shoppingItems)
+        saveFood(GlobalFoodNames)
+    }
+    override fun onPause() {
+        super.onPause()
         saveShoppingItems(shoppingItems)
         saveFood(GlobalFoodNames)
     }

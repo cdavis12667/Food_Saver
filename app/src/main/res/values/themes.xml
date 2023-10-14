@@ -10,6 +10,10 @@
 
 
     </style>
-
+    <style name="Base.Theme.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/actutal_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.FoodSaver</item>
+        <item name="splashScreenIconSize">512dp</item>
+    </style>
 
 </resources>
