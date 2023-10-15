@@ -57,7 +57,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="360dp"
         android:layout_marginEnd="165dp"
-        android:text="Notify when item is expired each day."
+        android:text="Receive daily morning alerts for items expiring today."
         android:textColor="#CBB8F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -94,8 +94,8 @@
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="231dp"
-        android:layout_height="164dp"
+        android:layout_width="114dp"
+        android:layout_height="161dp"
         android:layout_marginStart="65dp"
         android:layout_marginTop="139dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +103,7 @@
 
         <RadioButton
             android:id="@+id/settingsRadioB1"
-            android:layout_width="230dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Daily"
             android:textColor="#CBB8F6"
@@ -111,17 +111,8 @@
             tools:layout_editor_absoluteX="64dp" />
 
         <RadioButton
-            android:id="@+id/settingsRadioB4"
-            android:layout_width="230dp"
-            android:layout_height="wrap_content"
-            android:text="Monthly"
-            android:textColor="#CBB8F6"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="64dp" />
-
-        <RadioButton
             android:id="@+id/settingsRadioB2"
-            android:layout_width="230dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Weekly"
             android:textColor="#CBB8F6"
@@ -130,7 +121,7 @@
 
         <RadioButton
             android:id="@+id/settingsRadioB3"
-            android:layout_width="230dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Bi-Weekly"
             android:textColor="#CBB8F6"
@@ -138,8 +129,17 @@
             tools:layout_editor_absoluteX="64dp" />
 
         <RadioButton
+            android:id="@+id/settingsRadioB4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Monthly"
+            android:textColor="#CBB8F6"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="64dp" />
+
+        <RadioButton
             android:id="@+id/settingsRadioB5"
-            android:layout_width="230dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Off"
             android:textColor="#CBB8F6"
@@ -148,22 +148,11 @@
     </RadioGroup>
 
     <TextView
-        android:id="@+id/settingsText5"
-        android:layout_width="202dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="108dp"
-        android:layout_marginEnd="101dp"
-        android:text="Set Item Types"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="994dp" />
-
-    <TextView
         android:id="@+id/settingsTooltip1"
         android:layout_width="347dp"
         android:layout_height="41dp"
         android:layout_marginTop="100dp"
-        android:text="Set the update frequency. Weekly will be Fridays, and Monthly will be the 1st of the month."
+        android:text="Choose pantry item update interval. \n If weekly, set the day."
         android:textAlignment="center"
         android:textColor="#CBB8F6"
         app:layout_constraintEnd_toEndOf="parent"
@@ -176,9 +165,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="480dp"
-        android:text="Notification Test"
+        android:text="Pantry Notification Test"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/notifyTestButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="564dp"
+        android:text="Expired Notification Test"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -191,5 +191,16 @@
         android:src="@drawable/home_icon"
         tools:layout_editor_absoluteX="6dp"
         tools:layout_editor_absoluteY="7dp" />
-  
+
+    <Spinner
+        android:id="@+id/spinnerDayOfWeek"
+        android:layout_width="179dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginTop="188dp"
+        android:entries="@array/DayOfWeek"
+        android:spinnerMode="dropdown"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
