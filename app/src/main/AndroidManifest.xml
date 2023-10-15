@@ -45,11 +45,19 @@
 
         </activity>
         <receiver
-            android:name="com.example.foodsaver.MainActivity$NotificationReceiver"
+            android:name="com.example.foodsaver.MainActivity$PantryNotificationReceiver"
             android:exported="false"
             tools:ignore="Instantiatable">
             <intent-filter>
                 <action android:name="pantry_update" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.example.foodsaver.MainActivity$ExpCheckNotificationReceiver"
+            android:exported="false"
+            tools:ignore="Instantiatable">
+            <intent-filter>
+                <action android:name="daily_expire_check" />
             </intent-filter>
         </receiver>
     </application>

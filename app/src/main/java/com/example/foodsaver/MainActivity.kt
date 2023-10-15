@@ -19,12 +19,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.foodsaver.PantryActivity.Companion.GlobalFoodNames
 import java.io.EOFException
 import java.io.File
 import java.io.ObjectInputStream
 import java.util.Calendar
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 class MainActivity : ComponentActivity() {
     //Here I'm just making some vars that will be used for setting buttons
@@ -53,9 +53,14 @@ class MainActivity : ComponentActivity() {
 
 
         //Setting up notification receiver intent
-        val filter = IntentFilter("pantry_update") // Match the action
-        val receiver = NotificationReceiver()
-        registerReceiver(receiver, filter)
+        val pantryFilter = IntentFilter("pantry_update") // Match the action
+        val pantryReceiver = PantryNotificationReceiver()
+        registerReceiver(pantryReceiver, pantryFilter)
+
+        //Set up daily expiring check receiver
+        val expCheckFilter = IntentFilter("daily_expire_check") // Match the action
+        val expCheckReceiver = ExpCheckNotificationReceiver()
+        registerReceiver(expCheckReceiver, expCheckFilter)
 
         //Going to make some on click listeners which just go off when the user clicks a button
 
@@ -90,7 +95,7 @@ class MainActivity : ComponentActivity() {
 
         //Check for build version before establishing notification channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
+            //First channel, pantry update notification
             val channelId = "pantry_notify"
             val channelName = "Pantry Notification"
             val channelDescription = "A list of items that may require the user's attention."
@@ -98,8 +103,15 @@ class MainActivity : ComponentActivity() {
             val channel = NotificationChannel(channelId, channelName, importance).apply {
                 description = channelDescription
             }
+            //second channel
+            val channelID2 = "exp_daily_notice"
+            val channelName2 = "Food Expiring Today"
+            val channelDescription2 = "The following items will expire today."
+            val channel2 = NotificationChannel(channelID2, channelName2, importance).apply {
+                description = channelDescription2 }
             val notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(channel)
+            notificationManager.createNotificationChannel(channel2)
 
         }
         //Notification permission check, then test notification
@@ -133,18 +145,53 @@ class MainActivity : ComponentActivity() {
 
         //Set up notification timing through AlarmManager (and maybe Broadcast)
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, NotificationReceiver()::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        val pantryIntent = Intent(this, PantryNotificationReceiver()::class.java)
+        val expCheckIntent = Intent(this, ExpCheckNotificationReceiver()::class.java)
+        val firstPendingIntent = PendingIntent.getBroadcast(this, 0, pantryIntent, PendingIntent.FLAG_IMMUTABLE)
+        val expCheckPendingIntent = PendingIntent.getBroadcast(this, 2, expCheckIntent, PendingIntent.FLAG_IMMUTABLE)
         //Handling the timing
-        val intervalMillis = 7 * 24 * 60 * 60 * 1000
-        val intervalMonthMillis = 30 * 24 * 60 * 60 * 1000 //30 days in milliseconds
 
 // Set the time you want the notification to appear
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.HOUR_OF_DAY, 8)
         calendar.set(Calendar.MINUTE, 0)
+        val dayOfWeek = sharedPrefs.getInt("NotificationDay", 6)
+        //Set day of the week based on settings
+        when(dayOfWeek){
+            1 -> {
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
+            }
+            2 -> {
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
+            }
+            3 -> {
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY)
+            }
+            4 -> {
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY)
+            }
+            5 -> {
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY)
+            }
+            6 -> {
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY)
+            }
+            7 -> {
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY)
+            }
+        }
+        //Set first of the month settings
+        val today = Calendar.getInstance()
+        val firstDayOfNextMonth = Calendar.getInstance()
+        firstDayOfNextMonth.add(Calendar.MONTH, 1)
+        firstDayOfNextMonth.set(Calendar.DAY_OF_MONTH, 1)
 
-// Schedule the notification
+        if (today.after(firstDayOfNextMonth)) {
+            // If today is after the first day of next month, schedule for the first day of the month after next
+            firstDayOfNextMonth.add(Calendar.MONTH, 1)
+        }
+
+// Schedule the pantry update notification
         when(notificationFrequency)
         {
             //Daily
@@ -153,38 +200,43 @@ class MainActivity : ComponentActivity() {
                     AlarmManager.RTC_WAKEUP,
                     calendar.timeInMillis,
                     AlarmManager.INTERVAL_DAY,
-                    pendingIntent)
+                    firstPendingIntent)
             }
             //Weekly
             2 -> {
                 alarmManager.setRepeating(
                     AlarmManager.RTC_WAKEUP,
                     calendar.timeInMillis,
-                    intervalMillis.toLong(),
-                    pendingIntent)
+                    AlarmManager.INTERVAL_DAY * 7,
+                    firstPendingIntent)
             }
             //Bi-Weekly
             3 -> {
-                val intervalMillis = intervalMillis * 2
                 alarmManager.setRepeating(
                     AlarmManager.RTC_WAKEUP,
                     calendar.timeInMillis,
-                    intervalMillis.toLong(),
-                    pendingIntent)
+                    AlarmManager.INTERVAL_DAY * 14,
+                    firstPendingIntent)
             }
             //Monthly
             4 -> {
-                alarmManager.setRepeating(
+                alarmManager.set(
                     AlarmManager.RTC_WAKEUP,
-                    calendar.timeInMillis,
-                    intervalMonthMillis.toLong(),
-                    pendingIntent)
+                    firstDayOfNextMonth.timeInMillis,
+                    firstPendingIntent)
             }
         }
 
+        //Schedule the daily notification
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY,
+            expCheckPendingIntent
+        )
     }
 
-    inner class NotificationReceiver : BroadcastReceiver()
+    inner class PantryNotificationReceiver : BroadcastReceiver()
     {
         override fun onReceive(context: Context?, intent: Intent?) {
             //Get file, update GlobalFoodNames (just in case MainActivity onCreate isn't called)
@@ -195,6 +247,9 @@ class MainActivity : ComponentActivity() {
             var noDateCount = 0
             val sharedPrefs = getSharedPreferences("FoodSaverPref", Context.MODE_PRIVATE)
             val notificationFrequency = sharedPrefs.getInt("Notification Frequency", 1)
+            val skipDateMissing = sharedPrefs.getBoolean("SkipMissingDateCheck", false)
+            //Establishing notification text val, will be changed on checks
+            var notificationText = "Test"
 
             if(file.exists())
             {
@@ -223,11 +278,21 @@ class MainActivity : ComponentActivity() {
             }
             //Make the notification text
 
-            val notificationText = "Expiring within a week: $expWeekCount\n" +
-                                    "Expiring within 3 days: $expSoonCount\n" +
-                                    "Expired: $expCount\n" +
-                                    "Have no expiration date: $noDateCount\n" +
-                                    "Tap here to check your pantry."
+            if(!skipDateMissing)
+            {
+                 notificationText = "Expiring within a week: $expWeekCount\n" +
+                        "Expiring within 3 days: $expSoonCount\n" +
+                        "Expired: $expCount\n" +
+                        "Have no expiration date: $noDateCount\n" +
+                        "Tap here to check your pantry."
+            }
+            else{
+                notificationText = "Expiring within a week: $expWeekCount\n" +
+                        "Expiring within 3 days: $expSoonCount\n" +
+                        "Expired: $expCount\n" +
+                        "Tap here to check your pantry."
+            }
+
 
 
 
@@ -245,7 +310,7 @@ class MainActivity : ComponentActivity() {
                 .setSmallIcon(android.R.drawable.ic_dialog_info)
                 .setContentTitle("Pantry Update")
                 .setContentText("Check the status of your pantry")
-                .setStyle(NotificationCompat.BigTextStyle().bigText(notificationText)) //Later: output all lists */
+                .setStyle(NotificationCompat.BigTextStyle().bigText(notificationText))
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -257,12 +322,72 @@ class MainActivity : ComponentActivity() {
                 // Permission request done in MainActivity
                 return
             }
-            if(notificationFrequency != 0)
+            if (notificationFrequency != 0)
             {
                 notificationManager.notify(1,builder.build())
             }
         }
     }
+
+    //Second notification - daily expiring check
+    inner class ExpCheckNotificationReceiver : BroadcastReceiver()
+    {
+        override fun onReceive(p0: Context?, p1: Intent?) {
+            var file = File(filesDir, "Fooddata")
+            var expToday = mutableListOf<String>()
+            val sharedPrefs = getSharedPreferences("FoodSaverPref", Context.MODE_PRIVATE)
+            var expCheckStatus = sharedPrefs.getBoolean("DailyExpCheck", false)
+
+
+            if(file.exists())
+            {
+                GlobalFoodNames = getFoodFile()!!
+            }
+
+            if(GlobalFoodNames.isNotEmpty())
+            {
+                for (food in GlobalFoodNames)
+                {
+                    if (food.daysTillExpiration == 0) {
+                        expToday.add(food.foodItemName)
+                    }
+                }
+
+            }
+            //Notification on-tap action; intent and pending intent
+            val notificationIntent = Intent(this@MainActivity, PantryActivity::class.java)
+            val pendingIntent = PendingIntent.getActivity(
+                this@MainActivity,
+                2,
+                notificationIntent,
+                PendingIntent.FLAG_IMMUTABLE
+            )
+            //Notification builder
+            val notificationManager = NotificationManagerCompat.from(this@MainActivity)
+            val expCheckBuilder = NotificationCompat.Builder(this@MainActivity, "exp_daily_notice")
+                .setSmallIcon(android.R.drawable.ic_dialog_alert)
+                .setContentTitle("Expiring Today")
+                .setContentText("Food that expires today!")
+                .setStyle(NotificationCompat.BigTextStyle().bigText(expToday.joinToString()))
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            if (ActivityCompat.checkSelfPermission(
+                    this@MainActivity,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // Permission request done in MainActivity
+                return
+            }
+            if(expCheckStatus)
+            {
+                notificationManager.notify(2, expCheckBuilder.build())
+            }
+
+        }
+    }
+
     //Should be defunct after receiver is fully setup; still here for testing.
     fun showNotification(){
         //Get file, update GlobalFoodNames (just in case MainActivity onCreate isn't called)

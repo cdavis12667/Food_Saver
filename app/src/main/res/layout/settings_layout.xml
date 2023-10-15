@@ -27,78 +27,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Switch
-        android:id="@+id/settingsSwitch1"
-        android:layout_width="281dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="309dp"
-        android:text="Expired"
-        android:textColor="#CBB8F6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/settingsText3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="429dp"
-        android:text="Notify when item is expiring within 3 days."
-        android:textColor="#CBB8F6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/settingsText4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="496dp"
-        android:text="Only notify for specific items in your pantry."
-        android:textColor="#CBB8F6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/settingsText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="360dp"
-        android:layout_marginEnd="165dp"
-        android:text="Notify when item is expired."
-        android:textColor="#CBB8F6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Switch
-        android:id="@+id/settingsSwitch3"
-        android:layout_width="280dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="448dp"
-        android:text="Specific Item Type"
-        android:textColor="#CBB8F6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Switch
-        android:id="@+id/settingsSwitch2"
-        android:layout_width="280dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="380dp"
-        android:layout_marginEnd="59dp"
-        android:text="Expiring Soon"
-        android:textColor="#CBB8F6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/settingsText1"
@@ -114,79 +42,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="231dp"
-        android:layout_height="164dp"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="139dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <RadioButton
-            android:id="@+id/settingsRadioB1"
-            android:layout_width="230dp"
-            android:layout_height="wrap_content"
-            android:text="Daily"
-            android:textColor="#CBB8F6"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="64dp" />
-
-        <RadioButton
-            android:id="@+id/settingsRadioB4"
-            android:layout_width="230dp"
-            android:layout_height="wrap_content"
-            android:text="Monthly"
-            android:textColor="#CBB8F6"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="64dp" />
-
-        <RadioButton
-            android:id="@+id/settingsRadioB2"
-            android:layout_width="230dp"
-            android:layout_height="wrap_content"
-            android:text="Weekly"
-            android:textColor="#CBB8F6"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="64dp" />
-
-        <RadioButton
-            android:id="@+id/settingsRadioB3"
-            android:layout_width="230dp"
-            android:layout_height="wrap_content"
-            android:text="Bi-Weekly"
-            android:textColor="#CBB8F6"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="64dp" />
-
-        <RadioButton
-            android:id="@+id/settingsRadioB5"
-            android:layout_width="230dp"
-            android:layout_height="wrap_content"
-            android:text="Off"
-            android:textColor="#CBB8F6"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="64dp" />
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/settingsText5"
-        android:layout_width="202dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="478dp"
-        android:layout_marginEnd="101dp"
-        android:text="Set Item Types"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settingsText4" />
-
     <TextView
         android:id="@+id/settingsTooltip1"
-        android:layout_width="347dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="100dp"
-        android:text="Set the update frequency. Weekly will be Fridays, and Monthly will be the 1st of the month."
+        android:layout_width="284dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="106dp"
+        android:text="Choose pantry item update interval."
         android:textAlignment="center"
         android:textColor="#CBB8F6"
         app:layout_constraintEnd_toEndOf="parent"
@@ -198,14 +59,83 @@
         android:id="@+id/notifyTestButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="569dp"
-        android:text="Notification Test"
+        android:layout_marginTop="612dp"
+        android:text="Pantry Notification Test"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/settingsSwitch1"
+        android:layout_width="281dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="468dp"
+        android:text="Expired"
+        android:textColor="#CBB8F6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/settingsSwitch2"
+        android:layout_width="280dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="537dp"
+        android:text="Disable Date Missing Notification"
+        android:textColor="#CBB8F6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/settingsText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="584dp"
+        android:text="Disable notification for missing expiration dates."
+        android:textColor="#CBB8F6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/settingsText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="516dp"
+        android:layout_marginEnd="165dp"
+        android:text="Receive daily morning alerts for items expiring today."
+        android:textColor="#CBB8F6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/settingsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="376dp"
+        android:text="For weekly updates, set the day of the week."
+        android:textColor="#CBB8F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<ImageButton
+    <Button
+        android:id="@+id/notifyTestButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="668dp"
+        android:text="Expired Notification Test"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
         android:id="@+id/setting_home"
         android:layout_width="63dp"
         android:layout_height="51dp"
@@ -214,5 +144,72 @@
         android:src="@drawable/home_icon"
         tools:layout_editor_absoluteX="6dp"
         tools:layout_editor_absoluteY="7dp" />
-  
+
+    <Spinner
+        android:id="@+id/spinnerDayOfWeek"
+        android:layout_width="181dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="396dp"
+        android:entries="@array/DayOfWeek"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="128dp"
+        android:layout_height="239dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="132dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/settingsRadioB1"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Daily"
+            android:textColor="#CBB8F6"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="64dp" />
+
+        <RadioButton
+            android:id="@+id/settingsRadioB2"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Weekly"
+            android:textColor="#CBB8F6"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="64dp" />
+
+        <RadioButton
+            android:id="@+id/settingsRadioB3"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Bi-Weekly"
+            android:textColor="#CBB8F6"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="64dp" />
+
+        <RadioButton
+            android:id="@+id/settingsRadioB4"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Monthly"
+            android:textColor="#CBB8F6"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="64dp" />
+
+        <RadioButton
+            android:id="@+id/settingsRadioB5"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Off"
+            android:textColor="#CBB8F6"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="64dp" />
+    </RadioGroup>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
