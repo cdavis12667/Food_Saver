@@ -136,18 +136,18 @@ class SettingsActivity : ComponentActivity() {
         }
         //Test expiration check notification
         notifyTestButton2.setOnClickListener {
-            val intent = Intent("daily_expire_check")
+            val expCheckIntent = Intent("daily_expire_check")
             //Send the broadcast to Main
             if(sharedPrefs.getBoolean("DailyExpCheck", false))
             {
                 editor.putBoolean("DailyExpCheck", true)
-                sendBroadcast(intent)
+                sendBroadcast(expCheckIntent)
                 editor.putBoolean("DailyExpCheck", false)
 
             }
             else
             {
-                sendBroadcast(intent)
+                sendBroadcast(expCheckIntent)
             }
 
 

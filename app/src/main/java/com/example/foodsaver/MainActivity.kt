@@ -110,6 +110,7 @@ class MainActivity : ComponentActivity() {
             val channel2 = NotificationChannel(channelID2, channelName2, importance).apply {
                 description = channelDescription2 }
             val notificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(channel)
             notificationManager.createNotificationChannel(channel2)
 
         }
@@ -363,7 +364,7 @@ class MainActivity : ComponentActivity() {
             )
             //Notification builder
             val notificationManager = NotificationManagerCompat.from(this@MainActivity)
-            val builder = NotificationCompat.Builder(this@MainActivity, "exp_daily_notice")
+            val expCheckBuilder = NotificationCompat.Builder(this@MainActivity, "exp_daily_notice")
                 .setSmallIcon(android.R.drawable.ic_dialog_alert)
                 .setContentTitle("Expiring Today")
                 .setContentText("Food that expires today!")
@@ -381,7 +382,7 @@ class MainActivity : ComponentActivity() {
             }
             if(expCheckStatus)
             {
-                notificationManager.notify(2, builder.build())
+                notificationManager.notify(2, expCheckBuilder.build())
             }
 
         }
