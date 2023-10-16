@@ -57,7 +57,6 @@ class ShoppingListActivity : ComponentActivity() {
         searchListView.adapter = searchResultsAdapter
         searchListView.visibility = View.GONE //Invisible until the search starts
         exportShopList = findViewById(R.id.exportShopList)
-
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, shoppingItems)
         shopListView = findViewById(R.id.shopListView)
         shopListView.adapter = adapter
