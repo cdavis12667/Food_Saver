@@ -1,7 +1,6 @@
 package com.example.foodsaver
 import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,7 +12,6 @@ import android.widget.ListView
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
-import androidx.core.view.get
 import com.example.foodsaver.PantryActivity.Companion.GlobalFoodNames
 import java.io.EOFException
 import java.io.File
@@ -69,7 +67,6 @@ class ShoppingListActivity : ComponentActivity() {
         if(file.exists())
         {
             GlobalFoodNames = getFoodFile()!!
-
         }
         //making a file for food data
         val shoppingFile = File(filesDir, "Shoppingdata")
@@ -79,7 +76,6 @@ class ShoppingListActivity : ComponentActivity() {
             shoppingItems.clear()
             //get data from file and add to shopping items
             shoppingItems.addAll(getShoppingItems()!!)
-
         }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -104,7 +100,6 @@ class ShoppingListActivity : ComponentActivity() {
             }
         }
 
-
         //Deletes ONLY the tooltip when gaining focus
         shopText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             val starttext = shopText.text.toString().trim()
@@ -118,7 +113,6 @@ class ShoppingListActivity : ComponentActivity() {
         exportShopList.setOnClickListener{
            showExportConfirmationDialog()
         }
-
 
         addButton.setOnClickListener {
             addItem()

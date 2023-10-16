@@ -16,8 +16,7 @@ import java.io.ObjectOutputStream
 
 
 class AddItemActivity : ComponentActivity() {
-    //making a var for my buttons
-    private lateinit var addToMainButton: android.widget.Button
+    //Var creation
     private lateinit var addConfirmB: android.widget.Button
     private lateinit var addFoodNameEntry: android.widget.EditText
     private lateinit var addDateInput: android.widget.EditText
@@ -26,8 +25,6 @@ class AddItemActivity : ComponentActivity() {
     private lateinit var adapter: ArrayAdapter<String>
     private lateinit var addRemoveButton: android.widget.Button
     private lateinit var edit_home: android.widget.ImageButton
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_item_layout)
@@ -38,20 +35,19 @@ class AddItemActivity : ComponentActivity() {
         addDateInput = findViewById(R.id.addDateInput)
         addList = findViewById(R.id.addList)
         addRemoveButton = findViewById(R.id.addRemoveButton)
-        //I just need something to hold the selected index from addList
-        var indexHolder = 0
-        var listClickedFlag = false
-        //Setting my adapter to the simple layout
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1)
-        //setting my lists views adapter to be adapter
         addList.adapter = adapter
+        //This will hold the index of which TextView child of the ListView was clicked
+        var indexHolder = 0
+        //bool to see if the list has been clicked used to switch from edit and add
+        var listClickedFlag = false
         //Checks to see if the file is empty if not then sets saved data to global food names
         val file = File(filesDir, "Fooddata")
         if(file.exists())
         {
+            //Loads GlobalFoodNames from getFoodFile and then loops and prints to the list
             GlobalFoodNames = getFoodFile()!!
             for (food in GlobalFoodNames) {
-                //Pull from Global Food Names and display
                 adapter.add(food.foodItemName + " " + food.itemExpirationDate)
             }
         }
@@ -60,7 +56,6 @@ class AddItemActivity : ComponentActivity() {
             val intent = Intent(this@AddItemActivity, MainActivity::class.java)
             startActivity(intent)
         }
-
         //Making this on click to take user input and make a food item
         addConfirmB.setOnClickListener {
 
@@ -68,9 +63,10 @@ class AddItemActivity : ComponentActivity() {
 
             //check to make sure that the text boxes are not empty
             if ((addFoodNameEntry.text.isNotEmpty()) && (addDateInput.text.isNotEmpty())) {
-                //Make a food object
+
                 //check for valid date
-                var dateInputText=addDateInput.text.toString().replace("/","-")
+                val dateInputText=addDateInput.text.toString().replace("/","-")
+
                 if (foodInput.isValidDate(addDateInput.text.toString())) {
                     foodInput.foodItemName = addFoodNameEntry.text.toString()
                     foodInput.itemExpirationDate = foodInput.convertShortHandYear(dateInputText)
@@ -78,8 +74,6 @@ class AddItemActivity : ComponentActivity() {
                     if (listClickedFlag) {
                         GlobalFoodNames[indexHolder].foodItemName = addFoodNameEntry.text.toString()
                         GlobalFoodNames[indexHolder].itemExpirationDate = foodInput.convertShortHandYear(dateInputText)
-
-
                     }
                     // if the flag is not true it means they want to add an item
                     else if (!listClickedFlag) {
@@ -128,7 +122,7 @@ class AddItemActivity : ComponentActivity() {
 
         }
         //this is a listener that fires off when an item in the list is clicked
-        addList.setOnItemClickListener { adapterView: AdapterView<*>, view2: View, i: Int, l: Long ->
+        addList.setOnItemClickListener { _: AdapterView<*>, _: View, i: Int, _: Long ->
             //When an entry is clicked print that entry to the text boxes
             addFoodNameEntry.text.clear()
             addFoodNameEntry.text.append(GlobalFoodNames[i].foodItemName)

@@ -24,4 +24,8 @@
     <string name="pantry_title">Pantry</string>
 <!-- Main Menu Strings -->
     <string name="menu_title"> Food Savers</string>
+    <!-- Function Strings -->
+    <string name="sort_by_date">Sort By Date</string>
+    <string name="sort_alphabetically">Sort Alphabetically</string>
+
 </resources>
