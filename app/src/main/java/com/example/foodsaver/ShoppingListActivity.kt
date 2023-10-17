@@ -10,7 +10,6 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.SearchView
-import android.widget.TextView
 import androidx.activity.ComponentActivity
 import com.example.foodsaver.PantryActivity.Companion.GlobalFoodNames
 import java.io.EOFException
@@ -28,14 +27,14 @@ class ShoppingListActivity : ComponentActivity() {
     private lateinit var shopListView: ListView
     private lateinit var adapter: ArrayAdapter<String> // Use ArrayAdapter for simplicity
     private var shoppingItems = mutableListOf<String>()
-    private lateinit var searchDialog: AlertDialog
+    //private lateinit var searchDialog: AlertDialog
     private lateinit var searchResultsListView: ListView
     private lateinit var shopClear: Button
     private lateinit var searchView: SearchView
     private lateinit var searchListView: ListView
     private lateinit var searchResultsAdapter: ArrayAdapter<String>
     private lateinit var exportShopList: ImageButton
-    private lateinit var shoppinglist_home: android.widget.ImageButton
+    private lateinit var shoppinglist_home: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.shopping_list_layout)
@@ -50,7 +49,7 @@ class ShoppingListActivity : ComponentActivity() {
         shopListView = findViewById(R.id.shopListView)
         shoppingListAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1)
         shopListView.adapter = shoppingListAdapter
-        shopClear = findViewById<Button>(R.id.shopClear)
+        shopClear = findViewById(R.id.shopClear)
         searchView = findViewById(R.id.searchView)
         searchListView = findViewById(R.id.searchListView)
         searchResultsAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1)
@@ -121,9 +120,9 @@ class ShoppingListActivity : ComponentActivity() {
         }
 
         // Set an item click listener to toggle strikethrough
-        shopListView.setOnItemClickListener { _, view, number, _ ->
+        shopListView.setOnItemClickListener { _, _, number, _ ->
             // Get the TextView inside the clicked item
-            val textView = view as TextView
+            //val textView = view as TextView
 
             // Check for checkmark
             if (!shoppingItems[number].endsWith("\u2713")) {
@@ -137,7 +136,7 @@ class ShoppingListActivity : ComponentActivity() {
                 shoppingItems[number] = shoppingItems[number].removeRange(shoppingItems[number].length - 1, shoppingItems[number].length)
 
             }
-            shopListView.setOnItemLongClickListener { _, view, position, _ ->
+            shopListView.setOnItemLongClickListener { _, _, position, _ ->
                 showDeleteConfirmationDialog(position)
                 true
             }
@@ -190,7 +189,7 @@ class ShoppingListActivity : ComponentActivity() {
     exports them to the global food list*/
     private fun addShoppingToPantry(){
         //temp list
-        var templist = mutableListOf<String>()
+        val templist = mutableListOf<String>()
         templist.addAll(shoppingItems)
         //loop through list
 
@@ -198,7 +197,7 @@ class ShoppingListActivity : ComponentActivity() {
             //check for check mark
             if(name.contains("\u2713")){
                 //make food object with that name
-                val food: Food = Food()
+                val food = Food()
                 //set food name without checkmark
                 food.foodItemName = name.removeRange(name.length - 1, name.length)
                 //add that name to the global food list
@@ -219,7 +218,7 @@ class ShoppingListActivity : ComponentActivity() {
         AlertDialog.Builder(this)
             .setTitle("Confirm Deletion")
             .setMessage("Are you sure you want to delete this item?")
-            .setPositiveButton("Delete") { dialog, which ->
+            .setPositiveButton("Delete") { _, _ ->
                 deleteItem(position)
             }
             .setNegativeButton("Cancel", null)
@@ -230,7 +229,7 @@ class ShoppingListActivity : ComponentActivity() {
         AlertDialog.Builder(this)
             .setTitle("Confirm Export")
             .setMessage("Move checked items to pantry and remove from list?")
-            .setPositiveButton("Export") { dialog, which ->
+            .setPositiveButton("Export") { _, _ ->
                 addShoppingToPantry()
             }
             .setNegativeButton("Cancel", null)
@@ -245,7 +244,7 @@ class ShoppingListActivity : ComponentActivity() {
         AlertDialog.Builder(this)
             .setTitle("Clear Shopping List")
             .setMessage("Are you sure you want to clear the shopping list?")
-            .setPositiveButton("Clear") { dialog, which ->
+            .setPositiveButton("Clear") { _, _ ->
                 clearShoppingList()
             }
             .setNegativeButton("Cancel", null)

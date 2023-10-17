@@ -76,7 +76,7 @@ class AddItemActivity : ComponentActivity() {
                         GlobalFoodNames[indexHolder].itemExpirationDate = foodInput.convertShortHandYear(dateInputText)
                     }
                     // if the flag is not true it means they want to add an item
-                    else if (!listClickedFlag) {
+                    else  {
                         GlobalFoodNames.add(foodInput)
                     }
                 }
@@ -98,7 +98,7 @@ class AddItemActivity : ComponentActivity() {
                     GlobalFoodNames[indexHolder].itemExpirationDate = ""
                 }
                 //if not true than just add
-                else if (!listClickedFlag) {
+                else{
                     GlobalFoodNames.add(foodInput)
                 }
             }
