@@ -105,7 +105,7 @@ class PantryActivity : ComponentActivity() {
     private fun sortFoodByDate(foodList: MutableList<Food>){
         for (food in foodList) {
             if (food.itemExpirationDate != "") {
-                val bo = food.checkExpiration(food)
+
             }
             else{
                 food.daysTillExpiration = 1000
