@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BabyBlue">
+
+    <TextView
+        android:id="@+id/Pantry_Title"
+        android:layout_width="68dp"
+        android:layout_height="23dp"
+        android:layout_marginRight="4dp"
+        android:fontFamily="@font/lobster_regular"
+        android:text="Pantry"
+        android:textColor="@color/lightBlue"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.365"
+        app:layout_constraintStart_toEndOf="@+id/close_popup_window"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.026" />
+
+    <Button
+        android:id="@+id/close_popup_window"
+        android:layout_width="56dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="#2FBCC0"
+        android:text="X"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024" />
+
+    <TextView
+        android:id="@+id/Refridgerator_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/lobster_regular"
+        android:text="Refridgerator"
+        app:layout_constraintStart_toEndOf="@+id/Pantry_Title"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <GridView
+        android:id="@+id/freshDateView"
+        android:layout_width="409dp"
+        android:layout_height="654dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/close_popup_window" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

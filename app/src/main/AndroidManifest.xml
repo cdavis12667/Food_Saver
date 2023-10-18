@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodSaver"
         tools:targetApi="31">
+        <activity
+            android:name=".Fresh_Food_Dates"
+            android:exported="false" />
         <activity
             android:name=".AddItemActivity"
             android:exported="false"
@@ -45,7 +49,7 @@
 
         </activity>
         <receiver
-            android:name="com.example.foodsaver.MainActivity$PantryNotificationReceiver"
+            android:name=".MainActivity$PantryNotificationReceiver"
             android:exported="false"
             tools:ignore="Instantiatable">
             <intent-filter>

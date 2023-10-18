@@ -5,8 +5,19 @@
     android:id="@+id/add_item_l"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightBlue"
+    android:background="@color/BabyBlue"
     >
+
+    <Button
+        android:id="@+id/addToMainButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="#2FBCC0"
+        android:text="@string/m"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/addItemTitle"
@@ -23,7 +34,7 @@
         android:shadowRadius="1"
         android:text="@string/add_item_title"
         android:textAlignment="center"
-        android:textColor="@color/lightTan"
+        android:textColor="@color/teal_700"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,8 +49,6 @@
         android:fontFamily="@font/merriweather_regular"
         android:hint="@string/add_helper"
         android:inputType="text"
-        android:textColor="#CBB8F6"
-        android:textColorHint="#CBB8F6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectAndChangeText" />
 
@@ -54,8 +63,6 @@
         android:fontFamily="@font/merriweather_regular"
         android:hint="@string/add_date_helper"
         android:inputType="date"
-        android:textColor="#CBB8F6"
-        android:textColorHint="#CBB8F6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addFoodNameEntry" />
 
@@ -65,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
         android:layout_marginTop="36dp"
-        android:backgroundTint="@color/lightTan"
+        android:backgroundTint="#547285"
         android:fontFamily="@font/merriweather_regular"
         android:text="@string/add_confirm"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +97,6 @@
         android:fontFamily="@font/merriweather_regular"
         android:text="@string/select"
         android:textAlignment="center"
-        android:textColor="#CBB8F6"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addList" />
@@ -101,7 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="72dp"
-        android:backgroundTint="@color/lightTan"
+        android:backgroundTint="#547285"
         android:fontFamily="@font/merriweather_regular"
         android:text="@string/add_remove"
         app:layout_constraintEnd_toEndOf="parent"
@@ -210,6 +216,18 @@
         android:src="@drawable/home_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/no_date_Button"
+        android:layout_width="68dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="92dp"
+        android:backgroundTint="#547285"
+        android:text="No Date"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/addDateInput"
+        app:layout_constraintTop_toBottomOf="@+id/selectAndChangeText"
+        tools:text="No Date" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
