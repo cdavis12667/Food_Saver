@@ -205,5 +205,17 @@
         app:layout_constraintStart_toEndOf="@+id/additemNoDateLegend"
         app:layout_constraintTop_toBottomOf="@+id/additemTextRedLegend" />
 
+    <Button
+        android:id="@+id/no_date_Button"
+        android:layout_width="68dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="92dp"
+        android:backgroundTint="#547285"
+        android:text="No Date"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/addDateInput"
+        app:layout_constraintTop_toBottomOf="@+id/selectAndChangeText"
+        tools:text="No Date" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,16 +1,21 @@
 package com.example.foodsaver
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.GridView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import com.example.foodsaver.PantryActivity.Companion.GlobalFoodNames
 import java.io.EOFException
 import java.io.File
 import java.io.IOException
+import java.io.InputStream
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 
@@ -25,6 +30,10 @@ class AddItemActivity : ComponentActivity() {
     private lateinit var addList: android.widget.ListView
     private lateinit var adapter: ArrayAdapter<String>
     private lateinit var addRemoveButton: android.widget.Button
+    private lateinit var noDateButton: android.widget.Button
+    private lateinit var closeButton: Button
+    private lateinit var dialog: AlertDialog
+    private lateinit var dateView: GridView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +46,9 @@ class AddItemActivity : ComponentActivity() {
         addDateInput = findViewById(R.id.addDateInput)
         addList = findViewById(R.id.addList)
         addRemoveButton = findViewById(R.id.addRemoveButton)
+        noDateButton = findViewById(R.id.no_date_Button)
+
+
         //I just need something to hold the selected index from addList
         var indexHolder = 0
         var listClickedFlag = false
@@ -46,8 +58,7 @@ class AddItemActivity : ComponentActivity() {
         addList.adapter = adapter
         //Checks to see if the file is empty if not then sets saved data to global food names
         val file = File(filesDir, "Fooddata")
-        if(file.exists())
-        {
+        if (file.exists()) {
             GlobalFoodNames = getFoodFile()!!
             for (food in GlobalFoodNames) {
                 //Pull from Global Food Names and display
@@ -69,14 +80,15 @@ class AddItemActivity : ComponentActivity() {
             if ((addFoodNameEntry.text.isNotEmpty()) && (addDateInput.text.isNotEmpty())) {
                 //Make a food object
                 //check for valid date
-                var dateInputText=addDateInput.text.toString().replace("/","-")
+                var dateInputText = addDateInput.text.toString().replace("/", "-")
                 if (foodInput.isValidDate(addDateInput.text.toString())) {
                     foodInput.foodItemName = addFoodNameEntry.text.toString()
                     foodInput.itemExpirationDate = foodInput.convertShortHandYear(dateInputText)
                     //if this is true it means they clicked and want to edit
                     if (listClickedFlag) {
                         GlobalFoodNames[indexHolder].foodItemName = addFoodNameEntry.text.toString()
-                        GlobalFoodNames[indexHolder].itemExpirationDate = foodInput.convertShortHandYear(dateInputText)
+                        GlobalFoodNames[indexHolder].itemExpirationDate =
+                            foodInput.convertShortHandYear(dateInputText)
 
 
                     }
@@ -157,23 +169,66 @@ class AddItemActivity : ComponentActivity() {
             //reset flag to false
             listClickedFlag = false
         }
+        //Pop up window for fresh items
+        noDateButton.setOnClickListener {
+
+            val inflater = LayoutInflater.from(this)
+            val builder = AlertDialog.Builder(this)
+
+
+            val dateWindow = inflater.inflate(R.layout.fresh_food_popup_layout, null)
+
+            closeButton = dateWindow.findViewById(R.id.close_popup_window)
+            dateView = dateWindow.findViewById(R.id.freshDateView)
+            //Reading in text file
+            val inStream: InputStream = assets.open("freshfooddates.txt")
+            val freshFoodDayArray = mutableListOf<String>()
+            inStream.bufferedReader().forEachLine { freshFoodDayArray.add(it) }
+
+            // File("freshfooddates.txt").forEachLine { pAdapter.add(it) }
+            //adapter for listView
+
+            val pAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
+            dateView.adapter = pAdapter
+
+            //Reading array into list View
+
+            for (s in freshFoodDayArray) {
+                pAdapter.add(s)
+            }
+
+
+
+
+            builder.setView(dateWindow)
+            dialog = builder.create()
+            dialog.show()
+
+            closeButton.setOnClickListener {
+                dialog.dismiss()
+            }
+
+
+        }
+
 
     }
+
     //Functions for saving and writing
     //This functions saves a list and returns a bool if it worked or did not work
-    private fun saveFood(mutableFoodList: MutableList<Food>): Boolean{
+    private fun saveFood(mutableFoodList: MutableList<Food>): Boolean {
         try {
             val fos = openFileOutput("Fooddata", MODE_PRIVATE)
             val oos = ObjectOutputStream(fos)
             oos.writeObject(mutableFoodList)
             oos.close()
-        }
-        catch(e: IOException){
+        } catch (e: IOException) {
             e.printStackTrace()
             return false
         }
         return true
     }
+
     //this function reads an object and returns null if no object is their
     private fun getFoodFile(): MutableList<Food>? {
         try {
@@ -190,12 +245,14 @@ class AddItemActivity : ComponentActivity() {
         }
         return null
     }
-//Saving before stopping
+
+    //Saving before stopping
     override fun onStop() {
         super.onStop()
         saveFood(GlobalFoodNames)
     }
-    override fun onPause(){
+
+    override fun onPause() {
         super.onPause()
         saveFood(GlobalFoodNames)
     }
