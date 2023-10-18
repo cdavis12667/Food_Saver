@@ -47,9 +47,9 @@ class AddItemActivity : ComponentActivity() {
         noDateButton = findViewById(R.id.no_date_Button)
 
 
-        //I just need something to hold the selected index from addList
-        var indexHolder = 0
-        var listClickedFlag = false
+
+
+
         //Setting my adapter to the simple layout
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1)
         addList.adapter = adapter
