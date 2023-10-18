@@ -19,7 +19,11 @@ class Food() : Serializable {
     //Field to be used with updates
     var daysTillExpiration = 0
     private var itemIsExpired = false
-
+    init {
+        if(isValidDate(this.itemExpirationDate)){
+            checkExpiration(this)
+        }
+    }
     //Function to check expiration dates
     //May be updated to include specified windows of time
     fun checkExpiration(foodItem: Food): Boolean {

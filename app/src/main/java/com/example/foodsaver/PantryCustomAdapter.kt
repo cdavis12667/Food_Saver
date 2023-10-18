@@ -9,8 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 
 /*This class inherits from base adapter so it has methods that must be overwritten and a
-consturctor to be used
- */
+consturctor to be used*/
 class PantryCustomAdapter(private var activity: Activity, private var imageTextList: ArrayList<ImageTextView>): BaseAdapter() {
 
     //this private class just defines a view with three different views
