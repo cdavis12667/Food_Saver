@@ -333,10 +333,10 @@ class MainActivity : ComponentActivity() {
     inner class ExpCheckNotificationReceiver : BroadcastReceiver()
     {
         override fun onReceive(p0: Context?, p1: Intent?) {
-            var file = File(filesDir, "Fooddata")
-            var expToday = mutableListOf<String>()
+            val file = File(filesDir, "Fooddata")
+            val expToday = mutableListOf<String>()
             val sharedPrefs = getSharedPreferences("FoodSaverPref", Context.MODE_PRIVATE)
-            var expCheckStatus = sharedPrefs.getBoolean("DailyExpCheck", false)
+            val expCheckStatus = sharedPrefs.getBoolean("DailyExpCheck", false)
 
 
             if(file.exists())

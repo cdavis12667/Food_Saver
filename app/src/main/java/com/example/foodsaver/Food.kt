@@ -1,5 +1,6 @@
 package com.example.foodsaver
 
+import android.annotation.SuppressLint
 import java.io.Serializable
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -49,7 +50,7 @@ class Food() : Serializable {
 
         val timeInMilliseconds = expirationDate.time - Date().time
 
-        var timeInDays = (timeInMilliseconds / 86400000).toInt()
+        val timeInDays = (timeInMilliseconds / 86400000).toInt()
 
         return timeInDays
 
@@ -57,6 +58,7 @@ class Food() : Serializable {
     }
 
     //function added to convert strings into Dates to avoid repetitive code
+    @SuppressLint("SimpleDateFormat")
     fun convertExpirationDate(foodItem: Food): Date {
 
         val sFormat = SimpleDateFormat("MM-dd-yyyy")
@@ -68,6 +70,7 @@ class Food() : Serializable {
     }
 
     //Function added to check if a string is a valid date
+    @SuppressLint("SimpleDateFormat")
     fun isValidDate(date: String): Boolean {
         val sFormat = SimpleDateFormat("MM-dd-yyyy")
         val shortHandFormat = SimpleDateFormat("MM-dd-yy")
@@ -79,16 +82,16 @@ class Food() : Serializable {
         //Disallows the user to enter date in any other format than the above
         //sFormat.isLenient = false
         try {
-            var dashDate = date.replace('/', '-')
+            val dashDate = date.replace('/', '-')
             //Convert shorthand date string to a date and formatting it with full year
-            var shortHandDate = shortHandFormat.parse(dashDate)
-            var convertedDate = sFormat.format(shortHandDate)
+            val shortHandDate = shortHandFormat.parse(dashDate)
+            val convertedDate = sFormat.format(shortHandDate)
             sDate = sFormat.parse(convertedDate)
             if (sDate.after(Date())) {
                 isValid = true
             }
 
-        } catch (e: ParseException) {
+        } catch (_: ParseException) {
 
 
         }
@@ -98,15 +101,16 @@ class Food() : Serializable {
 
     }
 
+    @SuppressLint("SimpleDateFormat")
     fun convertShortHandYear(date: String): String {
 
         val sFormat = SimpleDateFormat("MM-dd-yy")
         val Format = SimpleDateFormat("MM-dd-yyyy")
         //Adding in the slash to dash conversion
-        var dashDate = date.replace('/', '-')
+        val dashDate = date.replace('/', '-')
         //Convert shorthand date string to a date and formatting it with full year
-        var shortHandDate = sFormat.parse(dashDate)
-        var convertedDate = Format.format(shortHandDate)
+        val shortHandDate = sFormat.parse(dashDate)
+        val convertedDate = Format.format(shortHandDate)
 
 
         return convertedDate
