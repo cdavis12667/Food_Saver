@@ -21,7 +21,7 @@
         android:shadowRadius="1"
         android:text="@string/pantry"
         android:textAlignment="center"
-        android:textColor="@color/lightTan"
+        android:textColor="@color/Orange"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +30,9 @@
         android:id="@+id/Pantrylist"
         android:layout_width="410dp"
         android:layout_height="646dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
+        android:cacheColorHint="#FF4E02"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pantryTitle" />
 
@@ -40,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
-        android:backgroundTint="#68C6F0"
+        android:backgroundTint="@color/lightTan"
         android:text="sort alphabetically"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
