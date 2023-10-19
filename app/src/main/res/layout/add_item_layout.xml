@@ -5,7 +5,7 @@
     android:id="@+id/add_item_l"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BabyBlue"
+    android:background="@color/lightBlue"
     >
 
     <TextView
@@ -18,12 +18,12 @@
         android:clickable="false"
         android:fontFamily="@font/lobster_regular"
         android:shadowColor="@color/black"
-        android:shadowDx="15"
-        android:shadowDy="15"
+        android:shadowDx="5"
+        android:shadowDy="10"
         android:shadowRadius="1"
         android:text="@string/add_item_title"
         android:textAlignment="center"
-        android:textColor="@color/teal_700"
+        android:textColor="@color/Orange"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,6 +38,8 @@
         android:fontFamily="@font/merriweather_regular"
         android:hint="@string/add_helper"
         android:inputType="text"
+        android:textColor="@color/gold"
+        android:textColorHint="@color/gold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectAndChangeText" />
 
@@ -52,6 +54,8 @@
         android:fontFamily="@font/merriweather_regular"
         android:hint="@string/add_date_helper"
         android:inputType="date"
+        android:textColor="@color/gold"
+        android:textColorHint="@color/gold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addFoodNameEntry" />
 
@@ -61,9 +65,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
         android:layout_marginTop="36dp"
-        android:backgroundTint="#547285"
+        android:backgroundTint="@color/lightTan"
         android:fontFamily="@font/merriweather_regular"
         android:text="@string/add_confirm"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addDateInput" />
 
@@ -86,6 +91,8 @@
         android:fontFamily="@font/merriweather_regular"
         android:text="@string/select"
         android:textAlignment="center"
+        android:textColor="@color/gold"
+        android:textColorHighlight="@color/gold"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addList" />
@@ -96,9 +103,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="72dp"
-        android:backgroundTint="#547285"
+        android:backgroundTint="@color/lightTan"
         android:fontFamily="@font/merriweather_regular"
         android:text="@string/add_remove"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addDateInput" />
 
@@ -150,7 +158,7 @@
         android:layout_marginTop="13dp"
         android:fontFamily="@font/merriweather_regular"
         android:text="@string/add_item_green"
-        android:textColor="#000000"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/additemGreenLegend"
         app:layout_constraintTop_toBottomOf="@+id/addConfirmB" />
@@ -163,7 +171,7 @@
         android:layout_marginTop="39dp"
         android:fontFamily="@font/merriweather_regular"
         android:text="@string/add_item_yellow"
-        android:textColor="#000000"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/additemYellowLegend"
         app:layout_constraintTop_toBottomOf="@+id/additemGreenText" />
@@ -196,13 +204,13 @@
 
     <ImageButton
         android:id="@+id/edit_home"
-        android:layout_width="60dp"
-        android:layout_height="58dp"
+        android:layout_width="65dp"
+        android:layout_height="70dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:background="@color/lightBlue"
         android:scaleType="fitCenter"
-        android:src="@drawable/home_icon"
+        android:src="@drawable/retro_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -211,8 +219,10 @@
         android:layout_width="68dp"
         android:layout_height="48dp"
         android:layout_marginTop="92dp"
-        android:backgroundTint="#547285"
+        android:backgroundTint="@color/lightTan"
         android:text="No Date"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gold"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/addDateInput"
         app:layout_constraintTop_toBottomOf="@+id/selectAndChangeText"
