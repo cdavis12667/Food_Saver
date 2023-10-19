@@ -33,7 +33,6 @@ class AddItemActivity : ComponentActivity() {
     private lateinit var dialog: AlertDialog
     private lateinit var dateView: android.widget.GridView
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_item_layout)
@@ -233,6 +232,7 @@ class AddItemActivity : ComponentActivity() {
             val foodlist = ois.readObject()
             ois.close()
             if (foodlist != null) {
+                @Suppress("UNCHECKED_CAST")
                 return foodlist as MutableList<Food>
             }
         } catch (e: EOFException) {

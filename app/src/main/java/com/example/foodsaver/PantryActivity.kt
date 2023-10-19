@@ -143,6 +143,7 @@ class PantryActivity : ComponentActivity() {
             val foodlist = ois.readObject()
             ois.close()
             if (foodlist != null) {
+                @Suppress("UNCHECKED_CAST")
                 return foodlist as MutableList<Food>
             }
         } catch (e: EOFException) {

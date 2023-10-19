@@ -8,17 +8,6 @@
     android:background="@color/BabyBlue"
     >
 
-    <Button
-        android:id="@+id/addToMainButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:backgroundTint="#2FBCC0"
-        android:text="@string/m"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/addItemTitle"
         style="@style/Theme.FoodSaver"

@@ -263,6 +263,7 @@ class ShoppingListActivity : ComponentActivity() {
             val foodlist = ois.readObject()
             ois.close()
             if (foodlist != null) {
+                @Suppress("UNCHECKED_CAST")
                 return foodlist as MutableList<Food>
             }
         } catch (e: EOFException) {
@@ -307,6 +308,7 @@ class ShoppingListActivity : ComponentActivity() {
             val listSave = ois.readObject()
             ois.close()
             if (listSave != null) {
+                @Suppress("UNCHECKED_CAST")
                 return listSave as MutableList<String>
             }
         } catch (e: EOFException) {
