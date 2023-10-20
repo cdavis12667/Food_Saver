@@ -336,7 +336,7 @@ class MainActivity : ComponentActivity() {
             val file = File(filesDir, "Fooddata")
             val expToday = mutableListOf<String>()
             val sharedPrefs = getSharedPreferences("FoodSaverPref", Context.MODE_PRIVATE)
-            val expCheckStatus = sharedPrefs.getBoolean("DailyExpCheck", false)
+            val expCheckStatus = sharedPrefs.getBoolean("DailyExpCheck", true)
 
 
             if(file.exists())
@@ -382,7 +382,11 @@ class MainActivity : ComponentActivity() {
             }
             if(expCheckStatus)
             {
-                notificationManager.notify(2, expCheckBuilder.build())
+                if(expToday.isNotEmpty())
+                {
+                    notificationManager.notify(2, expCheckBuilder.build())
+                }
+
             }
 
         }
