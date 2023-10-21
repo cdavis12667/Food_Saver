@@ -179,12 +179,11 @@ class AddItemActivity : ComponentActivity() {
             closeButton = dateWindow.findViewById(R.id.close_popup_window)
             dateView = dateWindow.findViewById(R.id.freshDateView)
             //Reading in text file
-            val inStream: InputStream = assets.open("freshfooddates.txt")
+            val inStream: InputStream = assets.open("freshdates.txt")
             val freshFoodDayArray = mutableListOf<String>()
-            inStream.bufferedReader().forEachLine { freshFoodDayArray.add(it) }
+            inStream.bufferedReader().forEachLine { freshFoodDayArray.add(it.replace(",","         "))}
 
-            // File("freshfooddates.txt").forEachLine { pAdapter.add(it) }
-            //adapter for listView
+
 
             val pAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
             dateView.adapter = pAdapter
@@ -194,6 +193,7 @@ class AddItemActivity : ComponentActivity() {
             for (s in freshFoodDayArray) {
                 pAdapter.add(s)
             }
+
 
 
 
