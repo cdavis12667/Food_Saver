@@ -10,10 +10,10 @@
 
     <TextView
         android:id="@+id/shoplistTitle"
-        android:layout_width="272dp"
-        android:layout_height="73dp"
+        android:layout_width="232dp"
+        android:layout_height="68dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="68dp"
+        android:layout_marginEnd="76dp"
         android:clickable="false"
         android:fontFamily="@font/lobster_regular"
         android:shadowColor="@color/black"
@@ -22,8 +22,8 @@
         android:shadowRadius="1"
         android:text="@string/shopping_list"
         android:textAlignment="center"
-        android:textColor="@color/lightTan"
-        android:textSize="48sp"
+        android:textColor="@color/Orange"
+        android:textSize="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -119,13 +119,13 @@
 
     <ImageButton
         android:id="@+id/shoppinglist_home"
-        android:layout_width="73dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
         android:background="@color/lightBlue"
         android:scaleType="fitCenter"
-        android:src="@drawable/retro_logo"
+        android:src="@drawable/homelogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

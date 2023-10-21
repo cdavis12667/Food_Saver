@@ -141,13 +141,13 @@
 
     <ImageButton
         android:id="@+id/setting_home"
-        android:layout_width="74dp"
-        android:layout_height="72dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="7dp"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
         android:background="@color/lightBlue"
         android:scaleType="fitCenter"
-        android:src="@drawable/retro_logo"
+        android:src="@drawable/homelogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
